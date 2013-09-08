@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2057" systemVersion="12C60" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="PodSpec" representedClassName="PodSpec" syncable="YES">
+        <attribute name="childDescription" optional="YES" transient="YES" attributeType="String" syncable="YES"/>
+        <attribute name="childHomePage" optional="YES" transient="YES" attributeType="String" syncable="YES"/>
+        <attribute name="childLoading" optional="YES" transient="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="childSourcePage" optional="YES" transient="YES" attributeType="String" syncable="YES"/>
+        <attribute name="childVersions" optional="YES" transient="YES" attributeType="String" syncable="YES"/>
+        <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="fetchedDetails" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="homePage" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="source" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="versions" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="XCodeProject" representedClassName="XCodeProject" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="projectFilePath" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="PodSpec" positionX="0" positionY="0" width="128" height="210"/>
+        <element name="XCodeProject" positionX="0" positionY="0" width="128" height="90"/>
+    </elements>
+</model>
