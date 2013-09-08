@@ -15,6 +15,10 @@ parts of the pod file are deleted.
 
 The Code is by far not the cleanest one, and a lot of optimizations are required. Heck this is even my first OSX app.
 
+If you dont want to mess with the code you can just get the latest compiled version from here:
+
+[Download](http://andyzaharia.com/CocoaPodsManager/CocoaPodsManager.zip)
+
 ## Requirements
 
 - Latest CocoaPods version already installed (works with 0.23 and up, but it might work with older versions).
