@@ -27,4 +27,6 @@
 
 -(NSString *) firstOccurenceOfStringEnclosedWith: (NSString *) str;
 
+-(NSString *) stringByAddingSpacesToPosition: (NSInteger) pos;
+
 @end

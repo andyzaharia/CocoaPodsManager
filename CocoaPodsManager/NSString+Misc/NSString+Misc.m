@@ -66,4 +66,19 @@
     return nil;
 }
 
+-(NSString *) stringByAddingSpacesToPosition: (NSInteger) pos
+{
+    if ([self length] - 1 > pos) {
+        return self;
+    }
+    
+    NSInteger spaces = pos - ([self length] - 1);
+    if (spaces) {
+        NSString *spaceStr = [@" " stringByPaddingToLength:spaces withString:@" " startingAtIndex:0];
+        return [self stringByAppendingString: spaceStr];
+    }
+    
+    return nil;
+}
+
 @end

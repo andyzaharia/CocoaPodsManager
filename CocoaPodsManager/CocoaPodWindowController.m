@@ -1156,10 +1156,13 @@ static NSString *ActivityToolbarItemIdentifier      = @"Activity Toolbar Item Id
             
             PodSpec *_podSpec = (PodSpec *)[context objectWithID: objectID];
             if(_podSpec){
-                NSString *currentVersion = [[_podSpec versionsArray] objectAtIndex: 0];
-                [_podSpec fetchPropertiesInContext: context withVersion: currentVersion];
                 
-                //[_podSpec fetchPropertiesInContext: context];
+                NSArray *versions = [_podSpec versionsArray];
+                if ([versions count]) {
+                    versions = [versions sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+                    NSString *lastVersion = [versions lastObject];
+                    [_podSpec fetchPropertiesInContext: context withVersion: lastVersion];
+                }
             }
         }];
         

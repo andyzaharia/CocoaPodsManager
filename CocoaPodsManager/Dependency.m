@@ -24,8 +24,8 @@
     
     // Pod Name
     [mutableString appendFormat: @"pod '%@', ", self.pod.name];
-    mutableString = [mutableString stringByPaddingToLength:35 withString:@" " startingAtIndex: 0].mutableCopy;
-    
+    mutableString = [mutableString stringByAddingSpacesToPosition: 35].mutableCopy;
+
     // Pod Version
     if ([self.versionStr length]) {
         NSString *operator = @"";

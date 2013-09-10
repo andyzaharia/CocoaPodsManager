@@ -81,8 +81,12 @@ NSManagedObjectContext      *_context;
                     pod.name = name;
                 }
                 
-                NSString *currentVersion = [[pod versionsArray] objectAtIndex: 0];
-                [pod fetchPropertiesInContext: localContext withVersion: currentVersion];
+                NSArray *versions = [pod versionsArray];
+                if ([versions count]) {
+                    versions = [versions sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+                    NSString *lastVersion = [versions lastObject];
+                    [pod fetchPropertiesInContext: localContext withVersion: lastVersion];
+                }
             }
         }
         

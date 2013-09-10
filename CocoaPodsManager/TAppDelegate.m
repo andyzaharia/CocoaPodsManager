@@ -16,6 +16,7 @@
 #import "AppConstants.h"
 #import "CocoaProject.h"
 
+
 static NSString *CHANGELOG_URL_STR = @"https://github.com/CocoaPods/CocoaPods/blob/master/CHANGELOG.md";
 
 @interface TAppDelegate () <NSTableViewDataSource, NSTableViewDelegate, PodManagerDelegate>
