@@ -1,0 +1,276 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		75CE203217E792BE0002492B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75CE203117E792BE0002492B /* Cocoa.framework */; };
+		75CE203C17E792BE0002492B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 75CE203A17E792BE0002492B /* InfoPlist.strings */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		75CE202E17E792BE0002492B /* CocoaPodsPlugin.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CocoaPodsPlugin.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		75CE203117E792BE0002492B /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		75CE203417E792BE0002492B /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		75CE203517E792BE0002492B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		75CE203617E792BE0002492B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		75CE203917E792BE0002492B /* CocoaPodsPlugin-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CocoaPodsPlugin-Info.plist"; sourceTree = "<group>"; };
+		75CE203B17E792BE0002492B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		75CE203D17E792BE0002492B /* CocoaPodsPlugin-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CocoaPodsPlugin-Prefix.pch"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		75CE202B17E792BE0002492B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				75CE203217E792BE0002492B /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		75CE202517E792BE0002492B = {
+			isa = PBXGroup;
+			children = (
+				75CE203717E792BE0002492B /* CocoaPodsPlugin */,
+				75CE203017E792BE0002492B /* Frameworks */,
+				75CE202F17E792BE0002492B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		75CE202F17E792BE0002492B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				75CE202E17E792BE0002492B /* CocoaPodsPlugin.bundle */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		75CE203017E792BE0002492B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				75CE203117E792BE0002492B /* Cocoa.framework */,
+				75CE203317E792BE0002492B /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		75CE203317E792BE0002492B /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				75CE203417E792BE0002492B /* AppKit.framework */,
+				75CE203517E792BE0002492B /* CoreData.framework */,
+				75CE203617E792BE0002492B /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		75CE203717E792BE0002492B /* CocoaPodsPlugin */ = {
+			isa = PBXGroup;
+			children = (
+				75CE203817E792BE0002492B /* Supporting Files */,
+			);
+			path = CocoaPodsPlugin;
+			sourceTree = "<group>";
+		};
+		75CE203817E792BE0002492B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				75CE203917E792BE0002492B /* CocoaPodsPlugin-Info.plist */,
+				75CE203A17E792BE0002492B /* InfoPlist.strings */,
+				75CE203D17E792BE0002492B /* CocoaPodsPlugin-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		75CE202D17E792BE0002492B /* CocoaPodsPlugin */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 75CE204017E792BE0002492B /* Build configuration list for PBXNativeTarget "CocoaPodsPlugin" */;
+			buildPhases = (
+				75CE202A17E792BE0002492B /* Sources */,
+				75CE202B17E792BE0002492B /* Frameworks */,
+				75CE202C17E792BE0002492B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CocoaPodsPlugin;
+			productName = CocoaPodsPlugin;
+			productReference = 75CE202E17E792BE0002492B /* CocoaPodsPlugin.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		75CE202617E792BE0002492B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "Andrei Zaharia";
+			};
+			buildConfigurationList = 75CE202917E792BE0002492B /* Build configuration list for PBXProject "CocoaPodsPlugin" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 75CE202517E792BE0002492B;
+			productRefGroup = 75CE202F17E792BE0002492B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				75CE202D17E792BE0002492B /* CocoaPodsPlugin */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		75CE202C17E792BE0002492B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				75CE203C17E792BE0002492B /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		75CE202A17E792BE0002492B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		75CE203A17E792BE0002492B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				75CE203B17E792BE0002492B /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		75CE203E17E792BE0002492B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		75CE203F17E792BE0002492B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		75CE204117E792BE0002492B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CocoaPodsPlugin/CocoaPodsPlugin-Prefix.pch";
+				INFOPLIST_FILE = "CocoaPodsPlugin/CocoaPodsPlugin-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		75CE204217E792BE0002492B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CocoaPodsPlugin/CocoaPodsPlugin-Prefix.pch";
+				INFOPLIST_FILE = "CocoaPodsPlugin/CocoaPodsPlugin-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		75CE202917E792BE0002492B /* Build configuration list for PBXProject "CocoaPodsPlugin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				75CE203E17E792BE0002492B /* Debug */,
+				75CE203F17E792BE0002492B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		75CE204017E792BE0002492B /* Build configuration list for PBXNativeTarget "CocoaPodsPlugin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				75CE204117E792BE0002492B /* Debug */,
+				75CE204217E792BE0002492B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 75CE202617E792BE0002492B /* Project object */;
+}
