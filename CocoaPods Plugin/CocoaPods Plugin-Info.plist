@@ -25,6 +25,14 @@
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2013 Andy. All rights reserved.</string>
 	<key>NSPrincipalClass</key>
-	<string></string>
+	<string>Plugin</string>
+	<key>XC4Compatible</key>
+	<true/>
+	<key>XC5Compatible</key>
+	<true/>
+	<key>XCGCReady</key>
+	<true/>
+	<key>XCPluginHasUI</key>
+	<false/>
 </dict>
 </plist>

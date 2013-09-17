@@ -7,6 +7,13 @@
 //
 
 #import "Plugin.h"
+#import "PluginWindowController.h"
+
+@interface Plugin ()
+
+@property (nonatomic, retain) PluginWindowController *windowController;
+
+@end
 
 @implementation Plugin
 
@@ -38,14 +45,24 @@
     if (editMenuItem) {
         [[editMenuItem submenu] addItem:[NSMenuItem separatorItem]];
         
+        NSBundle *thisBundle = [NSBundle bundleForClass:[self class]];
+        NSString *imagePath = [thisBundle pathForResource:@"cocoapodslogomenu" ofType:@"tiff"];
+        
+        NSImage *image = [[NSImage alloc] initWithContentsOfFile: imagePath];
+        
         NSMenuItem* newMenuItem = [[NSMenuItem alloc] initWithTitle:@"CocoaPods Manager"
                                                              action:@selector(showMessageBox:)
                                                       keyEquivalent:@"p"];
 
         [newMenuItem setTarget:self];
+        [newMenuItem setImage: image];
+        
         [newMenuItem setKeyEquivalentModifierMask: NSAlternateKeyMask];
         [[editMenuItem submenu] addItem:newMenuItem];
         [newMenuItem release];
+        
+    
+        [image release];
     }
 }
 
@@ -64,10 +81,28 @@
     }
 }
 
+- (void)dealloc
+{
+    [self.windowController release];
+    
+    [super dealloc];
+}
+
 - (void) showMessageBox: (id) origin {
-    NSAlert *alert = [[[NSAlert alloc] init] autorelease];
-    [alert setMessageText: selectedText];
-    [alert runModal];
+
+    NSBundle *thisBundle = [NSBundle bundleForClass:[self class]];
+    
+    NSString *imagePath = [thisBundle pathForResource:@"cocoapodslogomenu" ofType:@"tiff"];
+    
+    if (imagePath) {
+        NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+        [alert setMessageText: imagePath];
+        [alert runModal];
+    }
+    
+    PluginWindowController *windowController = [[PluginWindowController alloc] initWithWindowNibName:@"PluginWindowController" owner: self];
+    [windowController.window makeKeyAndOrderFront: self];
+    [windowController.window center];
 }
 
 @end

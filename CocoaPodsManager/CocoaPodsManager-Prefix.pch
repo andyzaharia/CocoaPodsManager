@@ -5,10 +5,9 @@
 #ifdef __OBJC__
     #import <Cocoa/Cocoa.h>
     #import "TODOMacros.h"
-    
-#define MR_ENABLE_ACTIVE_RECORD_LOGGING 0
-#define MR_SHORTHAND
 
+    #define MR_ENABLE_ACTIVE_RECORD_LOGGING 0
+    #define MR_SHORTHAND
 
     #import "CoreData+MagicalRecord.h"
     #import "CocoaPodsApp.h"
