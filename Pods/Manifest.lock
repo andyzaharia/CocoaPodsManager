@@ -1,19 +1,16 @@
 PODS:
   - LibYAML (0.1.4)
-  - MagicalRecord (2.2)
   - YAML-Framework (0.0.1):
     - LibYAML (~> 0.1.4)
   - ZKTextField (0.0.1)
 
 DEPENDENCIES:
-  - MagicalRecord
   - YAML-Framework
   - ZKTextField
 
 SPEC CHECKSUMS:
-  LibYAML: 49b77e5b3f4417fa512a8f1f4675a78480bf6b3d
-  MagicalRecord: b1fc46c99a9749fe7fe7e6f43a89b62ef5201933
+  LibYAML: bf5d90eb17ab8006db821c000d68c1debf2a6ba8
   YAML-Framework: 4ada9225119ffb13a206f251fe4434e660bca16d
   ZKTextField: c48a5472579cdfe64bcca71d1a8c6558f59f7149
 
-COCOAPODS: 0.24.0
+COCOAPODS: 0.25.0

@@ -7,27 +7,26 @@
 //
 
 #import "PodDetailPanel.h"
-#import "DSClickableURLTextField.h"
 #import "PodSpec+StdOutParser.h"
 #import "PodSpec+YAML.h"
 
 @interface PodDetailPanel ()
 
-@property (weak) IBOutlet NSTextField       *tfPodName;
-@property (weak) IBOutlet NSPopUpButton     *puVersion;
+@property (assign) IBOutlet NSTextField       *tfPodName;
+@property (assign) IBOutlet NSPopUpButton     *puVersion;
 
-@property (weak) IBOutlet NSTextField               *tfVersionLabel;
-@property (weak) IBOutlet NSTextField               *tfSummaryLabel;
-@property (weak) IBOutlet NSTextField               *tfDescriptionLabel;
-@property (weak) IBOutlet NSTextField               *tfAuthorsLabel;
-@property (weak) IBOutlet DSClickableURLTextField   *tfHomePage;
+@property (assign) IBOutlet NSTextField               *tfVersionLabel;
+@property (assign) IBOutlet NSTextField               *tfSummaryLabel;
+@property (assign) IBOutlet NSTextField               *tfDescriptionLabel;
+@property (assign) IBOutlet NSTextField               *tfAuthorsLabel;
+@property (assign) IBOutlet NSTextField               *tfHomePage;
 
-@property (weak) IBOutlet NSTextField *tfSummary;
-@property (weak) IBOutlet NSTextField *tfDescription;
-@property (weak) IBOutlet NSTextField *tfAuthors;
+@property (assign) IBOutlet NSTextField *tfSummary;
+@property (assign) IBOutlet NSTextField *tfDescription;
+@property (assign) IBOutlet NSTextField *tfAuthors;
 
 
-@property (nonatomic, strong) PodSpec       *pod;
+@property (nonatomic, retain) PodSpec       *pod;
 
 @end
 

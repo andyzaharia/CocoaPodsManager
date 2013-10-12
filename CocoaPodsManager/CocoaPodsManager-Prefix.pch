@@ -6,16 +6,18 @@
     #import <Cocoa/Cocoa.h>
     #import "TODOMacros.h"
 
-    #define MR_ENABLE_ACTIVE_RECORD_LOGGING 0
-    #define MR_SHORTHAND
+    #import "NSPersistentStoreCoordinator+Custom.h"
+    #import "NSManagedObjectContext+Custom.h"
+    #import "NSManagedObject+CoreData.h"
 
-    #import "CoreData+MagicalRecord.h"
     #import "CocoaPodsApp.h"
-    #import "PodSpec+Misc.h"
 
+//    #import "PodSpec+Misc.h"
+//    #import "PodSpec+YAML.h"
+//
+//    #import "PodRepositoryManager.h"
 
-
-#define XCODE_PROJECT_EXTENSION @"xcodeproj"
-#define XCODE_WORKSPACE_EXTENSION @"xcworkspace"
+    #define XCODE_PROJECT_EXTENSION @"xcodeproj"
+    #define XCODE_WORKSPACE_EXTENSION @"xcworkspace"
 
 #endif

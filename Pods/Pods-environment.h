@@ -12,12 +12,6 @@
 #define COCOAPODS_VERSION_MINOR_LibYAML 1
 #define COCOAPODS_VERSION_PATCH_LibYAML 4
 
-// MagicalRecord
-#define COCOAPODS_POD_AVAILABLE_MagicalRecord
-#define COCOAPODS_VERSION_MAJOR_MagicalRecord 2
-#define COCOAPODS_VERSION_MINOR_MagicalRecord 2
-#define COCOAPODS_VERSION_PATCH_MagicalRecord 0
-
 // YAML-Framework
 #define COCOAPODS_POD_AVAILABLE_YAML_Framework
 #define COCOAPODS_VERSION_MAJOR_YAML_Framework 0

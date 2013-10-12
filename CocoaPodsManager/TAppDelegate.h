@@ -7,11 +7,12 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "PodRepositoryManager.h"
 
 @interface TAppDelegate : NSObject <NSApplicationDelegate>
 
-@property (weak) IBOutlet       NSProgressIndicator     *loadingIndicator;
-@property (weak) IBOutlet       NSTextField             *lbStatus;
-@property (assign) IBOutlet     NSWindow                *window;
+@property (assign) IBOutlet       NSProgressIndicator     *loadingIndicator;
+@property (assign) IBOutlet       NSTextField             *lbStatus;
+@property (assign) IBOutlet       NSWindow                *window;
 
 @end

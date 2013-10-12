@@ -16,3 +16,11 @@ profile
 *.moved-aside
 DerivedData
 .idea/
+Pods/Pods-MAZeroingWeakRef-dummy.m
+Pods/Pods-MAZeroingWeakRef-prefix.pch
+Pods/Pods-MAZeroingWeakRef-Private.xcconfig
+Pods/Pods-MAZeroingWeakRef.xcconfig
+Pods/Pods-NoodleKit-dummy.m
+Pods/Pods-NoodleKit-prefix.pch
+Pods/Pods-NoodleKit-Private.xcconfig
+Pods/Pods-NoodleKit.xcconfig

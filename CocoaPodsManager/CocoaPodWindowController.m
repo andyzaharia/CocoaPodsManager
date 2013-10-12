@@ -15,10 +15,13 @@
 #import "NSApplication+ESSApplicationCategory.h"
 #import "NSString+Misc.h"
 #import "PodDetailPanel.h"
+#import "NSApp+Misc.h"
 
 #include <Security/Authorization.h>
 #include <Security/AuthorizationTags.h>
 #import <QuartzCore/QuartzCore.h>
+
+#import "Plugin.h"
 
 #define LOCAL_POD_PASTEBOARD_TYPE @"LOCAL_POD_PASTEBOARD_TYPE"
 #define MAX_RECTENT_PROJECTS 10
@@ -40,6 +43,9 @@ static NSString *UpdatePodToolbarItemIdentifier     = @"Update Pod Toolbar Item 
 static NSString *SavePodToolbarItemIdentifier       = @"Save Pod Toolbar Item Identifier";
 static NSString *ActivityToolbarItemIdentifier      = @"Activity Toolbar Item Identifier";
 
+static NSArray *iOS_VERSIONS = nil;
+static NSArray *OSX_VERSIONS = nil;
+
 @interface CocoaPodWindowController () <NSOutlineViewDataSource, NSOutlineViewDelegate>
 {
     __block  NSMutableArray              *projectPods;
@@ -47,34 +53,35 @@ static NSString *ActivityToolbarItemIdentifier      = @"Activity Toolbar Item Id
     __block     BOOL                     isWorking;
 }
 
-@property (weak) IBOutlet NSOutlineView             *cocoaPodsList;
-@property (weak) IBOutlet NSOutlineView             *projectPodsList;
-@property (weak) IBOutlet NSSearchFieldCell         *searchField;
-@property (weak) IBOutlet NSButton                  *btnInstall;
-@property (weak) IBOutlet NSButton                  *btnUpdate;
-@property (weak) IBOutlet NSButton                  *btnSave;
-@property (weak) IBOutlet NSTextFieldCell           *tfAvailablePods;
-@property (weak) IBOutlet NSPopUpButton             *pbPlatform;
-@property (weak) IBOutlet NSPopUpButton             *pbDeployment;
-@property (weak) IBOutlet NSProgressIndicator       *loadingIndicator;
-@property (weak) IBOutlet NSPanel                   *logSheet;
-@property (weak) IBOutlet NSButton                  *chBxInhibitAllWarnings;
-@property (weak) IBOutlet NSToolbar                 *toolbar;
+@property (assign) IBOutlet NSOutlineView             *cocoaPodsList;
+@property (assign) IBOutlet NSOutlineView             *projectPodsList;
+@property (assign) IBOutlet NSSearchFieldCell         *searchField;
+@property (assign) IBOutlet NSButton                  *btnInstall;
+@property (assign) IBOutlet NSButton                  *btnUpdate;
+@property (assign) IBOutlet NSButton                  *btnSave;
+@property (assign) IBOutlet NSTextFieldCell           *tfAvailablePods;
+@property (assign) IBOutlet NSPopUpButton             *pbPlatform;
+@property (assign) IBOutlet NSPopUpButton             *pbDeployment;
+@property (assign) IBOutlet NSProgressIndicator       *loadingIndicator;
+@property (assign) IBOutlet NSPanel                   *logSheet;
+@property (assign) IBOutlet NSButton                  *chBxInhibitAllWarnings;
+@property (assign) IBOutlet NSToolbar                 *toolbar;
 @property (unsafe_unretained) IBOutlet NSTextView   *tvLog;
 
-@property (weak) IBOutlet NSSplitView               *contentSplitViewContainer;
+@property (assign) IBOutlet NSSplitView               *contentSplitViewContainer;
 
-
-
-@property (nonatomic, strong)   NSMutableArray      *pods;
-@property (nonatomic, strong)   PodSpec             *itemBeingDragged;
+@property (nonatomic, retain)   NSArray      *pods;
+@property (nonatomic, retain)   PodSpec             *itemBeingDragged;
 @property (nonatomic)           BOOL                 wasEdited;
 
-@property (nonatomic, strong)   PodDetailPanel      *podDetailPanel;
+@property (nonatomic, retain)   PodDetailPanel      *podDetailPanel;
 
 // Test Code
 
-@property (weak) IBOutlet NSButtonCell *testBtn;
+@property (assign) IBOutlet NSButtonCell *testBtn;
+@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+
+@property (weak) IBOutlet NSSplitView *splitView;
 
 
 @end
@@ -86,6 +93,25 @@ static NSString *ActivityToolbarItemIdentifier      = @"Activity Toolbar Item Id
     self = [super initWithCoder: aDecoder];
     if (self) {
         // Initialization code here.
+    }
+    
+    return self;
+}
+
+- (id)initWithWindowNibName:(NSString *)windowNibName
+{
+    self = [super initWithWindowNibName: windowNibName];
+    if (self) {
+        // Initialization code here.
+        self.managedObjectContext = [NSManagedObjectContext contextForCurrentThread];
+        
+        if(!iOS_VERSIONS) {
+            iOS_VERSIONS = @[@"4.0",@"4.1",@"4.2",@"4.3",@"5.0",@"5.1",@"6.0",@"6.1",@"7.0"];
+        }
+        
+        if(!OSX_VERSIONS) {
+            OSX_VERSIONS = @[@"10.6",@"10.7",@"10.8", @"10.9"];
+        }
     }
     
     return self;
@@ -152,9 +178,30 @@ static NSString *ActivityToolbarItemIdentifier      = @"Activity Toolbar Item Id
     [self.contentSplitViewContainer setLayer:viewLayer];
 }
 
+- (void)windowWillClose:(NSNotification *)notification {
+//    [NSApp endSheet: self.window];
+//    [self.window orderOut: self];
+//    
+//    //[NSApp stopModal];
+//    
+//    if ([NSApplication isRunningFromPlugin]) {
+//        
+//    }
+}
+
 -(void) dealloc{
     
+    self.projectPodsList.delegate = nil;
+    self.projectPodsList.dataSource = nil;
+    self.cocoaPodsList.delegate = nil;
+    self.cocoaPodsList.dataSource = nil;
+    
     [[NSNotificationCenter defaultCenter] removeObserver: self];
+
+    [self.managedObjectContext save: nil];
+    self.managedObjectContext = nil;
+    
+    self.project = nil;
 }
 
 #pragma mark - IBActions
@@ -173,7 +220,7 @@ static NSString *ActivityToolbarItemIdentifier      = @"Activity Toolbar Item Id
     
     [self.project writeProjectToPodFile];
     
-    CocoaPodWindowController *__weak weakSelf = self;
+    __weak CocoaPodWindowController *weakSelf = self;
     [CocoaPodsApp updateProject:self.project withOptions:@[] onSuccess:^(NSString *response) {
         
         isWorking = NO;
@@ -244,7 +291,8 @@ static NSString *ActivityToolbarItemIdentifier      = @"Activity Toolbar Item Id
     [self.loadingIndicator startAnimation: self];
     isWorking = YES;
     
-    CocoaPodWindowController *__weak weakSelf = self;
+    __weak CocoaPodWindowController *weakSelf = self;
+    
     [CocoaPodsApp installCocoaPodsInProject:self.project onSuccess:^(NSString *error) {
         
         isWorking = NO;
@@ -345,6 +393,8 @@ static NSString *ActivityToolbarItemIdentifier      = @"Activity Toolbar Item Id
     self.project.platformString = [item.title lowercaseString];
     
     self.wasEdited = YES;
+    
+    [self configureDeploymentVersionsWithPlatformString: self.project.platformString];
 }
 
 - (IBAction)deploymentDidChange:(NSPopUpButton *)sender {
@@ -357,6 +407,18 @@ static NSString *ActivityToolbarItemIdentifier      = @"Activity Toolbar Item Id
     }
     
     self.wasEdited = YES;
+}
+
+-(void) configureDeploymentVersionsWithPlatformString: (NSString *) platform
+{
+    [self.pbDeployment removeAllItems];
+    
+    NSMutableArray *items = [NSMutableArray arrayWithArray: ([platform isEqualToString:@"ios"]) ? iOS_VERSIONS : OSX_VERSIONS];
+    [items insertObject:@"-" atIndex: 0];
+    
+    for (NSString *item in items) {
+        [self.pbDeployment addItemWithTitle: item];
+    }
 }
 
 - (IBAction)headValueChanged:(NSButton *)sender {
@@ -454,6 +516,8 @@ static NSString *ActivityToolbarItemIdentifier      = @"Activity Toolbar Item Id
                                           inParent: nil
                                      withAnimation: NSTableViewAnimationEffectGap];
     }
+    
+    self.wasEdited = YES;
 }
 
 #pragma mark Custom Methods
@@ -481,7 +545,7 @@ static NSString *ActivityToolbarItemIdentifier      = @"Activity Toolbar Item Id
         }
         
         if (self.podDetailPanel) {
-            CocoaPodWindowController *__weak weakSelf = self;
+            __weak CocoaPodWindowController *weakSelf = self;
             [self.podDetailPanel setOnDone: ^{
                 [NSApp endSheet: weakSelf.podDetailPanel];
             }];
@@ -492,11 +556,17 @@ static NSString *ActivityToolbarItemIdentifier      = @"Activity Toolbar Item Id
     if (pod) {
         [self.podDetailPanel displayPodSpec: pod];
         
-        [NSApp beginSheet: self.podDetailPanel
-           modalForWindow: [self window]
-            modalDelegate: self
-           didEndSelector: @selector(didEndSheet:returnCode:contextInfo:)
-              contextInfo: nil];
+            NSAlert* msgBox1 = [[NSAlert alloc] init];
+            [msgBox1 setMessageText: [NSString stringWithFormat:@"Windows: %ld", [[NSApp windows] count]]];
+            [msgBox1 addButtonWithTitle: @"OK"];
+            [msgBox1 runModal];
+        
+//        [NSApp beginSheet: self.podDetailPanel
+//           modalForWindow: [self window]
+//            modalDelegate: self
+//           didEndSelector: @selector(didEndSheet:returnCode:contextInfo:)
+//              contextInfo: nil];
+        
     }
 }
 
@@ -517,51 +587,43 @@ static NSString *ActivityToolbarItemIdentifier      = @"Activity Toolbar Item Id
     }
 }
 
-- (NSMutableArray *)pods{
-    return _pods;
-}
+//- (NSMutableArray *)pods{
+//    return _pods;
+//}
 
 - (BOOL)windowShouldClose:(id)sender{
     
     if(self.wasEdited){
+        NSAlert* msgBox = [NSAlert alertWithMessageText:@"Hey, wait a second."
+                                          defaultButton:@"Yes"
+                                        alternateButton:@"Cancel"
+                                            otherButton:@"No"
+                              informativeTextWithFormat: @"Do you want to save the modified pod file ?"];
+        [msgBox beginSheetModalForWindow: self.window
+                           modalDelegate: self
+                          didEndSelector: @selector(alertDidEnd:returnCode:contextInfo:)
+                             contextInfo: nil];
         
-        NSBeginAlertSheet(
-                          @"Hey, wait a second",
-                          @"Yes",
-                          @"Cancel",
-                          @"No",
-                          sender,
-                          self,
-                          NULL,
-                          @selector(saveModalDidDismissed:returnCode:contextInfo:),
-                          NULL,
-                          @"Do you want to save the modified pod file ?",
-                          NULL
-                          );
+        return NO;
     }else{
         self.canClose = YES;
-    }
-    
-    if (self.canClose) {
-        self.projectPodsList.delegate = nil;
-        self.projectPodsList.dataSource = nil;
-        self.cocoaPodsList.delegate = nil;
-        self.cocoaPodsList.dataSource = nil;
     }
     
     return self.canClose;
 }
 
-
--(void) saveModalDidDismissed: (id) sender returnCode: (NSInteger)returnCode contextInfo: (void *)contextInfo{
-    
+- (void) alertDidEnd:(NSAlert *) alert returnCode:(int) returnCode contextInfo:(int *) contextInfo
+{
     if(returnCode == NSAlertDefaultReturn){
         // Save the pod file
         [self.project writeProjectToPodFile];
     }
     
     self.canClose = YES;
-    [self close];
+    
+    if (returnCode != NSAlertAlternateReturn) {
+        [self close];
+    }    
 }
 
 - (void)contextDidSave:(NSNotification *)notification {
@@ -589,11 +651,11 @@ static NSString *ActivityToolbarItemIdentifier      = @"Activity Toolbar Item Id
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending: YES];
     if ([searchTerm length] > 0) {
         predicate = [NSPredicate predicateWithFormat:@"(name CONTAINS[cd] %@) or (desc CONTAINS[cd] %@)", searchTerm, searchTerm];
-        self.pods = [[PodSpec findAllWithPredicate: predicate] sortedArrayUsingDescriptors:@[sortDescriptor]].mutableCopy;
+        self.pods = [[PodSpec findAllWithPredicate: predicate] sortedArrayUsingDescriptors:@[sortDescriptor]];
     }else{
-        self.pods = [[PodSpec findAll] sortedArrayUsingDescriptors:@[sortDescriptor]].mutableCopy;
+        self.pods = [[PodSpec findAll] sortedArrayUsingDescriptors:@[sortDescriptor]];
     }
-    
+   
     self.cocoaPodsList.delegate = self;
     self.cocoaPodsList.dataSource = self;
     
@@ -663,6 +725,8 @@ static NSString *ActivityToolbarItemIdentifier      = @"Activity Toolbar Item Id
                 [self.pbPlatform selectItem: item];
             }
         }
+        
+        [self configureDeploymentVersionsWithPlatformString: self.project.platformString];
     }
     
     if ([self.project.deploymentString length] > 0){
@@ -697,19 +761,20 @@ static NSString *ActivityToolbarItemIdentifier      = @"Activity Toolbar Item Id
 -(void) openFile: (NSString *) filePath{
     
     NSString *projectPath = [XCodeProject projectPathWithRandomPath: filePath];
-    XCodeProject *xcodeProj = [XCodeProject findFirstWithPredicate:[NSPredicate predicateWithFormat:@"projectFilePath = %@", projectPath]];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"projectFilePath LIKE[c] %@", projectPath];
+    XCodeProject *xcodeProj = [XCodeProject findFirstWithPredicate: predicate];
+    
     if (!xcodeProj) {
         
         NSArray *items = [XCodeProject findAllSortedBy:@"date" ascending: NO];
-        // This that we might want to change ... seems dumb to remove recent projects
+        // We might want to change ... seems dumb to remove recent projects
         if ([items count] >= MAX_RECTENT_PROJECTS) {
             NSInteger itemsToDeleteCount = ([items count] - MAX_RECTENT_PROJECTS);
             NSArray *itemsToDelete = [items subarrayWithRange:NSMakeRange([items count] - itemsToDeleteCount, itemsToDeleteCount)];
-            [MagicalRecord saveUsingCurrentThreadContextWithBlockAndWait:^(NSManagedObjectContext *localContext) {
-                for (NSManagedObject *item in itemsToDelete) {
-                    [localContext deleteObject: item];
-                }
-            }];
+            
+            for (NSManagedObject *item in itemsToDelete) {
+                [self.managedObjectContext deleteObject: item];
+            }
         }
         
         xcodeProj = [XCodeProject createEntity];
@@ -760,22 +825,21 @@ static NSString *ActivityToolbarItemIdentifier      = @"Activity Toolbar Item Id
                                [self.projectPodsList reloadData];
                                
                                if ([[xcodeProj managedObjectContext] hasChanges]) {
-                                   [[xcodeProj managedObjectContext] saveToPersistentStoreAndWait];
+                                   [[xcodeProj managedObjectContext] save: nil];
                                }
                            },
                            nil,
                            NULL,
                            @"Do you want to Replace the content of the existing PodFile ? Or you want to add more Pods to the existing one ?");
     }else {
-        [MagicalRecord saveUsingCurrentThreadContextWithBlockAndWait:^(NSManagedObjectContext *localContext) {
-            xcodeProj.date = [NSDate date];
-        }];
+
+        xcodeProj.date = [NSDate date];
         
         self.project = [[CocoaProject alloc] initWithXCodeProject: xcodeProj];
         [self updateUI];
         [self.projectPodsList reloadData];
         
-        [[xcodeProj managedObjectContext] saveToPersistentStoreAndWait];
+        [self.managedObjectContext save: nil];
     }
 }
 
@@ -820,7 +884,15 @@ static NSString *ActivityToolbarItemIdentifier      = @"Activity Toolbar Item Id
             [cellView.textField setStringValue: ([pod.name length]) ? pod.name : @""];
             [cellView.textField setFont:[NSFont systemFontOfSize:13]];
             
-            // description label
+            // Check if the Pod has the description fetched
+            if (![pod.fetchedDetails boolValue]) {
+//                [pod fetchPropertiesWithVersion: [pod lastVersion]
+//                                         onDone:^{
+//                                             //NSLog(@"Retrieved description.");
+//                                         }];
+            }
+            
+            // Layout code.... oh... ugly code
             if ([pod.desc length]) {
                 NSTextField *descriptionTextField = [cellView viewWithTag: 2];
                 if (descriptionTextField) {
@@ -834,13 +906,25 @@ static NSString *ActivityToolbarItemIdentifier      = @"Activity Toolbar Item Id
                 [descriptionTextField setHidden: NO];
                 
                 NSTextField *nameTextField = [cellView viewWithTag: 1];
+                [nameTextField sizeToFit];
                 [nameTextField setFrame: NSMakeRect(nameTextField.frame.origin.x,
-                                                    view.frame.size.height - nameTextField.frame.size.height - 3,
+                                                    view.frame.size.height - nameTextField.frame.size.height - 3.0,
                                                     nameTextField.frame.size.width,
                                                     nameTextField.frame.size.height)];
                 
+                [descriptionTextField sizeToFit];
+                
+                CGFloat descriptionHeight = view.frame.size.height - (nameTextField.frame.size.height + 6.0);
+                NSRect descriptionRect = NSMakeRect(nameTextField.frame.origin.x,
+                                                    view.frame.size.height - (nameTextField.frame.size.height + nameTextField.frame.origin.y) - 3.0,
+                                                    view.frame.size.width - descriptionTextField.frame.origin.x,
+                                                    descriptionHeight);
+                
+                [descriptionTextField setFrame: descriptionRect];
+                
             } else {
                 NSTextField *nameTextField = [cellView viewWithTag: 1];
+                [nameTextField sizeToFit];
                 [nameTextField setFrame: NSMakeRect(nameTextField.frame.origin.x,
                                                     view.frame.size.height * 0.5 - nameTextField.frame.size.height * 0.5,
                                                     nameTextField.frame.size.width,
@@ -850,10 +934,18 @@ static NSString *ActivityToolbarItemIdentifier      = @"Activity Toolbar Item Id
                 [descriptionTextField setHidden: YES];
             }
             
-            NSButton *_installedInProjectCheckBox = [cellView viewWithTag: 0];
+            NSButton *_installedInProjectCheckBox = [cellView viewWithTag: 3];
             if (_installedInProjectCheckBox) {
                 [_installedInProjectCheckBox setState: [self.project containsPod: pod]];
             }
+            
+            // XCode 5 IB workaround.
+            NSView *btnView = [cellView viewWithTag: 3];
+            [btnView setFrame: NSMakeRect(4.0,
+                                          cellView.bounds.size.height * 0.5 - btnView.frame.size.height * 0.5,
+                                          btnView.frame.size.width,
+                                          btnView.frame.size.height)];
+            
         }else{
             if([item isKindOfClass:[NSString class]]){
                 if ([item length] == 0) {
@@ -865,17 +957,6 @@ static NSString *ActivityToolbarItemIdentifier      = @"Activity Toolbar Item Id
                 [cellView.textField setStringValue: @""];
             }
         }
-    }
-    
-    if ([[tableColumn identifier] isEqualToString:@"PodAction"]) {
-//        GotoButton *button = [view viewWithTag: 1];
-//        if ([item isKindOfClass:[PodSpec class]]) {
-//            PodSpec *pod = (PodSpec *)item;
-//            button.gotoLink = pod.homePage;
-//        }
-//        
-//        BOOL hidden = (![item isKindOfClass:[PodSpec class]] && [button isKindOfClass:[GotoButton class]]);
-//        [button setHidden: hidden];
     }
     
     return view;
@@ -943,6 +1024,21 @@ static NSString *ActivityToolbarItemIdentifier      = @"Activity Toolbar Item Id
             }else {
                 [cellView.textField setStringValue: @"Error"];
             }
+            
+            // XCode 5 IB bug, for some unkown reason it keeps changing the frame in the nib
+            [cellView.textField sizeToFit];
+            
+            NSRect textFieldRect = NSMakeRect(32.0,
+                                              cellView.bounds.size.height * 0.5 - cellView.textField.frame.size.height * 0.5,
+                                              cellView.bounds.size.width - 32.0,
+                                              cellView.textField.frame.size.height);
+            [cellView.textField setFrame: textFieldRect];
+            
+            NSView *btnView = [cellView viewWithTag: 2];
+            [btnView setFrame: NSMakeRect(1.0,
+                                          cellView.bounds.size.height * 0.5 - btnView.frame.size.height * 0.5,
+                                          btnView.frame.size.width,
+                                          btnView.frame.size.height)];
         }
     }else if ([[tableColumn identifier] isEqualToString:kCOLUMN_HEAD_ID]) {
         NSButton *button = [view viewWithTag: 1];
@@ -963,6 +1059,7 @@ static NSString *ActivityToolbarItemIdentifier      = @"Activity Toolbar Item Id
     return view;
 }
 
+#pragma mark -
 
 - (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item {
     
@@ -1167,7 +1264,7 @@ static NSString *ActivityToolbarItemIdentifier      = @"Activity Toolbar Item Id
         }];
         
         if ([context hasChanges]) {
-            [context saveToPersistentStoreAndWait];
+            [context save: nil];
         }
     });
     
@@ -1182,13 +1279,14 @@ static NSString *ActivityToolbarItemIdentifier      = @"Activity Toolbar Item Id
     id outlineParentItem = nil;
     //NSMutableArray *childNodeArray = [parentNode mutableChildNodes];
     NSInteger outlineColumnIndex = [[self.projectPodsList tableColumns] indexOfObject:[self.projectPodsList outlineTableColumn]];
-    
+        
     __weak CocoaPodWindowController *weakSelf = self;
+    
     // Enumerate all items dropped on us and create new model objects for them
     NSArray *classes = [NSArray arrayWithObject:[PodSpec class]];
     __block NSInteger insertionIndex = childIndex >= 0 ? childIndex : 0;
-    [info enumerateDraggingItemsWithOptions:0 forView:weakSelf.projectPodsList classes:classes searchOptions:nil usingBlock:^(NSDraggingItem *draggingItem, NSInteger index, BOOL *stop) {
-        
+    [info enumerateDraggingItemsWithOptions:0 forView:self.projectPodsList classes:classes searchOptions:nil usingBlock:^(NSDraggingItem *draggingItem, NSInteger index, BOOL *stop) {
+            
         PodSpec *newNodeData = (PodSpec *)draggingItem.item;
         // Wrap the model object in a tree node
         NSTreeNode *treeNode = [NSTreeNode treeNodeWithRepresentedObject:newNodeData];
@@ -1305,15 +1403,14 @@ static NSString *ActivityToolbarItemIdentifier      = @"Activity Toolbar Item Id
 
 - (NSToolbarItem *) toolbar: (NSToolbar *)toolbar itemForItemIdentifier: (NSString *) itemIdent willBeInsertedIntoToolbar:(BOOL) willBeInserted {
     
-    NSToolbarItem *toolbarItem = nil;
-    toolbarItem = [[NSToolbarItem alloc] initWithItemIdentifier: itemIdent];
+    NSToolbarItem *toolbarItem = [[NSToolbarItem alloc] initWithItemIdentifier: itemIdent];
 	
     if ([itemIdent isEqualToString: UpdatePodToolbarItemIdentifier]) {
         [toolbarItem setLabel: @"Update"];
         [toolbarItem setPaletteLabel: @"Update"];
         
         [toolbarItem setToolTip: @"Update Pod"];
-        [toolbarItem setImage: [NSImage imageNamed: @"update"]];
+        [toolbarItem setImage: [Plugin imageWithName: @"update"]];
         // Tell the item what message to send when it is clicked
         [toolbarItem setTarget: self];
         [toolbarItem setAction: @selector(installAction:)];
@@ -1322,7 +1419,9 @@ static NSString *ActivityToolbarItemIdentifier      = @"Activity Toolbar Item Id
         [toolbarItem setPaletteLabel: @"Install"];
         
         [toolbarItem setToolTip: @"Install Pod"];
-        [toolbarItem setImage: [NSImage imageNamed: @"install"]];
+        
+        
+        [toolbarItem setImage: [Plugin imageWithName: @"install"]];
         // Tell the item what message to send when it is clicked
         [toolbarItem setTarget: self];
         [toolbarItem setAction: @selector(installAction:)];
@@ -1331,7 +1430,7 @@ static NSString *ActivityToolbarItemIdentifier      = @"Activity Toolbar Item Id
         [toolbarItem setPaletteLabel: @"Save"];
         
         [toolbarItem setToolTip: @"Save Pod File"];
-        [toolbarItem setImage: [NSImage imageNamed: @"save_as"]];
+        [toolbarItem setImage: [Plugin imageWithName: @"save_as"]];
         // Tell the item what message to send when it is clicked
         [toolbarItem setTarget: self];
         [toolbarItem setAction: @selector(saveAction:)];
@@ -1391,6 +1490,19 @@ static NSString *ActivityToolbarItemIdentifier      = @"Activity Toolbar Item Id
         enable = YES;
     }
     return enable;
+}
+
+#pragma mark - NSSplitViewDelegate
+
+- (void)splitViewDidResizeSubviews:(NSNotification *)aNotification
+{
+    //NSLog(@"Notification: %@", aNotification);
+    
+    NSDictionary *userInfo = [aNotification userInfo];
+    if([userInfo[@"name"] isEqualToString: NSSplitViewDidResizeSubviewsNotification]) {
+        NSView *view = userInfo[@"object"];
+        [view setNeedsDisplay: YES];
+    }
 }
 
 @end
