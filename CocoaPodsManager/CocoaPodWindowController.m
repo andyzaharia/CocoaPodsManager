@@ -9,7 +9,6 @@
 #import "CocoaPodWindowController.h"
 #import "CocoaProject.h"
 #import "XCodeProject+Misc.h"
-#import "Taskit.h"
 #import "CocoaPodsTreeController.h"
 #import "PodSpec+StdOutParser.h"
 #import "NSApplication+ESSApplicationCategory.h"

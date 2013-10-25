@@ -58,8 +58,6 @@
 		7530C70118072F490050C136 /* ProjectTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7530C70018072F490050C136 /* ProjectTableView.m */; };
 		7530C72118073BF90050C136 /* NSApplication+ESSApplicationCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 7530C70818073BF80050C136 /* NSApplication+ESSApplicationCategory.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7530C72218073BF90050C136 /* NSApplication+ESSApplicationCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 7530C70818073BF80050C136 /* NSApplication+ESSApplicationCategory.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		7530C72518073BF90050C136 /* Taskit.m in Sources */ = {isa = PBXBuildFile; fileRef = 7530C70C18073BF80050C136 /* Taskit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		7530C72618073BF90050C136 /* Taskit.m in Sources */ = {isa = PBXBuildFile; fileRef = 7530C70C18073BF80050C136 /* Taskit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7530C73918073DCA0050C136 /* CocoaPodsApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 7530C73818073DCA0050C136 /* CocoaPodsApp.m */; };
 		7530C73A18073DCA0050C136 /* CocoaPodsApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 7530C73818073DCA0050C136 /* CocoaPodsApp.m */; };
 		756786CB180728550056C1AC /* CocoaPods Plugin-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 756786C1180728550056C1AC /* CocoaPods Plugin-Info.plist */; };
@@ -191,8 +189,6 @@
 		7530C70018072F490050C136 /* ProjectTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectTableView.m; sourceTree = "<group>"; };
 		7530C70718073BF80050C136 /* NSApplication+ESSApplicationCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSApplication+ESSApplicationCategory.h"; sourceTree = "<group>"; };
 		7530C70818073BF80050C136 /* NSApplication+ESSApplicationCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSApplication+ESSApplicationCategory.m"; sourceTree = "<group>"; };
-		7530C70B18073BF80050C136 /* Taskit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Taskit.h; sourceTree = "<group>"; };
-		7530C70C18073BF80050C136 /* Taskit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Taskit.m; sourceTree = "<group>"; };
 		7530C73718073DCA0050C136 /* CocoaPodsApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocoaPodsApp.h; sourceTree = "<group>"; };
 		7530C73818073DCA0050C136 /* CocoaPodsApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CocoaPodsApp.m; sourceTree = "<group>"; };
 		756786C1180728550056C1AC /* CocoaPods Plugin-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "CocoaPods Plugin-Info.plist"; sourceTree = "<group>"; };
@@ -426,7 +422,6 @@
 				75BBB55618087EF00031B011 /* HyperlinkTextField */,
 				7530C73618073DCA0050C136 /* CocoaPodsApp */,
 				7530C70618073BF80050C136 /* NSBeginAlertSheet-using-Blocks */,
-				7530C70918073BF80050C136 /* taskit */,
 				7530C6C118072A720050C136 /* AppConstants */,
 				7530C6C418072A720050C136 /* Categories */,
 				7530C6CB18072A720050C136 /* CCPWorkspaceManager */,
@@ -533,15 +528,6 @@
 				7530C70818073BF80050C136 /* NSApplication+ESSApplicationCategory.m */,
 			);
 			path = "NSBeginAlertSheet-using-Blocks";
-			sourceTree = "<group>";
-		};
-		7530C70918073BF80050C136 /* taskit */ = {
-			isa = PBXGroup;
-			children = (
-				7530C70B18073BF80050C136 /* Taskit.h */,
-				7530C70C18073BF80050C136 /* Taskit.m */,
-			);
-			path = taskit;
 			sourceTree = "<group>";
 		};
 		7530C73618073DCA0050C136 /* CocoaPodsApp */ = {
@@ -869,7 +855,6 @@
 				7567ED621809E245006B0F7C /* PodRepositoryManager.m in Sources */,
 				7530C6E518072A720050C136 /* NSManagedObject+CoreData.m in Sources */,
 				75A9F4AB1809DFA000869AA5 /* PodSpec+StdOutParser.m in Sources */,
-				7530C72518073BF90050C136 /* Taskit.m in Sources */,
 				7567ED681809E857006B0F7C /* main.m in Sources */,
 				75225FD91723FA4F00B3C077 /* HooksPanel.m in Sources */,
 			);
@@ -890,7 +875,6 @@
 				7567ED631809E245006B0F7C /* PodRepositoryManager.m in Sources */,
 				75A9F4B01809DFA000869AA5 /* PodSpec.m in Sources */,
 				75A9F4AE1809DFA000869AA5 /* PodSpec+YAML.m in Sources */,
-				7530C72618073BF90050C136 /* Taskit.m in Sources */,
 				7530C6DC18072A720050C136 /* AppConstants.m in Sources */,
 				75A9F4C11809DFC900869AA5 /* PodLineDependencyParser.m in Sources */,
 				7530C6EA18072A720050C136 /* NSPersistentStoreCoordinator+Custom.m in Sources */,

@@ -7,7 +7,6 @@
 //
 
 #import "PodSpecTaskOperation.h"
-#import "Taskit.h"
 #import "NSString+Misc.h"
 #import "AppConstants.h"
 #import "PodSpec+StdOutParser.h"

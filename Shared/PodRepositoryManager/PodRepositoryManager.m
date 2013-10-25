@@ -8,7 +8,6 @@
 
 #import "PodRepositoryManager.h"
 #import "TAppDelegate.h"
-#import "Taskit.h"
 #import "PodSpecTaskOperation.h"
 #import "AppConstants.h"
 #import "Plugin.h"
