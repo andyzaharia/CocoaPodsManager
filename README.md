@@ -17,7 +17,9 @@ The Code is by far not the cleanest one, and a lot of optimizations are required
 
 If you dont want to mess with the code you can just get the latest compiled version from here:
 
-[Download](http://andyzaharia.com/CocoaPodsManager/CocoaPodsManager.zip)
+![Pods Window](https://dl.dropboxusercontent.com/u/9337037/CocoaPodsManager/Screenshot%202013-12-23%2018.04.15.png "")
+![XCode Plugin](https://dl.dropboxusercontent.com/u/9337037/CocoaPodsManager/Screenshot%202013-12-23%2017.58.18.png "")
+![Standalone app](https://dl.dropboxusercontent.com/u/9337037/CocoaPodsManager/Screenshot%202013-12-23%2018.05.53.png "")
 
 ## Requirements
 
