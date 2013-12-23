@@ -20,6 +20,8 @@
 
     #import "NSApp+Misc.h"
 
+    #import "CPProject+Misc.h"
+
     #define XCODE_PROJECT_EXTENSION @"xcodeproj"
     #define XCODE_WORKSPACE_EXTENSION @"xcworkspace"
 

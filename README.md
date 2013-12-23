@@ -59,7 +59,7 @@ Hooks
 
 ## Creators
 
-CocoaPods Manager was created by [Andrei Zaharia](https://github.com/andyzaharia/) in [MobileEngine's Labs](http://mobileengine.es/)
+CocoaPods Manager was created by [Andrei Zaharia](https://github.com/andyzaharia/)
 
 ## Credits
 
