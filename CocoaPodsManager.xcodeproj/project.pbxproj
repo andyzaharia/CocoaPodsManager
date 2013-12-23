@@ -16,6 +16,17 @@
 		74213BBB170D7BC000E7E6E6 /* PodDetailPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74213BBA170D7BC000E7E6E6 /* PodDetailPanel.xib */; };
 		743C4B0416C3F8D600F03545 /* Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 743C4B0316C3F8D600F03545 /* Icon.icns */; };
 		743F7F3016CCED2A0042CD63 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 743F7F2F16CCED2A0042CD63 /* Security.framework */; };
+		745ABFC51828E12100DB2BA1 /* PodLineDependencyParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 745ABFBE1828E12100DB2BA1 /* PodLineDependencyParser.m */; };
+		745ABFC61828E12100DB2BA1 /* PodLineDependencyParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 745ABFBE1828E12100DB2BA1 /* PodLineDependencyParser.m */; };
+		745ABFC71828E12100DB2BA1 /* PodLineDependencyParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 745ABFBE1828E12100DB2BA1 /* PodLineDependencyParser.m */; };
+		745ABFCA1828EC7E00DB2BA1 /* CPProject+Misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 745ABFC91828EC7E00DB2BA1 /* CPProject+Misc.m */; };
+		745ABFCB1828EC7E00DB2BA1 /* CPProject+Misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 745ABFC91828EC7E00DB2BA1 /* CPProject+Misc.m */; };
+		745ABFCC1828EC7E00DB2BA1 /* CPProject+Misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 745ABFC91828EC7E00DB2BA1 /* CPProject+Misc.m */; };
+		745ABFE81828FDF100DB2BA1 /* CPDependency.m in Sources */ = {isa = PBXBuildFile; fileRef = 745ABFE71828FDF100DB2BA1 /* CPDependency.m */; };
+		745ABFE91828FDF100DB2BA1 /* CPDependency.m in Sources */ = {isa = PBXBuildFile; fileRef = 745ABFE71828FDF100DB2BA1 /* CPDependency.m */; };
+		745ABFEA1828FDF100DB2BA1 /* CPDependency.m in Sources */ = {isa = PBXBuildFile; fileRef = 745ABFE71828FDF100DB2BA1 /* CPDependency.m */; };
+		7497F85A1862DEF700D37A16 /* CPDependency+Misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 7497F8591862DEF700D37A16 /* CPDependency+Misc.m */; };
+		7497F85B1862DEF700D37A16 /* CPDependency+Misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 7497F8591862DEF700D37A16 /* CPDependency+Misc.m */; };
 		74BCF60816E736480054040D /* trash.png in Resources */ = {isa = PBXBuildFile; fileRef = 74BCF60716E736480054040D /* trash.png */; };
 		74DA445316DCBA9200F130EF /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 74DA445216DCBA9100F130EF /* libresolv.dylib */; };
 		74DA445616DDE76500F130EF /* action_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 74DA445516DDE76500F130EF /* action_arrow.png */; };
@@ -27,6 +38,8 @@
 		7510D009170F3D820032E742 /* update.png in Resources */ = {isa = PBXBuildFile; fileRef = 7510D008170F3D820032E742 /* update.png */; };
 		7510D00B170F3E540032E742 /* save_as.png in Resources */ = {isa = PBXBuildFile; fileRef = 7510D00A170F3E540032E742 /* save_as.png */; };
 		751D0AC917FCA05900DA3523 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A3EDDB5BFDF4E5588523290 /* libPods.a */; };
+		751F031218683F6400305394 /* NSFileManager+DirectoryLocations.m in Sources */ = {isa = PBXBuildFile; fileRef = 751F031118683F6400305394 /* NSFileManager+DirectoryLocations.m */; };
+		751F031318683F6400305394 /* NSFileManager+DirectoryLocations.m in Sources */ = {isa = PBXBuildFile; fileRef = 751F031118683F6400305394 /* NSFileManager+DirectoryLocations.m */; };
 		75225FD91723FA4F00B3C077 /* HooksPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 75225FD81723FA4F00B3C077 /* HooksPanel.m */; };
 		75225FDB1723FA7B00B3C077 /* HooksPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75225FDA1723FA7B00B3C077 /* HooksPanel.xib */; };
 		75231E1517E8F01B000FE8E2 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 740FE03416C294A60078A953 /* CoreData.framework */; };
@@ -98,19 +111,13 @@
 		75A9F4AE1809DFA000869AA5 /* PodSpec+YAML.m in Sources */ = {isa = PBXBuildFile; fileRef = 75A9F4A21809DFA000869AA5 /* PodSpec+YAML.m */; };
 		75A9F4AF1809DFA000869AA5 /* PodSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 75A9F4A41809DFA000869AA5 /* PodSpec.m */; };
 		75A9F4B01809DFA000869AA5 /* PodSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 75A9F4A41809DFA000869AA5 /* PodSpec.m */; };
-		75A9F4B11809DFA000869AA5 /* XCodeProject+Misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 75A9F4A61809DFA000869AA5 /* XCodeProject+Misc.m */; };
-		75A9F4B21809DFA000869AA5 /* XCodeProject+Misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 75A9F4A61809DFA000869AA5 /* XCodeProject+Misc.m */; };
-		75A9F4B31809DFA000869AA5 /* XCodeProject.m in Sources */ = {isa = PBXBuildFile; fileRef = 75A9F4A81809DFA000869AA5 /* XCodeProject.m */; };
-		75A9F4B41809DFA000869AA5 /* XCodeProject.m in Sources */ = {isa = PBXBuildFile; fileRef = 75A9F4A81809DFA000869AA5 /* XCodeProject.m */; };
-		75A9F4BC1809DFC900869AA5 /* CocoaProject.m in Sources */ = {isa = PBXBuildFile; fileRef = 75A9F4B71809DFC900869AA5 /* CocoaProject.m */; };
-		75A9F4BD1809DFC900869AA5 /* CocoaProject.m in Sources */ = {isa = PBXBuildFile; fileRef = 75A9F4B71809DFC900869AA5 /* CocoaProject.m */; };
-		75A9F4BE1809DFC900869AA5 /* Dependency.m in Sources */ = {isa = PBXBuildFile; fileRef = 75A9F4B91809DFC900869AA5 /* Dependency.m */; };
-		75A9F4BF1809DFC900869AA5 /* Dependency.m in Sources */ = {isa = PBXBuildFile; fileRef = 75A9F4B91809DFC900869AA5 /* Dependency.m */; };
-		75A9F4C01809DFC900869AA5 /* PodLineDependencyParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 75A9F4BB1809DFC900869AA5 /* PodLineDependencyParser.m */; };
-		75A9F4C11809DFC900869AA5 /* PodLineDependencyParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 75A9F4BB1809DFC900869AA5 /* PodLineDependencyParser.m */; };
 		75BBB55918087EF00031B011 /* HyperlinkTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BBB55818087EF00031B011 /* HyperlinkTextField.m */; };
 		75BBB55A18087EF00031B011 /* HyperlinkTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BBB55818087EF00031B011 /* HyperlinkTextField.m */; };
 		75BBB55D180896D40031B011 /* PluginIcon26.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 75BBB55C180896D40031B011 /* PluginIcon26.tiff */; };
+		75ED7CD61868504C00B82B30 /* CPProject.m in Sources */ = {isa = PBXBuildFile; fileRef = 75ED7CD51868504C00B82B30 /* CPProject.m */; };
+		75ED7CD71868504C00B82B30 /* CPProject.m in Sources */ = {isa = PBXBuildFile; fileRef = 75ED7CD51868504C00B82B30 /* CPProject.m */; };
+		75ED7CDA186856F000B82B30 /* Pod.m in Sources */ = {isa = PBXBuildFile; fileRef = 75ED7CD9186856F000B82B30 /* Pod.m */; };
+		75ED7CDB186856F000B82B30 /* Pod.m in Sources */ = {isa = PBXBuildFile; fileRef = 75ED7CD9186856F000B82B30 /* Pod.m */; };
 		8FE2AE8B31F5430483E2EE67 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A3EDDB5BFDF4E5588523290 /* libPods.a */; };
 		E195CE7916CA538200B4E3B8 /* Xcode.png in Resources */ = {isa = PBXBuildFile; fileRef = E195CE7816CA538200B4E3B8 /* Xcode.png */; };
 		E195CE8116CA6A7000B4E3B8 /* xcode_proj.png in Resources */ = {isa = PBXBuildFile; fileRef = E195CE8016CA6A7000B4E3B8 /* xcode_proj.png */; };
@@ -140,6 +147,14 @@
 		74213BBA170D7BC000E7E6E6 /* PodDetailPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PodDetailPanel.xib; path = PodDetailPanel/PodDetailPanel.xib; sourceTree = "<group>"; };
 		743C4B0316C3F8D600F03545 /* Icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Icon.icns; sourceTree = "<group>"; };
 		743F7F2F16CCED2A0042CD63 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		745ABFBD1828E12100DB2BA1 /* PodLineDependencyParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PodLineDependencyParser.h; sourceTree = "<group>"; };
+		745ABFBE1828E12100DB2BA1 /* PodLineDependencyParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PodLineDependencyParser.m; sourceTree = "<group>"; };
+		745ABFC81828EC7E00DB2BA1 /* CPProject+Misc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CPProject+Misc.h"; sourceTree = "<group>"; };
+		745ABFC91828EC7E00DB2BA1 /* CPProject+Misc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CPProject+Misc.m"; sourceTree = "<group>"; };
+		745ABFE61828FDF100DB2BA1 /* CPDependency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPDependency.h; sourceTree = "<group>"; };
+		745ABFE71828FDF100DB2BA1 /* CPDependency.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPDependency.m; sourceTree = "<group>"; };
+		7497F8581862DEF700D37A16 /* CPDependency+Misc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CPDependency+Misc.h"; sourceTree = "<group>"; };
+		7497F8591862DEF700D37A16 /* CPDependency+Misc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CPDependency+Misc.m"; sourceTree = "<group>"; };
 		74BCF60716E736480054040D /* trash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trash.png; sourceTree = "<group>"; };
 		74DA445216DCBA9100F130EF /* libresolv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libresolv.dylib; path = usr/lib/libresolv.dylib; sourceTree = SDKROOT; };
 		74DA445516DDE76500F130EF /* action_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = action_arrow.png; sourceTree = "<group>"; };
@@ -152,6 +167,8 @@
 		7510D006170F3CB90032E742 /* install.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = install.png; sourceTree = "<group>"; };
 		7510D008170F3D820032E742 /* update.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = update.png; sourceTree = "<group>"; };
 		7510D00A170F3E540032E742 /* save_as.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = save_as.png; sourceTree = "<group>"; };
+		751F031018683F6400305394 /* NSFileManager+DirectoryLocations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+DirectoryLocations.h"; sourceTree = "<group>"; };
+		751F031118683F6400305394 /* NSFileManager+DirectoryLocations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+DirectoryLocations.m"; sourceTree = "<group>"; };
 		75225FD71723FA4F00B3C077 /* HooksPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HooksPanel.h; path = HooksPanel/HooksPanel.h; sourceTree = "<group>"; };
 		75225FD81723FA4F00B3C077 /* HooksPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HooksPanel.m; path = HooksPanel/HooksPanel.m; sourceTree = "<group>"; };
 		75225FDA1723FA7B00B3C077 /* HooksPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HooksPanel.xib; path = HooksPanel/HooksPanel.xib; sourceTree = "<group>"; };
@@ -210,19 +227,13 @@
 		75A9F4A21809DFA000869AA5 /* PodSpec+YAML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PodSpec+YAML.m"; sourceTree = "<group>"; };
 		75A9F4A31809DFA000869AA5 /* PodSpec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PodSpec.h; sourceTree = "<group>"; };
 		75A9F4A41809DFA000869AA5 /* PodSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PodSpec.m; sourceTree = "<group>"; };
-		75A9F4A51809DFA000869AA5 /* XCodeProject+Misc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XCodeProject+Misc.h"; sourceTree = "<group>"; };
-		75A9F4A61809DFA000869AA5 /* XCodeProject+Misc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "XCodeProject+Misc.m"; sourceTree = "<group>"; };
-		75A9F4A71809DFA000869AA5 /* XCodeProject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCodeProject.h; sourceTree = "<group>"; };
-		75A9F4A81809DFA000869AA5 /* XCodeProject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCodeProject.m; sourceTree = "<group>"; };
-		75A9F4B61809DFC900869AA5 /* CocoaProject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocoaProject.h; sourceTree = "<group>"; };
-		75A9F4B71809DFC900869AA5 /* CocoaProject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CocoaProject.m; sourceTree = "<group>"; };
-		75A9F4B81809DFC900869AA5 /* Dependency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dependency.h; sourceTree = "<group>"; };
-		75A9F4B91809DFC900869AA5 /* Dependency.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Dependency.m; sourceTree = "<group>"; };
-		75A9F4BA1809DFC900869AA5 /* PodLineDependencyParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PodLineDependencyParser.h; sourceTree = "<group>"; };
-		75A9F4BB1809DFC900869AA5 /* PodLineDependencyParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PodLineDependencyParser.m; sourceTree = "<group>"; };
 		75BBB55718087EF00031B011 /* HyperlinkTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HyperlinkTextField.h; sourceTree = "<group>"; };
 		75BBB55818087EF00031B011 /* HyperlinkTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HyperlinkTextField.m; sourceTree = "<group>"; };
 		75BBB55C180896D40031B011 /* PluginIcon26.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = PluginIcon26.tiff; sourceTree = "<group>"; };
+		75ED7CD41868504C00B82B30 /* CPProject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPProject.h; sourceTree = "<group>"; };
+		75ED7CD51868504C00B82B30 /* CPProject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPProject.m; sourceTree = "<group>"; };
+		75ED7CD8186856F000B82B30 /* Pod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pod.h; sourceTree = "<group>"; };
+		75ED7CD9186856F000B82B30 /* Pod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pod.m; sourceTree = "<group>"; };
 		8F0ADA391BE84E54BA40C106 /* libPods-CocoaPodsPlugin.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CocoaPodsPlugin.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E13A2B2916CD8C0E00A7E637 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E13A2B3716CD8E4500A7E637 /* CocoaPodsManager.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CocoaPodsManager.entitlements; sourceTree = "<group>"; };
@@ -373,6 +384,23 @@
 			path = Resources;
 			sourceTree = SOURCE_ROOT;
 		};
+		745ABFB81828E12100DB2BA1 /* CPProject */ = {
+			isa = PBXGroup;
+			children = (
+				75ED7CD41868504C00B82B30 /* CPProject.h */,
+				75ED7CD51868504C00B82B30 /* CPProject.m */,
+				745ABFE61828FDF100DB2BA1 /* CPDependency.h */,
+				745ABFE71828FDF100DB2BA1 /* CPDependency.m */,
+				745ABFC81828EC7E00DB2BA1 /* CPProject+Misc.h */,
+				745ABFC91828EC7E00DB2BA1 /* CPProject+Misc.m */,
+				745ABFBD1828E12100DB2BA1 /* PodLineDependencyParser.h */,
+				745ABFBE1828E12100DB2BA1 /* PodLineDependencyParser.m */,
+				7497F8581862DEF700D37A16 /* CPDependency+Misc.h */,
+				7497F8591862DEF700D37A16 /* CPDependency+Misc.m */,
+			);
+			path = CPProject;
+			sourceTree = "<group>";
+		};
 		74D0EE35170AFFE600F9442B /* PodDetailsPanel */ = {
 			isa = PBXGroup;
 			children = (
@@ -381,6 +409,15 @@
 				74213BBA170D7BC000E7E6E6 /* PodDetailPanel.xib */,
 			);
 			name = PodDetailsPanel;
+			sourceTree = "<group>";
+		};
+		751F030F18683F6400305394 /* NSFileManager */ = {
+			isa = PBXGroup;
+			children = (
+				751F031018683F6400305394 /* NSFileManager+DirectoryLocations.h */,
+				751F031118683F6400305394 /* NSFileManager+DirectoryLocations.m */,
+			);
+			path = NSFileManager;
 			sourceTree = "<group>";
 		};
 		75225FD61723FA1D00B3C077 /* HooksPanel */ = {
@@ -417,8 +454,8 @@
 			isa = PBXGroup;
 			children = (
 				7567ED5B1809E245006B0F7C /* PodRepositoryManager */,
-				75A9F4B51809DFC900869AA5 /* CocoaProject */,
-				75A9F49C1809DFA000869AA5 /* CoreDataYAML */,
+				745ABFB81828E12100DB2BA1 /* CPProject */,
+				75A9F49C1809DFA000869AA5 /* CoreData+YAML */,
 				75BBB55618087EF00031B011 /* HyperlinkTextField */,
 				7530C73618073DCA0050C136 /* CocoaPodsApp */,
 				7530C70618073BF80050C136 /* NSBeginAlertSheet-using-Blocks */,
@@ -426,7 +463,6 @@
 				7530C6C418072A720050C136 /* Categories */,
 				7530C6CB18072A720050C136 /* CCPWorkspaceManager */,
 				7530C6D118072A720050C136 /* Core Data */,
-				7530C6D818072A720050C136 /* Helpers */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -443,6 +479,7 @@
 		7530C6C418072A720050C136 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				751F030F18683F6400305394 /* NSFileManager */,
 				7530C6C518072A720050C136 /* NSApp */,
 				7530C6C818072A720050C136 /* NSString+Misc */,
 			);
@@ -487,13 +524,6 @@
 				7530C6D718072A720050C136 /* NSPersistentStoreCoordinator+Custom.m */,
 			);
 			path = "Core Data";
-			sourceTree = "<group>";
-		};
-		7530C6D818072A720050C136 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Helpers;
 			sourceTree = "<group>";
 		};
 		7530C6ED18072B260050C136 /* MainWindow */ = {
@@ -559,11 +589,13 @@
 				7567ED5F1809E245006B0F7C /* PodSpecParser.m */,
 				7567ED601809E245006B0F7C /* PodSpecTaskOperation.h */,
 				7567ED611809E245006B0F7C /* PodSpecTaskOperation.m */,
+				75ED7CD8186856F000B82B30 /* Pod.h */,
+				75ED7CD9186856F000B82B30 /* Pod.m */,
 			);
 			path = PodRepositoryManager;
 			sourceTree = "<group>";
 		};
-		75A9F49C1809DFA000869AA5 /* CoreDataYAML */ = {
+		75A9F49C1809DFA000869AA5 /* CoreData+YAML */ = {
 			isa = PBXGroup;
 			children = (
 				75A9F49D1809DFA000869AA5 /* PodSpec+Misc.h */,
@@ -574,25 +606,9 @@
 				75A9F4A21809DFA000869AA5 /* PodSpec+YAML.m */,
 				75A9F4A31809DFA000869AA5 /* PodSpec.h */,
 				75A9F4A41809DFA000869AA5 /* PodSpec.m */,
-				75A9F4A51809DFA000869AA5 /* XCodeProject+Misc.h */,
-				75A9F4A61809DFA000869AA5 /* XCodeProject+Misc.m */,
-				75A9F4A71809DFA000869AA5 /* XCodeProject.h */,
-				75A9F4A81809DFA000869AA5 /* XCodeProject.m */,
 			);
+			name = "CoreData+YAML";
 			path = CoreDataYAML;
-			sourceTree = "<group>";
-		};
-		75A9F4B51809DFC900869AA5 /* CocoaProject */ = {
-			isa = PBXGroup;
-			children = (
-				75A9F4B61809DFC900869AA5 /* CocoaProject.h */,
-				75A9F4B71809DFC900869AA5 /* CocoaProject.m */,
-				75A9F4B81809DFC900869AA5 /* Dependency.h */,
-				75A9F4B91809DFC900869AA5 /* Dependency.m */,
-				75A9F4BA1809DFC900869AA5 /* PodLineDependencyParser.h */,
-				75A9F4BB1809DFC900869AA5 /* PodLineDependencyParser.m */,
-			);
-			path = CocoaProject;
 			sourceTree = "<group>";
 		};
 		75BBB55618087EF00031B011 /* HyperlinkTextField */ = {
@@ -825,19 +841,21 @@
 				740FE04416C294A60078A953 /* TAppDelegate.m in Sources */,
 				7567ED661809E245006B0F7C /* PodSpecTaskOperation.m in Sources */,
 				740FE06916C297400078A953 /* CocoaPodWindowController.m in Sources */,
-				75A9F4C01809DFC900869AA5 /* PodLineDependencyParser.m in Sources */,
 				7530C6F718072DCE0050C136 /* HoverTableRowView.m in Sources */,
+				75ED7CD61868504C00B82B30 /* CPProject.m in Sources */,
 				7530C6DB18072A720050C136 /* AppConstants.m in Sources */,
 				7530C6E118072A720050C136 /* CCPWorkspaceManager.m in Sources */,
+				7497F85A1862DEF700D37A16 /* CPDependency+Misc.m in Sources */,
 				756786CF180728550056C1AC /* Plugin.m in Sources */,
+				745ABFC51828E12100DB2BA1 /* PodLineDependencyParser.m in Sources */,
+				75ED7CDA186856F000B82B30 /* Pod.m in Sources */,
 				7530C6FE18072E200050C136 /* ProjectCell.m in Sources */,
-				75A9F4BC1809DFC900869AA5 /* CocoaProject.m in Sources */,
 				7530C72118073BF90050C136 /* NSApplication+ESSApplicationCategory.m in Sources */,
 				7530C73918073DCA0050C136 /* CocoaPodsApp.m in Sources */,
 				7567ED641809E245006B0F7C /* PodSpecParser.m in Sources */,
 				7530C6E918072A720050C136 /* NSPersistentStoreCoordinator+Custom.m in Sources */,
 				75A9F4A91809DFA000869AA5 /* PodSpec+Misc.m in Sources */,
-				75A9F4B11809DFA000869AA5 /* XCodeProject+Misc.m in Sources */,
+				745ABFE81828FDF100DB2BA1 /* CPDependency.m in Sources */,
 				75A9F4AF1809DFA000869AA5 /* PodSpec.m in Sources */,
 				7530C6FB18072DE90050C136 /* NSCustomImageView.m in Sources */,
 				7530C6DF18072A720050C136 /* NSString+Misc.m in Sources */,
@@ -845,12 +863,12 @@
 				7530C6DD18072A720050C136 /* NSApp+Misc.m in Sources */,
 				7530C6E718072A720050C136 /* NSManagedObjectContext+Custom.m in Sources */,
 				74DA445E16DF57F800F130EF /* CocoaPodsTreeController.m in Sources */,
-				75A9F4B31809DFA000869AA5 /* XCodeProject.m in Sources */,
+				745ABFCA1828EC7E00DB2BA1 /* CPProject+Misc.m in Sources */,
 				74DA447016E0F36600F130EF /* CustomOutlineView.m in Sources */,
 				74213BB9170D7B8800E7E6E6 /* PodDetailPanel.m in Sources */,
 				75BBB55918087EF00031B011 /* HyperlinkTextField.m in Sources */,
-				75A9F4BE1809DFC900869AA5 /* Dependency.m in Sources */,
 				7530C6F318072D130050C136 /* DataModel.xcdatamodeld in Sources */,
+				751F031218683F6400305394 /* NSFileManager+DirectoryLocations.m in Sources */,
 				7530C70118072F490050C136 /* ProjectTableView.m in Sources */,
 				7567ED621809E245006B0F7C /* PodRepositoryManager.m in Sources */,
 				7530C6E518072A720050C136 /* NSManagedObject+CoreData.m in Sources */,
@@ -865,6 +883,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				7528C92F1714AA2700F12D66 /* UnitTest.m in Sources */,
+				745ABFCC1828EC7E00DB2BA1 /* CPProject+Misc.m in Sources */,
+				745ABFC71828E12100DB2BA1 /* PodLineDependencyParser.m in Sources */,
+				745ABFEA1828FDF100DB2BA1 /* CPDependency.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -876,21 +897,21 @@
 				75A9F4B01809DFA000869AA5 /* PodSpec.m in Sources */,
 				75A9F4AE1809DFA000869AA5 /* PodSpec+YAML.m in Sources */,
 				7530C6DC18072A720050C136 /* AppConstants.m in Sources */,
-				75A9F4C11809DFC900869AA5 /* PodLineDependencyParser.m in Sources */,
+				75ED7CD71868504C00B82B30 /* CPProject.m in Sources */,
 				7530C6EA18072A720050C136 /* NSPersistentStoreCoordinator+Custom.m in Sources */,
 				75A9F4AA1809DFA000869AA5 /* PodSpec+Misc.m in Sources */,
+				745ABFCB1828EC7E00DB2BA1 /* CPProject+Misc.m in Sources */,
 				75A9F4AC1809DFA000869AA5 /* PodSpec+StdOutParser.m in Sources */,
-				75A9F4B21809DFA000869AA5 /* XCodeProject+Misc.m in Sources */,
 				7574047A17E8E43C004CF3FD /* HooksPanel.m in Sources */,
 				7567ED671809E245006B0F7C /* PodSpecTaskOperation.m in Sources */,
+				751F031318683F6400305394 /* NSFileManager+DirectoryLocations.m in Sources */,
+				745ABFE91828FDF100DB2BA1 /* CPDependency.m in Sources */,
 				7574047C17E8E43C004CF3FD /* PodDetailPanel.m in Sources */,
 				756786D0180728550056C1AC /* Plugin.m in Sources */,
-				75A9F4BF1809DFC900869AA5 /* Dependency.m in Sources */,
 				7530C73A18073DCA0050C136 /* CocoaPodsApp.m in Sources */,
-				75A9F4B41809DFA000869AA5 /* XCodeProject.m in Sources */,
-				75A9F4BD1809DFC900869AA5 /* CocoaProject.m in Sources */,
 				7574047E17E8E43C004CF3FD /* CocoaPodWindowController.m in Sources */,
 				7567ED651809E245006B0F7C /* PodSpecParser.m in Sources */,
+				75ED7CDB186856F000B82B30 /* Pod.m in Sources */,
 				7530C6DE18072A720050C136 /* NSApp+Misc.m in Sources */,
 				75BBB55A18087EF00031B011 /* HyperlinkTextField.m in Sources */,
 				7530C72218073BF90050C136 /* NSApplication+ESSApplicationCategory.m in Sources */,
@@ -898,6 +919,8 @@
 				7530C6E618072A720050C136 /* NSManagedObject+CoreData.m in Sources */,
 				7530C6E018072A720050C136 /* NSString+Misc.m in Sources */,
 				7574048917E8E454004CF3FD /* CocoaPodsTreeController.m in Sources */,
+				7497F85B1862DEF700D37A16 /* CPDependency+Misc.m in Sources */,
+				745ABFC61828E12100DB2BA1 /* PodLineDependencyParser.m in Sources */,
 				7530C6E218072A720050C136 /* CCPWorkspaceManager.m in Sources */,
 				7574048A17E8E454004CF3FD /* CustomOutlineView.m in Sources */,
 				7530C6F418072D130050C136 /* DataModel.xcdatamodeld in Sources */,

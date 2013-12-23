@@ -16,6 +16,7 @@
 //    #import "PodSpec+YAML.h"
 //
 //    #import "PodRepositoryManager.h"
+    #import "CPProject+Misc.h"
 
     #define XCODE_PROJECT_EXTENSION @"xcodeproj"
     #define XCODE_WORKSPACE_EXTENSION @"xcworkspace"

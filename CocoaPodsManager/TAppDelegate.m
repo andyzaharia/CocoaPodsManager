@@ -11,10 +11,9 @@
 #import "CocoaPodWindowController.h"
 #import "NSCustomImageView.h"
 #import "ProjectTableView.h"
-#import "XCodeProject.h"
 #import "NSString+Misc.h"
 #import "AppConstants.h"
-#import "CocoaProject.h"
+#import "CPProject.h"
 
 
 @interface TAppDelegate () <NSTableViewDataSource, NSTableViewDelegate, PodManagerDelegate>
@@ -29,7 +28,7 @@
 @property (assign) IBOutlet       NSMenuItem                  *openRecentMenu;
 
 @property (nonatomic, retain)   NSMutableArray              *viewControllers;
-@property (nonatomic, retain)   NSArray                     *xcodeProjects; // Used for recents
+@property (nonatomic, retain)   NSArray                     *projects; // Used for recents
 
 @end
 
@@ -121,11 +120,12 @@
     
     [self.loadingIndicator startAnimation: self];
     
-//    PodSpecManager *manager = [PodSpecManager sharedPodSpecManager];
-//    manager.delegate = self;
-//    [manager updateAllPodProperties:^{
-//        
-//    }];
+    __weak TAppDelegate *weakSelf = self;
+    PodRepositoryManager *manager = [PodRepositoryManager sharedPodSpecManager];
+    manager.delegate = self;
+    [manager updateAllPodProperties:^{
+        [weakSelf.loadingIndicator stopAnimation: weakSelf];
+    }];
 }
 
 -(void) getCocoaPodVersion
@@ -198,10 +198,10 @@
 
 -(void) refreshRecentProjectsList
 {
-    NSMutableArray *items = [XCodeProject findAllSortedBy:@"date" ascending: NO].mutableCopy;
+    NSMutableArray *items = [CPProject findAllSortedBy:@"date" ascending: NO].mutableCopy;
     // Lets check if all projects exists
     __block NSMutableArray *itemsToRemove = [NSMutableArray array];
-    [items enumerateObjectsUsingBlock:^(XCodeProject *proj, NSUInteger idx, BOOL *stop) {
+    [items enumerateObjectsUsingBlock:^(CPProject *proj, NSUInteger idx, BOOL *stop) {
         if (![[NSFileManager defaultManager] fileExistsAtPath:proj.projectFilePath]) {
             [itemsToRemove addObject: proj];
         }
@@ -210,7 +210,7 @@
         // Cleanup the missing projects
         [items removeObjectsInArray:itemsToRemove];
         NSManagedObjectContext *context = [NSManagedObjectContext contextForMainThread];
-        [itemsToRemove enumerateObjectsUsingBlock:^(XCodeProject *proj, NSUInteger idx, BOOL *stop) {
+        [itemsToRemove enumerateObjectsUsingBlock:^(CPProject *proj, NSUInteger idx, BOOL *stop) {
             [context deleteObject: proj];
         }];
         if ([context hasChanges]) {
@@ -218,21 +218,30 @@
         }
     }
     
-    self.xcodeProjects = items;
+    self.projects = items;
     [self.recentlyUsedProjects reloadData];
     
     [self.openRecentMenu.submenu removeAllItems];
-    for (XCodeProject *proj in self.xcodeProjects) {
-        NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:proj.name action:@selector(openRecentItem:) keyEquivalent: @""];
-        item.tag = [self.xcodeProjects indexOfObject: proj];
-        [self.openRecentMenu.submenu addItem: item];
+    for (CPProject *proj in self.projects) {
+        // Cleanup if project name is nil
+        if (![proj.name length]) {
+            NSManagedObjectContext *context = [NSManagedObjectContext contextForMainThread];
+            [context performBlock:^{
+                [context deleteObject: proj];
+                [context save: nil];
+            }];
+        } else {
+            NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:proj.name action:@selector(openRecentItem:) keyEquivalent: @""];
+            item.tag = [self.projects indexOfObject: proj];
+            [self.openRecentMenu.submenu addItem: item];
+        }
     }
 }
 
 -(void) openRecentItem: (NSMenuItem *) sender
 {
-    XCodeProject *project = [self.xcodeProjects objectAtIndex: sender.tag];
-    [self openXCodeProject: project];
+    CPProject *project = [self.projects objectAtIndex: sender.tag];
+    [self openProject: project];
 }
 
 - (IBAction)openNewPodDoc:(id)sender {
@@ -253,13 +262,13 @@
     [self updatePodList: nil];
 }
 
--(void) openXCodeProject: (XCodeProject *) project
+-(void) openProject: (CPProject *) project
 {
     // Lets look for already opened Windows
     __block BOOL alreadyOpened = NO;
     __block CocoaPodWindowController *_controller = nil;
     [self.viewControllers enumerateObjectsUsingBlock:^(CocoaPodWindowController *controller, NSUInteger idx, BOOL *stop) {
-        if ([controller.project isSameXCodeProject: project]) {
+        if ([controller.project isSameProject: project]) {
             alreadyOpened = YES;
             _controller = controller;
             *stop = YES;
@@ -299,10 +308,10 @@
     [self.lbStatus setStringValue:[NSString stringWithFormat:@"Error: %@", [error description]]];
 }
 
-#pragma mark -
+#pragma mark - NSTableViewDelegate & NSTableViewDataSource
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
-    return [self.xcodeProjects count];
+    return [self.projects count];
 }
 
 - (id)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
@@ -310,11 +319,11 @@
     NSTableCellView *result = [tableView makeViewWithIdentifier:[tableColumn identifier] owner:nil];
     result.backgroundStyle = NSBackgroundStyleRaised;
     
-    XCodeProject *proj = [self.xcodeProjects objectAtIndex: row];
+    CPProject *proj = [self.projects objectAtIndex: row];
     
     NSTextField *tf = [result viewWithTag: 1];
     if(tf){
-        [tf setStringValue: proj.name];
+        [tf setStringValue: ([proj.name length]) ? proj.name : @"No name"];
     }
     return result;
 }
@@ -325,8 +334,8 @@
 {
     NSInteger row = [self.recentlyUsedProjects clickedRow];
     if ((row != NSNotFound) && (row > -1)) {
-        XCodeProject *proj = [self.xcodeProjects objectAtIndex: row];
-        [self openXCodeProject: proj];
+        CPProject *proj = [self.projects objectAtIndex: row];
+        [self openProject: proj];
     }
 }
 

@@ -7,8 +7,10 @@
 //
 
 #import "PodLineDependencyParser.h"
+#import "CPDependency+Misc.h"
 #import "NSString+Misc.h"
-
+#import "PodSpec+Misc.h"
+#import "PodSpecTaskOperation.h"
 
 #define kPODFILE_LOCK @"Podfile.lock"
 #define kPLATFORM @"platform"
@@ -44,7 +46,7 @@
     return nil;
 }
 
-+(void) parseComponents: (NSArray *) components forDependency: (Dependency *) dependency
++(void) parseComponents: (NSArray *) components forDependency: (CPDependency *) dependency
 {
     NSMutableArray *mComponents = components.mutableCopy;
     [mComponents enumerateObjectsUsingBlock:^(NSString *component, NSUInteger idx, BOOL *stop) {
@@ -63,7 +65,7 @@
         }
         else
         if ([trimmedComponent isSameLeftSideWithCaseInsensitive: kPOD_HEAD]) {
-            dependency.head = YES;
+            dependency.head = @(YES);
         }
         else
         if ([trimmedComponent isSameLeftSideWithCaseInsensitive: kPOD_COMMIT]) {
@@ -96,9 +98,9 @@
     }
 }
 
-+(Dependency *) dependencyFromString: (NSString *) podLine
++(CPDependency *) dependencyFromString: (NSString *) podLine
 {
-    __block Dependency *dependency = [[Dependency alloc] init];
+    __block CPDependency *dependency = [CPDependency createEntity];
     
     if ([podLine length] > [kPOD length]) {
         NSString *line = [[podLine substringWithRange:NSMakeRange([kPOD length], [podLine length] - [kPOD length])] trimWhiteSpace];
@@ -111,21 +113,23 @@
                 PodSpec *pod = [PodSpec findFirstByAttribute:@"name" withValue:name];
                 
                 if (!pod) {
-                    NSAlert* msgBox1 = [[NSAlert alloc] init];
-                    [msgBox1 setMessageText: @"Cant find pod"];
-                    [msgBox1 addButtonWithTitle: @"OK"];
-                    [msgBox1 runModal];
+                    [PodSpecTaskOperation fetchPodSpecWithName:name onDone: nil];
+                    pod = [PodSpec findFirstByAttribute:@"name" withValue:name];
                 }
-                
                 
                 if (pod) {
                     dependency.pod = pod;
             
                     [components removeObjectAtIndex: 0]; // Remove the Pod Name object
                     [PodLineDependencyParser parseComponents:components forDependency: dependency];
-                }
-                else {
+                } else {
                     TODO("Warn our user that we where not able to find that specific pod in our pod list");
+                    
+//                    NSAlert* msgBox1 = [[NSAlert alloc] init];
+//                    [msgBox1 setMessageText: [NSString stringWithFormat: @"Cant find pod entry with name %@.", name]];
+//                    [msgBox1 addButtonWithTitle: @"OK"];
+//                    [msgBox1 runModal];
+                    
                     return nil;
                 }
             }

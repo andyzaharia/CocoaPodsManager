@@ -13,13 +13,34 @@
 
 + (id) findFirstWithPredicate: (NSPredicate *) predicate
 {
+    return [self findFirstWithPredicate:predicate inContext:[NSManagedObjectContext contextForCurrentThread]];
+}
+
++ (id) findFirstWithPredicate: (NSPredicate *) predicate inContext: (NSManagedObjectContext *) context
+{
     NSString *className = NSStringFromClass(self);
     
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName: className];
     [request setPredicate: predicate];
     [request setFetchLimit: 1];
     
-    NSArray *items = [[NSManagedObjectContext contextForCurrentThread] executeFetchRequest:request error: nil];
+    NSArray *items = [context executeFetchRequest:request error: nil];
+    if ([items count]) {
+        return items[0];
+    }
+    
+    return nil;
+}
+
++ (id) findFirstByAttribute:(NSString *) attribute withValue: (id) value inContext: (NSManagedObjectContext *) context
+{
+    NSString *className = NSStringFromClass(self);
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName: className];
+    [request setPredicate: [NSPredicate predicateWithFormat:@"%K == %@", attribute, value]];
+    [request setFetchLimit: 1];
+    
+    NSArray *items = [context executeFetchRequest:request error: nil];
     if ([items count]) {
         return items[0];
     }
@@ -29,19 +50,17 @@
 
 + (id) findFirstByAttribute:(NSString *) attribute withValue: (id) value
 {
-    NSString *className = NSStringFromClass(self);
-    
-    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName: className];
-    [request setPredicate: [NSPredicate predicateWithFormat:@"%K == %@", attribute, value]];
-    [request setFetchLimit: 1];
-    
-    NSArray *items = [[NSManagedObjectContext contextForCurrentThread] executeFetchRequest:request error: nil];
-    if ([items count]) {
-        return items[0];
-    }
-    
-    return nil;
+    return [self findFirstByAttribute: attribute withValue: value inContext: [NSManagedObjectContext contextForCurrentThread]];
 }
+
+
++ (id) findByAttribute:(NSString *) attribute withValue:(id) value
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K = %@", attribute, value];
+    return [self findAllWithPredicate: predicate];
+}
+
+#pragma mark -
 
 + (NSArray *) findAll
 {
@@ -49,17 +68,33 @@
     return [self findAllWithPredicate: predicate];
 }
 
++ (NSArray *) findAllInContext: (NSManagedObjectContext *) context
+{
+    NSPredicate *predicate = [NSPredicate predicateWithValue: YES];
+    return [self findAllWithPredicate:predicate inContext:context];
+}
+
 + (NSArray *) findAllWithPredicate: (NSPredicate *) predicate
+{
+    return [self findAllWithPredicate:predicate inContext: [NSManagedObjectContext contextForCurrentThread]];
+}
+
++ (NSArray *) findAllWithPredicate: (NSPredicate *) predicate inContext: (NSManagedObjectContext *) context;
 {
     NSString *className = NSStringFromClass(self);
     
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName: className];
     [request setPredicate: predicate];
     
-    return [[NSManagedObjectContext contextForCurrentThread] executeFetchRequest:request error: nil];
+    return [context executeFetchRequest:request error: nil];
 }
 
 + (NSArray *) findAllSortedBy:(NSString *) param ascending: (BOOL) ascending
+{
+    return [self findAllSortedBy:param ascending:ascending inContext: [NSManagedObjectContext contextForCurrentThread]];
+}
+
++ (NSArray *) findAllSortedBy:(NSString *) param ascending: (BOOL) ascending inContext: (NSManagedObjectContext *) context
 {
     NSString *className = NSStringFromClass(self);
     
@@ -69,19 +104,24 @@
     [request setPredicate: [NSPredicate predicateWithValue: YES]];
     [request setSortDescriptors:@[sorter]];
     
-    return [[NSManagedObjectContext contextForCurrentThread] executeFetchRequest:request error: nil];
+    return [context executeFetchRequest:request error: nil];
 }
 
 #pragma mark -
 
 + (void) deleteAllMatchingPredicate: (NSPredicate *) predicate
 {
-    NSString *className = NSStringFromClass(self);
+    NSManagedObjectContext *context = [NSManagedObjectContext contextForCurrentThread];
+    [self deleteAllMatchingPredicate:predicate inContext:context];
+}
 
++ (void) deleteAllMatchingPredicate: (NSPredicate *) predicate inContext: (NSManagedObjectContext *) context;
+{
+    NSString *className = NSStringFromClass(self);
+    
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName: className];
     [request setPredicate: predicate];
     
-    NSManagedObjectContext *context = [NSManagedObjectContext contextForCurrentThread];
     [context performBlock:^{
         NSArray *items = [context executeFetchRequest:request error: nil];
         [items enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
@@ -106,6 +146,13 @@
 + (id) createEntity
 {
     return [self createEntityInContext: [NSManagedObjectContext contextForCurrentThread]];
+}
+
+#pragma mark -
+
++(NSUInteger) countOfEntitiesWithPredicate: (NSPredicate *) predicate
+{
+    return [[self findAllWithPredicate: predicate] count];
 }
 
 @end

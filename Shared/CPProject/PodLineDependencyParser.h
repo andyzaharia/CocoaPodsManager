@@ -7,10 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Dependency.h"
+#import "CPDependency.h"
 
 @interface PodLineDependencyParser : NSObject
 
-+(Dependency *) dependencyFromString: (NSString *) podLine;
++(CPDependency *) dependencyFromString: (NSString *) podLine;
 
 @end

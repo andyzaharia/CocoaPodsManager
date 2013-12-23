@@ -12,7 +12,7 @@
 {
 }
 
-@property (nonatomic, retain)   CocoaProject        *project;
+@property (nonatomic, retain)   CPProject           *project;
 @property (nonatomic)           BOOL                 canClose;
 
 // Returns the list of available pods

@@ -15,7 +15,7 @@ enum CocoaPodsAppError {
 };
 
 
-@class CocoaProject;
+@class CPProject;
 
 typedef void (^PodExecOnSucceedBlock) (NSString *);
 typedef void (^PodExecOnFailBlock) (NSError *);
@@ -47,12 +47,12 @@ typedef void (^PodExecOnFailBlock) (NSError *);
 
 
 
-+(void) updateProject: (CocoaProject *) project
++(void) updateProject: (CPProject *) project
           withOptions: (NSArray *) options
             onSuccess: (PodExecOnSucceedBlock) onSuccess
               onError: (PodExecOnFailBlock) errorBlock;
 
-+(void) installCocoaPodsInProject: (CocoaProject *) project
++(void) installCocoaPodsInProject: (CPProject *) project
                         onSuccess: (PodExecOnSucceedBlock) onSuccess
                       withOnError: (PodExecOnFailBlock) errorBlock;
 

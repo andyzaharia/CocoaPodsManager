@@ -33,9 +33,8 @@ static NSMutableDictionary *_managedObjectContextsDictionary = nil;
 
 + (NSManagedObjectContext *) contextForCurrentThread
 {
-    if (!_managedObjectContextsDictionary) {
-        _managedObjectContextsDictionary = [[NSMutableDictionary alloc] init];
-    }
+    // Just in case, make sure the main thread context is initialized
+    [NSManagedObjectContext contextForMainThread];
     
     NSThread *currentThread = [NSThread currentThread];
     if (![[currentThread name] length]) {
@@ -52,6 +51,7 @@ static NSMutableDictionary *_managedObjectContextsDictionary = nil;
         if (![currentThread isMainThread]) {
             context.parentContext = [NSManagedObjectContext contextForMainThread];
         }
+        
         [_managedObjectContextsDictionary setObject:context forKey: [currentThread name]];
         
         return context;

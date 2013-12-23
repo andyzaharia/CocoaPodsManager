@@ -10,8 +10,7 @@
 #import "CocoaPodWindowController.h"
 #import "CCPWorkspaceManager.h"
 
-#import "XCodeProject+Misc.h"
-#import "CocoaProject.h"
+#import "CPProject.h"
 #import "CocoaPodsApp.h"
 
 #import "PodRepositoryManager.h"
@@ -121,10 +120,10 @@ static Plugin *_sharedPluginInstance = nil;
     if ([workspaceDirectoryPath length]) {
         
         // Check if this PodFile project isnt already opened.
-        NSString *projectPath = [XCodeProject projectPathWithRandomPath: workspaceDirectoryPath];
+        NSString *projectPath = [CPProject projectPathWithRandomPath: workspaceDirectoryPath];
         __block CocoaPodWindowController *existingWindowController = nil;
         [self.windows enumerateObjectsUsingBlock:^(CocoaPodWindowController *windowController, NSUInteger idx, BOOL *stop) {
-            NSString *projPath = windowController.project.xcodeProject.projectFilePath;
+            NSString *projPath = windowController.project.projectFilePath;
             
             if ([projectPath isEqualToString: projPath]) {
                 existingWindowController = windowController;

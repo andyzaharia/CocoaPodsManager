@@ -7,7 +7,7 @@
 //
 
 #import "CocoaPodsApp.h"
-#import "CocoaProject.h"
+#import "CPProject.h"
 #import "NSString+Misc.h"
 #import "AppConstants.h"
 
@@ -135,6 +135,8 @@
         
         NSMutableDictionary *environment = [[[NSProcessInfo processInfo] environment] mutableCopy];
         environment[@"CP_STDOUT_SYNC"] = @"TRUE";
+        environment[@"LC_ALL"] = @"UTF-8";
+        
         [task setLaunchPath:@"/usr/bin/env"];
         [task setEnvironment: environment];
         [task setArguments:args];
@@ -170,7 +172,7 @@
     
     return [CocoaPodsApp executeWithArguments: items
                          withCurrentDirectory: [[NSFileManager defaultManager] currentDirectoryPath]
-                                responseBlock:responseBlock
+                                responseBlock: responseBlock
                                andOnFailBlock: failBlock];
 }
 
@@ -183,7 +185,7 @@
 }
 
 
-+(void) updateProject: (CocoaProject *) project
++(void) updateProject: (CPProject *) project
           withOptions: (NSArray *) options
             onSuccess: (PodExecOnSucceedBlock) onSuccess
               onError: (PodExecOnFailBlock) errorBlock{
@@ -202,17 +204,29 @@
         }
         
         __block NSString *respOutput = @"";
+        NSString *projectDirectory = [project.projectFilePath stringByDeletingLastPathComponent];
+        if (![projectDirectory length]) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSDictionary *userInfo = @{NSLocalizedDescriptionKey: [NSString stringWithFormat:@"Project directory is invalid %@", projectDirectory]};
+                errorBlock([NSError errorWithDomain: @""
+                                               code: NSFileNoSuchFileError
+                                           userInfo: userInfo]);
+            });
+        }
+        
         int status = [CocoaPodsApp executeWithArguments:args
-                                   withCurrentDirectory:[project.xcodeProject.projectFilePath stringByDeletingLastPathComponent]
+                                   withCurrentDirectory:projectDirectory
                                           responseBlock:^(NSString *outputMessage) {
                                               respOutput = outputMessage;
                                           }
                                          andOnFailBlock:^(NSError *error) {
+                                            
                                          }];
         
         if (status == 1) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                errorBlock([NSError errorWithDomain:respOutput code:status userInfo:nil]);
+                NSDictionary *userInfo = @{NSLocalizedDescriptionKey: respOutput};
+                errorBlock([NSError errorWithDomain:@"" code:status userInfo:userInfo]);
             });
         }else {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -222,7 +236,7 @@
     });
 }
 
-+(void) installCocoaPodsInProject: (CocoaProject *) project
++(void) installCocoaPodsInProject: (CPProject *) project
                         onSuccess: (PodExecOnSucceedBlock) onSuccess
                       withOnError: (PodExecOnFailBlock) errorBlock{
     
@@ -240,7 +254,7 @@
         
         __block NSString *respOutput = @"";
         [CocoaPodsApp executeWithArguments:args
-                      withCurrentDirectory:[project.xcodeProject.projectFilePath stringByDeletingLastPathComponent]
+                      withCurrentDirectory:[project.projectFilePath stringByDeletingLastPathComponent]
                              responseBlock:^(NSString *outputMessage) {
                                  respOutput = [outputMessage trimWhiteSpaceAndNewline];
                              }

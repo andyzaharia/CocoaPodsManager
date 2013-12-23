@@ -1,5 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2057" systemVersion="12C60" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3401" systemVersion="13B42" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="CPDependency" representedClassName="CPDependency" syncable="YES">
+        <attribute name="commit" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="customPodSpec" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="gitSource" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="head" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="local" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="versionOperator" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="versionStr" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="pod" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PodSpec" inverseName="dependencies" inverseEntity="PodSpec" syncable="YES"/>
+        <relationship name="project" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CPProject" inverseName="items" inverseEntity="CPProject" syncable="YES"/>
+    </entity>
+    <entity name="CPProject" representedClassName="CPProject" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="deploymentString" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="inhibit_all_warnings" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="platformString" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="post_install" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pre_install" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="projectFilePath" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="CPDependency" inverseName="project" inverseEntity="CPDependency" syncable="YES"/>
+        <relationship name="pods" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="PodSpec" inverseName="projects" inverseEntity="PodSpec" syncable="YES"/>
+    </entity>
     <entity name="PodSpec" representedClassName="PodSpec" syncable="YES">
         <attribute name="childDescription" optional="YES" transient="YES" attributeType="String" syncable="YES"/>
         <attribute name="childHomePage" optional="YES" transient="YES" attributeType="String" syncable="YES"/>
@@ -12,14 +35,12 @@
         <attribute name="name" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="source" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="versions" optional="YES" attributeType="String" syncable="YES"/>
-    </entity>
-    <entity name="XCodeProject" representedClassName="XCodeProject" syncable="YES">
-        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="projectFilePath" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="dependencies" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CPDependency" inverseName="pod" inverseEntity="CPDependency" syncable="YES"/>
+        <relationship name="projects" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CPProject" inverseName="pods" inverseEntity="CPProject" syncable="YES"/>
     </entity>
     <elements>
-        <element name="PodSpec" positionX="0" positionY="0" width="128" height="210"/>
-        <element name="XCodeProject" positionX="0" positionY="0" width="128" height="90"/>
+        <element name="CPDependency" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="CPProject" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="PodSpec" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

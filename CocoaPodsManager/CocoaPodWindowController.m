@@ -7,8 +7,7 @@
 //
 
 #import "CocoaPodWindowController.h"
-#import "CocoaProject.h"
-#import "XCodeProject+Misc.h"
+#import "CPProject.h"
 #import "CocoaPodsTreeController.h"
 #import "PodSpec+StdOutParser.h"
 #import "NSApplication+ESSApplicationCategory.h"
@@ -21,6 +20,8 @@
 #import <QuartzCore/QuartzCore.h>
 
 #import "Plugin.h"
+
+#import "CPDependency+Misc.h"
 
 #define LOCAL_POD_PASTEBOARD_TYPE @"LOCAL_POD_PASTEBOARD_TYPE"
 #define MAX_RECTENT_PROJECTS 10
@@ -52,35 +53,35 @@ static NSArray *OSX_VERSIONS = nil;
     __block     BOOL                     isWorking;
 }
 
-@property (assign) IBOutlet NSOutlineView             *cocoaPodsList;
-@property (assign) IBOutlet NSOutlineView             *projectPodsList;
-@property (assign) IBOutlet NSSearchFieldCell         *searchField;
-@property (assign) IBOutlet NSButton                  *btnInstall;
-@property (assign) IBOutlet NSButton                  *btnUpdate;
-@property (assign) IBOutlet NSButton                  *btnSave;
-@property (assign) IBOutlet NSTextFieldCell           *tfAvailablePods;
-@property (assign) IBOutlet NSPopUpButton             *pbPlatform;
-@property (assign) IBOutlet NSPopUpButton             *pbDeployment;
-@property (assign) IBOutlet NSProgressIndicator       *loadingIndicator;
-@property (assign) IBOutlet NSPanel                   *logSheet;
-@property (assign) IBOutlet NSButton                  *chBxInhibitAllWarnings;
-@property (assign) IBOutlet NSToolbar                 *toolbar;
-@property (unsafe_unretained) IBOutlet NSTextView   *tvLog;
+@property (assign) IBOutlet             NSOutlineView             *cocoaPodsList;
+@property (assign) IBOutlet             NSOutlineView             *projectPodsList;
+@property (assign) IBOutlet             NSSearchFieldCell         *searchField;
+@property (assign) IBOutlet             NSButton                  *btnInstall;
+@property (assign) IBOutlet             NSButton                  *btnUpdate;
+@property (assign) IBOutlet             NSButton                  *btnSave;
+@property (assign) IBOutlet             NSTextFieldCell           *tfAvailablePods;
+@property (assign) IBOutlet             NSPopUpButton             *pbPlatform;
+@property (assign) IBOutlet             NSPopUpButton             *pbDeployment;
+@property (assign) IBOutlet             NSProgressIndicator       *loadingIndicator;
+@property (assign) IBOutlet             NSPanel                   *logSheet;
+@property (assign) IBOutlet             NSButton                  *chBxInhibitAllWarnings;
+@property (assign) IBOutlet             NSToolbar                 *toolbar;
+@property (unsafe_unretained) IBOutlet  NSTextView                *tvLog;
 
-@property (assign) IBOutlet NSSplitView               *contentSplitViewContainer;
+@property (assign) IBOutlet             NSSplitView               *contentSplitViewContainer;
 
-@property (nonatomic, retain)   NSArray      *pods;
-@property (nonatomic, retain)   PodSpec             *itemBeingDragged;
-@property (nonatomic)           BOOL                 wasEdited;
+@property (nonatomic, retain)           NSArray                   *pods;
+@property (nonatomic, retain)           PodSpec                   *itemBeingDragged;
+@property (nonatomic)                   BOOL                      wasEdited;
 
-@property (nonatomic, retain)   PodDetailPanel      *podDetailPanel;
+@property (nonatomic, retain)           PodDetailPanel            *podDetailPanel;
 
 // Test Code
 
-@property (assign) IBOutlet NSButtonCell *testBtn;
-@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+@property (assign) IBOutlet     NSButtonCell                        *testBtn;
+@property (nonatomic, strong)   NSManagedObjectContext              *managedObjectContext;
 
-@property (weak) IBOutlet NSSplitView *splitView;
+@property (weak) IBOutlet       NSSplitView                         *splitView;
 
 
 @end
@@ -124,10 +125,10 @@ static NSArray *OSX_VERSIONS = nil;
     self.wasEdited = NO;
     
     if (!self.project) {
-        self.project = [[CocoaProject alloc] init];
+        self.project = [CPProject createEntity];
     }else{
-        if (self.project.xcodeProject.name) {
-            self.window.title = self.project.xcodeProject.name;
+        if (self.project.name) {
+            self.window.title = self.project.name;
         }
     }
     
@@ -203,6 +204,116 @@ static NSArray *OSX_VERSIONS = nil;
     self.project = nil;
 }
 
+#pragma mark -
+
+-(void) openFile: (NSString *) filePath{
+    
+    NSString *projectPath = [CPProject projectPathWithRandomPath: filePath];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"projectFilePath LIKE[c] %@", projectPath];
+    CPProject *project = [CPProject findFirstWithPredicate: predicate];
+    
+    if (!project) {
+        
+        NSArray *items = [CPProject findAllSortedBy:@"date" ascending: NO];
+        // We might want to change ...
+        if ([items count] >= MAX_RECTENT_PROJECTS) {
+            NSInteger itemsToDeleteCount = ([items count] - MAX_RECTENT_PROJECTS);
+            NSArray *itemsToDelete = [items subarrayWithRange:NSMakeRange([items count] - itemsToDeleteCount, itemsToDeleteCount)];
+            
+            for (NSManagedObject *item in itemsToDelete) {
+                [self.managedObjectContext deleteObject: item];
+            }
+        }
+        
+        project = [CPProject createEntity];
+        [project setProjectPath: projectPath];
+        project.name = [[projectPath lastPathComponent] stringByDeletingPathExtension];
+    }
+    
+    BOOL podFileAlreadyExists = ([[NSFileManager defaultManager] fileExistsAtPath:[CPProject podFileWithProjectPath: projectPath]]);
+    if(podFileAlreadyExists && [project.items count]){
+        ESSBeginAlertSheet(@"Action required",
+                           @"Add More",
+                           @"Cancel",
+                           @"Replace",
+                           self.window,
+                           ^(void *contextInf, NSInteger returnCode) {
+                               
+                               switch (returnCode) {
+                                   case NSAlertAlternateReturn :
+                                       // Cancel
+                                       break;
+                                   case NSAlertDefaultReturn : {
+                                       // Add More
+                                       //                                       NSMutableArray *itemsToAdd = [NSMutableArray array];
+                                       //                                       if ([self.project.items count]) {
+                                       //                                           itemsToAdd = self.project.items;
+                                       //                                       }
+                                       
+                                       self.project = project;
+                                       //[self.project addPodsFromArray: itemsToAdd];
+                                       
+                                   } break;
+                                   case NSAlertOtherReturn : {
+                                       //                                       NSMutableArray *itemsToAdd = [NSMutableArray array];
+                                       //                                       if ([self.project.items count]) {
+                                       //                                           itemsToAdd = self.project.items;
+                                       //                                       }
+                                       
+                                       self.project = project;
+                                       //[self.project setItems: nil];
+                                       //[self.project addPodsFromArray: itemsToAdd];
+                                       
+                                   } break;
+                                   default:
+                                       break;
+                               }
+                               
+                               [self updateUI];
+                               [self.projectPodsList reloadData];
+                               
+                               if ([[project managedObjectContext] hasChanges]) {
+                                   [[project managedObjectContext] save: nil];
+                               }
+                           },
+                           nil,
+                           NULL,
+                           @"Do you want to Replace the content of the existing PodFile ? Or you want to add more Pods to the existing one ?");
+    } else {
+        
+        project.date = [NSDate date];
+        
+        self.project = [CPProject createEntity];
+        self.project.projectFilePath = projectPath;
+        
+        [self updateUI];
+        [self.projectPodsList reloadData];
+        
+        [self.managedObjectContext save: nil];
+    }
+}
+
+-(void) loadPods{
+    
+    self.cocoaPodsList.delegate = nil;
+    self.cocoaPodsList.dataSource = nil;
+    
+    NSPredicate *predicate = nil;
+    NSString *searchTerm = self.searchField.stringValue;
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending: YES];
+    if ([searchTerm length] > 0) {
+        predicate = [NSPredicate predicateWithFormat:@"(name CONTAINS[cd] %@) or (desc CONTAINS[cd] %@)", searchTerm, searchTerm];
+        self.pods = [[PodSpec findAllWithPredicate: predicate] sortedArrayUsingDescriptors:@[sortDescriptor]];
+    }else{
+        self.pods = [[PodSpec findAll] sortedArrayUsingDescriptors:@[sortDescriptor]];
+    }
+    
+    self.cocoaPodsList.delegate = self;
+    self.cocoaPodsList.dataSource = self;
+    
+    [self.cocoaPodsList reloadData];
+}
+
 #pragma mark - IBActions
 
 - (IBAction)searchTermDidChange:(id)sender {
@@ -257,7 +368,8 @@ static NSArray *OSX_VERSIONS = nil;
                            NULL,
                            ^(void *contextInf, NSInteger returnCode) {
                                if(returnCode == NSAlertAlternateReturn) {
-                                   [self showLogWindowWithString: [error domain]];
+                                   NSString *info  = error.userInfo[NSLocalizedDescriptionKey];
+                                   [self showLogWindowWithString: info];
                                }
                            },
                            NULL,
@@ -269,7 +381,7 @@ static NSArray *OSX_VERSIONS = nil;
 
 - (IBAction)installAction:(id)sender {
     
-    if (!self.project.xcodeProject) {
+    if (!self.project) {
         NSBeginAlertSheet(@"Warning",
                           @"Yes",
                           @"No",
@@ -299,7 +411,7 @@ static NSArray *OSX_VERSIONS = nil;
         [weakSelf.toolbar validateVisibleItems];
         weakSelf.wasEdited = NO;
         
-        NSString *doneMessage = [NSString stringWithFormat:@"From now on use '%@.xcworkspace'", weakSelf.project.xcodeProject.name];
+        NSString *doneMessage = [NSString stringWithFormat:@"From now on use '%@.xcworkspace'", weakSelf.project.name];
         NSBeginAlertSheet(
                           @"Done !",
                           @"OK",
@@ -340,7 +452,7 @@ static NSArray *OSX_VERSIONS = nil;
 
 
 - (IBAction)saveAction:(id)sender {
-    if (!self.project.xcodeProject) {
+    if (!self.project) {
         NSBeginAlertSheet(@"Warning",
                           @"Yes",
                           @"No",
@@ -361,7 +473,7 @@ static NSArray *OSX_VERSIONS = nil;
 }
 
 -(IBAction)inhibitAllWarningsAction:(NSButton *)sender {
-    self.project.inhibit_all_warnings = [sender state];
+    self.project.inhibit_all_warnings = @([sender state]);
 }
 
 - (IBAction)podVersionChanged:(NSPopUpButton *)sender {
@@ -369,7 +481,7 @@ static NSArray *OSX_VERSIONS = nil;
     self.wasEdited = YES;
     
     NSInteger row = [self.projectPodsList rowForView: sender];
-    Dependency *dependencyItem = [self.projectPodsList itemAtRow:row];
+    CPDependency *dependencyItem = [self.projectPodsList itemAtRow:row];
     dependencyItem.versionStr = [sender selectedItem].title;
 }
 
@@ -423,8 +535,8 @@ static NSArray *OSX_VERSIONS = nil;
 - (IBAction)headValueChanged:(NSButton *)sender {
     
     NSInteger row = [self.projectPodsList rowForView: sender];
-    Dependency *dependencyItem = [self.projectPodsList itemAtRow:row];
-    dependencyItem.head = sender.state;
+    CPDependency *dependencyItem = [self.projectPodsList itemAtRow:row];
+    dependencyItem.head = @(sender.state);
     
     self.wasEdited = YES;
 }
@@ -499,17 +611,17 @@ static NSArray *OSX_VERSIONS = nil;
     
     if(sender.state == 0) {
         // Remove Pod
-        Dependency *dependency = [self.project dependencyForPod: pod];
+        CPDependency *dependency = [self.project dependencyForPod: pod];
         if (dependency) {
-            NSInteger index = [self.project.items indexOfObject: dependency];
-            [self.project.items removeObject: dependency];
+            NSInteger index = [self.project.pods indexOfObject: dependency];
+            [self.project removeItemsObject: dependency];
             [self.projectPodsList removeItemsAtIndexes:[NSIndexSet indexSetWithIndex: index] inParent:nil withAnimation: NSTableViewAnimationEffectFade];
         }        
         
     } else {
         // Add pod        
-        Dependency *dependency = [Dependency dependencyWithPod: pod];
-        [self.project.items addObject: dependency];
+        CPDependency *dependency = [CPDependency dependencyWithPod: pod];
+        [self.project addItemsObject: dependency];
         
         [self.projectPodsList insertItemsAtIndexes: [NSIndexSet indexSetWithIndex: [self.project.items indexOfObject: dependency]]
                                           inParent: nil
@@ -640,28 +752,6 @@ static NSArray *OSX_VERSIONS = nil;
 
 #pragma mark -
 
--(void) loadPods{
-    
-    self.cocoaPodsList.delegate = nil;
-    self.cocoaPodsList.dataSource = nil;
-    
-    NSPredicate *predicate = nil;
-    NSString *searchTerm = self.searchField.stringValue;
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending: YES];
-    if ([searchTerm length] > 0) {
-        predicate = [NSPredicate predicateWithFormat:@"(name CONTAINS[cd] %@) or (desc CONTAINS[cd] %@)", searchTerm, searchTerm];
-        self.pods = [[PodSpec findAllWithPredicate: predicate] sortedArrayUsingDescriptors:@[sortDescriptor]];
-    }else{
-        self.pods = [[PodSpec findAll] sortedArrayUsingDescriptors:@[sortDescriptor]];
-    }
-   
-    self.cocoaPodsList.delegate = self;
-    self.cocoaPodsList.dataSource = self;
-    
-    [self.cocoaPodsList reloadData];
-}
-
-
 - (BOOL)validateMenuItem:(NSMenuItem *)item {
     return YES;
 }
@@ -742,10 +832,13 @@ static NSArray *OSX_VERSIONS = nil;
         [self.pbDeployment selectItemAtIndex:0];
     }
     
-    [self.btnInstall setEnabled: ![self.project.xcodeProject isPodInstalledForProject]];
-    [self.btnUpdate setEnabled: [self.project.xcodeProject isPodInstalledForProject]];
+//    [self.btnInstall setEnabled: ![self.project isPodInstalledForProject]];
+//    [self.btnUpdate setEnabled: [self.project isPodInstalledForProject]];
     
-    self.chBxInhibitAllWarnings.state = self.project.inhibit_all_warnings;
+    [self.btnInstall setEnabled: YES];
+    [self.btnUpdate setEnabled: YES];
+    
+    self.chBxInhibitAllWarnings.state = [self.project.inhibit_all_warnings boolValue];
 }
 
 #pragma mark - Sheet delegates
@@ -757,96 +850,10 @@ static NSArray *OSX_VERSIONS = nil;
 
 #pragma mark -
 
--(void) openFile: (NSString *) filePath{
-    
-    NSString *projectPath = [XCodeProject projectPathWithRandomPath: filePath];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"projectFilePath LIKE[c] %@", projectPath];
-    XCodeProject *xcodeProj = [XCodeProject findFirstWithPredicate: predicate];
-    
-    if (!xcodeProj) {
-        
-        NSArray *items = [XCodeProject findAllSortedBy:@"date" ascending: NO];
-        // We might want to change ... seems dumb to remove recent projects
-        if ([items count] >= MAX_RECTENT_PROJECTS) {
-            NSInteger itemsToDeleteCount = ([items count] - MAX_RECTENT_PROJECTS);
-            NSArray *itemsToDelete = [items subarrayWithRange:NSMakeRange([items count] - itemsToDeleteCount, itemsToDeleteCount)];
-            
-            for (NSManagedObject *item in itemsToDelete) {
-                [self.managedObjectContext deleteObject: item];
-            }
-        }
-        
-        xcodeProj = [XCodeProject createEntity];
-        [xcodeProj setProjectPath: projectPath];
-        xcodeProj.name = [[projectPath lastPathComponent] stringByDeletingPathExtension];
-    }
-    
-    BOOL podFileAlreadyExists = ([[NSFileManager defaultManager] fileExistsAtPath:[XCodeProject podFileWithProjectPath: projectPath]]);
-    if(podFileAlreadyExists && [self.project.items count]){
-        ESSBeginAlertSheet(@"Action required",
-                           @"Add More",
-                           @"Cancel",
-                           @"Replace",
-                           self.window,
-                           ^(void *contextInf, NSInteger returnCode) {
-                               
-                               switch (returnCode) {
-                                   case NSAlertAlternateReturn :
-                                       // Cancel
-                                       break;
-                                   case NSAlertDefaultReturn : {
-                                       // Add More
-                                       NSMutableArray *itemsToAdd = [NSMutableArray array];
-                                       if ([self.project.items count]) {
-                                           itemsToAdd = self.project.items;
-                                       }
-                                       
-                                       self.project = [[CocoaProject alloc] initWithXCodeProject: xcodeProj];
-                                       [self.project addPodsFromArray: itemsToAdd];
-                                       
-                                   } break;
-                                   case NSAlertOtherReturn : {
-                                       NSMutableArray *itemsToAdd = [NSMutableArray array];
-                                       if ([self.project.items count]) {
-                                           itemsToAdd = self.project.items;
-                                       }
-                                       
-                                       self.project = [[CocoaProject alloc] initWithXCodeProject: xcodeProj];
-                                       [self.project.items removeAllObjects];
-                                       [self.project addPodsFromArray: itemsToAdd];
-                                       
-                                   } break;
-                                   default:
-                                       break;
-                               }
-                               
-                               [self updateUI];
-                               [self.projectPodsList reloadData];
-                               
-                               if ([[xcodeProj managedObjectContext] hasChanges]) {
-                                   [[xcodeProj managedObjectContext] save: nil];
-                               }
-                           },
-                           nil,
-                           NULL,
-                           @"Do you want to Replace the content of the existing PodFile ? Or you want to add more Pods to the existing one ?");
-    }else {
-
-        xcodeProj.date = [NSDate date];
-        
-        self.project = [[CocoaProject alloc] initWithXCodeProject: xcodeProj];
-        [self updateUI];
-        [self.projectPodsList reloadData];
-        
-        [self.managedObjectContext save: nil];
-    }
-}
-
-
 -(void) installDoneModalDidDismissed: (id) sender returnCode: (NSInteger)returnCode contextInfo: (void *)contextInfo{
     
     if(returnCode == NSAlertAlternateReturn){
-        [[NSWorkspace sharedWorkspace] openFile: [self.project.xcodeProject workSpaceFilePath]
+        [[NSWorkspace sharedWorkspace] openFile: [self.project workSpaceFilePath]
                                 withApplication: @"XCode"];
     }
 }
@@ -963,14 +970,14 @@ static NSArray *OSX_VERSIONS = nil;
 
 -(NSView *) viewForXCodePodsListTableView: (NSView *) view forTableColumn:(NSTableColumn *)tableColumn item:(id)item{
     
-    Dependency *dependency = nil;
-    if ([item isKindOfClass:[Dependency class]]) {
-        dependency = (Dependency *)item;
+    CPDependency *dependency = nil;
+    if ([item isKindOfClass:[CPDependency class]]) {
+        dependency = (CPDependency *)item;
     }
     
     if ([[tableColumn identifier] isEqualToString:kCOLUMN_VERSION_ID]) {
         
-        if ([item isKindOfClass:[Dependency class]] && [view isKindOfClass:[NSView class]]) {
+        if ([item isKindOfClass:[CPDependency class]] && [view isKindOfClass:[NSView class]]) {
             
             NSPopUpButton *popupButton = (NSPopUpButton *)view;
             [popupButton removeAllItems];
@@ -1016,8 +1023,8 @@ static NSArray *OSX_VERSIONS = nil;
         }
     }else if ([view isKindOfClass:[NSTableCellView class]]){
         NSTableCellView *cellView = (NSTableCellView *)view;
-        if ([item isKindOfClass:[Dependency class]]) {
-            PodSpec *pod = [(Dependency *)item pod];
+        if ([item isKindOfClass:[CPDependency class]]) {
+            PodSpec *pod = [(CPDependency *)item pod];
             if (pod) {
                 [cellView.textField setStringValue: [pod.name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
             }else {
@@ -1170,7 +1177,7 @@ static NSArray *OSX_VERSIONS = nil;
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView acceptDrop:(id <NSDraggingInfo>)info item:(PodSpec *)item childIndex:(NSInteger)childIndex {
     
-    if ([item isKindOfClass:[Dependency class]]) return NO;
+    if ([item isKindOfClass:[CPDependency class]]) return NO;
     
     
     __block BOOL drop = NO;
@@ -1212,7 +1219,7 @@ static NSArray *OSX_VERSIONS = nil;
 
 - (id <NSPasteboardWriting>)outlineView:(NSOutlineView *)outlineView pasteboardWriterForItem:(id)item {
     
-    return ([item isKindOfClass:[Dependency class]]) ? nil: (id <NSPasteboardWriting>)item;
+    return ([item isKindOfClass:[CPDependency class]]) ? nil: (id <NSPasteboardWriting>)item;
 }
 
 #pragma mark - Expand And Load Data
@@ -1293,12 +1300,13 @@ static NSArray *OSX_VERSIONS = nil;
         
         weakSelf.wasEdited = YES;
         
-        Dependency *dependency = [Dependency dependencyWithPod: newNodeData];
+        CPDependency *dependency = [CPDependency dependencyWithPod: newNodeData];
         
         if (insertionIndex < 0) {
-            [weakSelf.project.items addObject: dependency];
+            [weakSelf.project addItemsObject: dependency];
         }else{
-            [weakSelf.project.items insertObject:dependency atIndex: insertionIndex];
+            //[weakSelf.project.items insertObject:dependency atIndex: insertionIndex];
+            [weakSelf.project insertObject:dependency inItemsAtIndex:insertionIndex];
         }
         
         [weakSelf.projectPodsList insertItemsAtIndexes:[NSIndexSet indexSetWithIndex:insertionIndex]
@@ -1316,9 +1324,9 @@ static NSArray *OSX_VERSIONS = nil;
 - (void)_removeItemAtRow:(NSInteger)row {
     
     id item = [self.projectPodsList itemAtRow:row];
-    Dependency *parent = (Dependency *)[self.projectPodsList parentForItem: item];
+    CPDependency *parent = (CPDependency *)[self.projectPodsList parentForItem: item];
     
-    [self.project.items removeObjectAtIndex: row];
+    [self.project removeItemsAtIndexes:[NSIndexSet indexSetWithIndex: row]];
     
     [self.cocoaPodsList reloadItem: parent.pod];
     
@@ -1337,7 +1345,7 @@ static NSArray *OSX_VERSIONS = nil;
     
     NSTableColumn *tableColumn = [[self.projectPodsList tableColumns] objectAtIndex: columnIndex];
     if (tableColumn) {
-        Dependency *dependencyItem = [self.projectPodsList itemAtRow:rowIndex];
+        CPDependency *dependencyItem = [self.projectPodsList itemAtRow:rowIndex];
         
         if ([[tableColumn identifier] isEqualToString: kCOLUMN_GITSOURCE_ID]) {
             dependencyItem.gitSource = [textField string];
@@ -1362,8 +1370,12 @@ static NSArray *OSX_VERSIONS = nil;
     _wasEdited = edited;
     
     [self.btnSave setEnabled: edited];
-    [self.btnInstall setEnabled: ![self.project.xcodeProject isPodInstalledForProject]];
-    [self.btnUpdate setEnabled: [self.project.xcodeProject isPodInstalledForProject]];    
+    
+//    [self.btnInstall setEnabled: ![self.project isPodInstalledForProject]];
+//    [self.btnUpdate setEnabled: [self.project isPodInstalledForProject]];
+    
+    [self.btnInstall setEnabled: YES];
+    [self.btnUpdate setEnabled: YES];
 }
 
 #pragma mark -
@@ -1412,7 +1424,7 @@ static NSArray *OSX_VERSIONS = nil;
         [toolbarItem setImage: [Plugin imageWithName: @"update"]];
         // Tell the item what message to send when it is clicked
         [toolbarItem setTarget: self];
-        [toolbarItem setAction: @selector(installAction:)];
+        [toolbarItem setAction: @selector(updateAction:)];
     }else if ([itemIdent isEqualToString: InstalPodToolbarItemIdentifier]) {
         [toolbarItem setLabel: @"Install"];
         [toolbarItem setPaletteLabel: @"Install"];
@@ -1482,9 +1494,11 @@ static NSArray *OSX_VERSIONS = nil;
     }
     
     if ([[toolbarItem itemIdentifier] isEqual: InstalPodToolbarItemIdentifier]) {
-        enable = ![self.project.xcodeProject isPodInstalledForProject];
+//        enable = ![self.project isPodInstalledForProject];
+        enable = YES;
     } else if ([[toolbarItem itemIdentifier] isEqual: UpdatePodToolbarItemIdentifier]) {
-        enable = [self.project.xcodeProject isPodInstalledForProject];
+//        enable = [self.project isPodInstalledForProject];
+          enable = YES;
     } else if ([[toolbarItem itemIdentifier] isEqual: SavePodToolbarItemIdentifier]) {
         enable = YES;
     }
@@ -1495,8 +1509,6 @@ static NSArray *OSX_VERSIONS = nil;
 
 - (void)splitViewDidResizeSubviews:(NSNotification *)aNotification
 {
-    //NSLog(@"Notification: %@", aNotification);
-    
     NSDictionary *userInfo = [aNotification userInfo];
     if([userInfo[@"name"] isEqualToString: NSSplitViewDidResizeSubviewsNotification]) {
         NSView *view = userInfo[@"object"];

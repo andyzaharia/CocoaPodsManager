@@ -43,7 +43,7 @@
     for (NSString *name in lines) {
         NSString *podName = [name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
         if([podName length] > 0) {
-            PodSpec *pod = [PodSpec findFirstWithPredicate:[NSPredicate predicateWithFormat:@"name = %@", podName]];
+            PodSpec *pod = [PodSpec findFirstWithPredicate:[NSPredicate predicateWithFormat:@"name LIKE[c] %@", podName]];
             if (!pod) {
                 pod = [PodSpec createEntity];
             }
@@ -74,10 +74,10 @@
         if (self.isCancelled) return;
         
         if([name length] > 0) {
-            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name == %@", name];
-            PodSpec *pod = [PodSpec findFirstWithPredicate:predicate];
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name LIKE[c] %@", name];
+            PodSpec *pod = [PodSpec findFirstWithPredicate:predicate inContext: self.managedObjectContext];
             if (!pod) {
-                pod = [PodSpec createEntity];
+                pod = [PodSpec createEntityInContext: self.managedObjectContext];
                 pod.name = name;
             }
             
@@ -127,6 +127,40 @@
         });
     }
 
+}
+
+#pragma mark -
+
++(void) fetchPodSpecWithName: (NSString *) podName onDone: (OnDone) onDone
+{
+    NSManagedObjectContext *context = [NSManagedObjectContext contextForCurrentThread];
+    [context performBlockAndWait:^{
+        
+        if([podName length] > 0) {
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name LIKE[c] %@", podName];
+            PodSpec *pod = [PodSpec findFirstWithPredicate:predicate];
+            if (!pod) {
+                pod = [PodSpec createEntityInContext: context];
+                pod.name = podName;
+            }
+            
+            NSArray *versions = [pod versionsArray];
+            if ([versions count]) {
+                versions = [versions sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+                NSString *lastVersion = [versions lastObject];
+                [pod fetchPropertiesInContext: context
+                                  withVersion: lastVersion];
+            }
+        }
+        
+        if ([context hasChanges]) {
+            [context save: nil];
+        }
+        
+        if (onDone) {
+            onDone();
+        }
+    }];
 }
 
 @end

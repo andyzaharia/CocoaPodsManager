@@ -18,7 +18,9 @@
 @property (copy)                OnFailure                   onFailureBlock;
 @property (copy)                OnProgress                  onProgressBlock;
 
-
 -(id) initWithPodNames: (NSArray *) podNames;
+
++(void) fetchPodSpecWithName: (NSString *) podName onDone: (OnDone) onDone;
+
 
 @end

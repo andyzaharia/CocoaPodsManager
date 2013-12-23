@@ -1,19 +1,20 @@
 //
-//  Dependency.m
+//  CPDependency+Misc.m
 //  CocoaPodsManager
 //
-//  Created by Andy on 11.02.2013.
+//  Created by Andy on 19.12.2013.
 //  Copyright (c) 2013 Andy. All rights reserved.
 //
 
-#import "Dependency.h"
+#import "CPDependency+Misc.h"
+#import "PodSpec+Misc.h"
 #import "NSString+Misc.h"
 
-@implementation Dependency
+@implementation CPDependency (Misc)
 
-+(Dependency *) dependencyWithPod: (PodSpec *) pod
++(CPDependency *) dependencyWithPod: (PodSpec *) pod
 {
-    Dependency *d = [[Dependency alloc] init];
+    CPDependency *d = [[CPDependency alloc] init];
     d.pod = pod;
     return d;
 }
@@ -25,7 +26,7 @@
     // Pod Name
     [mutableString appendFormat: @"pod '%@', ", self.pod.name];
     mutableString = [mutableString stringByAddingSpacesToPosition: 35].mutableCopy;
-
+    
     // Pod Version
     if ([self.versionStr length]) {
         NSString *operator = @"";
