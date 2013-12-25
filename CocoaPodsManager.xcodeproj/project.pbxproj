@@ -16,17 +16,6 @@
 		74213BBB170D7BC000E7E6E6 /* PodDetailPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74213BBA170D7BC000E7E6E6 /* PodDetailPanel.xib */; };
 		743C4B0416C3F8D600F03545 /* Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 743C4B0316C3F8D600F03545 /* Icon.icns */; };
 		743F7F3016CCED2A0042CD63 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 743F7F2F16CCED2A0042CD63 /* Security.framework */; };
-		745ABFC51828E12100DB2BA1 /* PodLineDependencyParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 745ABFBE1828E12100DB2BA1 /* PodLineDependencyParser.m */; };
-		745ABFC61828E12100DB2BA1 /* PodLineDependencyParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 745ABFBE1828E12100DB2BA1 /* PodLineDependencyParser.m */; };
-		745ABFC71828E12100DB2BA1 /* PodLineDependencyParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 745ABFBE1828E12100DB2BA1 /* PodLineDependencyParser.m */; };
-		745ABFCA1828EC7E00DB2BA1 /* CPProject+Misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 745ABFC91828EC7E00DB2BA1 /* CPProject+Misc.m */; };
-		745ABFCB1828EC7E00DB2BA1 /* CPProject+Misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 745ABFC91828EC7E00DB2BA1 /* CPProject+Misc.m */; };
-		745ABFCC1828EC7E00DB2BA1 /* CPProject+Misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 745ABFC91828EC7E00DB2BA1 /* CPProject+Misc.m */; };
-		745ABFE81828FDF100DB2BA1 /* CPDependency.m in Sources */ = {isa = PBXBuildFile; fileRef = 745ABFE71828FDF100DB2BA1 /* CPDependency.m */; };
-		745ABFE91828FDF100DB2BA1 /* CPDependency.m in Sources */ = {isa = PBXBuildFile; fileRef = 745ABFE71828FDF100DB2BA1 /* CPDependency.m */; };
-		745ABFEA1828FDF100DB2BA1 /* CPDependency.m in Sources */ = {isa = PBXBuildFile; fileRef = 745ABFE71828FDF100DB2BA1 /* CPDependency.m */; };
-		7497F85A1862DEF700D37A16 /* CPDependency+Misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 7497F8591862DEF700D37A16 /* CPDependency+Misc.m */; };
-		7497F85B1862DEF700D37A16 /* CPDependency+Misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 7497F8591862DEF700D37A16 /* CPDependency+Misc.m */; };
 		74BCF60816E736480054040D /* trash.png in Resources */ = {isa = PBXBuildFile; fileRef = 74BCF60716E736480054040D /* trash.png */; };
 		74DA445316DCBA9200F130EF /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 74DA445216DCBA9100F130EF /* libresolv.dylib */; };
 		74DA445616DDE76500F130EF /* action_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 74DA445516DDE76500F130EF /* action_arrow.png */; };
@@ -48,6 +37,8 @@
 		7528C9261714AA2700F12D66 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E13A2B2916CD8C0E00A7E637 /* Foundation.framework */; };
 		7528C92C1714AA2700F12D66 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7528C92A1714AA2700F12D66 /* InfoPlist.strings */; };
 		7528C92F1714AA2700F12D66 /* UnitTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7528C92E1714AA2700F12D66 /* UnitTest.m */; };
+		752CECB4186BA2DB00B03531 /* NSManagedObjectModel+KCOrderedAccessorFix.m in Sources */ = {isa = PBXBuildFile; fileRef = 752CECB3186BA2DB00B03531 /* NSManagedObjectModel+KCOrderedAccessorFix.m */; };
+		752CECB5186BA2DB00B03531 /* NSManagedObjectModel+KCOrderedAccessorFix.m in Sources */ = {isa = PBXBuildFile; fileRef = 752CECB3186BA2DB00B03531 /* NSManagedObjectModel+KCOrderedAccessorFix.m */; };
 		7530C6DB18072A720050C136 /* AppConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 7530C6C318072A720050C136 /* AppConstants.m */; };
 		7530C6DC18072A720050C136 /* AppConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 7530C6C318072A720050C136 /* AppConstants.m */; };
 		7530C6DD18072A720050C136 /* NSApp+Misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 7530C6C718072A720050C136 /* NSApp+Misc.m */; };
@@ -92,6 +83,24 @@
 		7574047F17E8E43C004CF3FD /* CocoaPodWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 740FE07516C3986E0078A953 /* CocoaPodWindowController.xib */; };
 		7574048917E8E454004CF3FD /* CocoaPodsTreeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74DA445D16DF57F800F130EF /* CocoaPodsTreeController.m */; };
 		7574048A17E8E454004CF3FD /* CustomOutlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74DA446F16E0F36600F130EF /* CustomOutlineView.m */; };
+		75796D78186B9598008C31C7 /* CPDependency+Misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 75796D67186B9598008C31C7 /* CPDependency+Misc.m */; };
+		75796D79186B9598008C31C7 /* CPDependency+Misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 75796D67186B9598008C31C7 /* CPDependency+Misc.m */; };
+		75796D7A186B9598008C31C7 /* CPDependency.m in Sources */ = {isa = PBXBuildFile; fileRef = 75796D69186B9598008C31C7 /* CPDependency.m */; };
+		75796D7B186B9598008C31C7 /* CPDependency.m in Sources */ = {isa = PBXBuildFile; fileRef = 75796D69186B9598008C31C7 /* CPDependency.m */; };
+		75796D7C186B9598008C31C7 /* CPProject+Misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 75796D6B186B9598008C31C7 /* CPProject+Misc.m */; };
+		75796D7D186B9598008C31C7 /* CPProject+Misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 75796D6B186B9598008C31C7 /* CPProject+Misc.m */; };
+		75796D7E186B9598008C31C7 /* CPProject.m in Sources */ = {isa = PBXBuildFile; fileRef = 75796D6D186B9598008C31C7 /* CPProject.m */; };
+		75796D7F186B9598008C31C7 /* CPProject.m in Sources */ = {isa = PBXBuildFile; fileRef = 75796D6D186B9598008C31C7 /* CPProject.m */; };
+		75796D82186B9598008C31C7 /* PodSpec+Misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 75796D71186B9598008C31C7 /* PodSpec+Misc.m */; };
+		75796D83186B9598008C31C7 /* PodSpec+Misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 75796D71186B9598008C31C7 /* PodSpec+Misc.m */; };
+		75796D84186B9598008C31C7 /* PodSpec+StdOutParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 75796D73186B9598008C31C7 /* PodSpec+StdOutParser.m */; };
+		75796D85186B9598008C31C7 /* PodSpec+StdOutParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 75796D73186B9598008C31C7 /* PodSpec+StdOutParser.m */; };
+		75796D86186B9598008C31C7 /* PodSpec+YAML.m in Sources */ = {isa = PBXBuildFile; fileRef = 75796D75186B9598008C31C7 /* PodSpec+YAML.m */; };
+		75796D87186B9598008C31C7 /* PodSpec+YAML.m in Sources */ = {isa = PBXBuildFile; fileRef = 75796D75186B9598008C31C7 /* PodSpec+YAML.m */; };
+		75796D88186B9598008C31C7 /* PodSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 75796D77186B9598008C31C7 /* PodSpec.m */; };
+		75796D89186B9598008C31C7 /* PodSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 75796D77186B9598008C31C7 /* PodSpec.m */; };
+		75796D8D186B975C008C31C7 /* PodLineDependencyParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 75796D8C186B975C008C31C7 /* PodLineDependencyParser.m */; };
+		75796D8E186B975C008C31C7 /* PodLineDependencyParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 75796D8C186B975C008C31C7 /* PodLineDependencyParser.m */; };
 		758CB56617E8EBEC00A30AF5 /* save_as.png in Resources */ = {isa = PBXBuildFile; fileRef = 7510D00A170F3E540032E742 /* save_as.png */; };
 		758CB56717E8EBEC00A30AF5 /* install.png in Resources */ = {isa = PBXBuildFile; fileRef = 7510D006170F3CB90032E742 /* install.png */; };
 		758CB56817E8EBEC00A30AF5 /* update.png in Resources */ = {isa = PBXBuildFile; fileRef = 7510D008170F3D820032E742 /* update.png */; };
@@ -103,19 +112,9 @@
 		758CB56E17E8EBEC00A30AF5 /* Xcode.png in Resources */ = {isa = PBXBuildFile; fileRef = E195CE7816CA538200B4E3B8 /* Xcode.png */; };
 		758CB56F17E8EBEC00A30AF5 /* Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 743C4B0316C3F8D600F03545 /* Icon.icns */; };
 		759D90A817E7A03300B93F36 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 740FE03016C294A60078A953 /* Cocoa.framework */; };
-		75A9F4A91809DFA000869AA5 /* PodSpec+Misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 75A9F49E1809DFA000869AA5 /* PodSpec+Misc.m */; };
-		75A9F4AA1809DFA000869AA5 /* PodSpec+Misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 75A9F49E1809DFA000869AA5 /* PodSpec+Misc.m */; };
-		75A9F4AB1809DFA000869AA5 /* PodSpec+StdOutParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 75A9F4A01809DFA000869AA5 /* PodSpec+StdOutParser.m */; };
-		75A9F4AC1809DFA000869AA5 /* PodSpec+StdOutParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 75A9F4A01809DFA000869AA5 /* PodSpec+StdOutParser.m */; };
-		75A9F4AD1809DFA000869AA5 /* PodSpec+YAML.m in Sources */ = {isa = PBXBuildFile; fileRef = 75A9F4A21809DFA000869AA5 /* PodSpec+YAML.m */; };
-		75A9F4AE1809DFA000869AA5 /* PodSpec+YAML.m in Sources */ = {isa = PBXBuildFile; fileRef = 75A9F4A21809DFA000869AA5 /* PodSpec+YAML.m */; };
-		75A9F4AF1809DFA000869AA5 /* PodSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 75A9F4A41809DFA000869AA5 /* PodSpec.m */; };
-		75A9F4B01809DFA000869AA5 /* PodSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 75A9F4A41809DFA000869AA5 /* PodSpec.m */; };
 		75BBB55918087EF00031B011 /* HyperlinkTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BBB55818087EF00031B011 /* HyperlinkTextField.m */; };
 		75BBB55A18087EF00031B011 /* HyperlinkTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BBB55818087EF00031B011 /* HyperlinkTextField.m */; };
 		75BBB55D180896D40031B011 /* PluginIcon26.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 75BBB55C180896D40031B011 /* PluginIcon26.tiff */; };
-		75ED7CD61868504C00B82B30 /* CPProject.m in Sources */ = {isa = PBXBuildFile; fileRef = 75ED7CD51868504C00B82B30 /* CPProject.m */; };
-		75ED7CD71868504C00B82B30 /* CPProject.m in Sources */ = {isa = PBXBuildFile; fileRef = 75ED7CD51868504C00B82B30 /* CPProject.m */; };
 		75ED7CDA186856F000B82B30 /* Pod.m in Sources */ = {isa = PBXBuildFile; fileRef = 75ED7CD9186856F000B82B30 /* Pod.m */; };
 		75ED7CDB186856F000B82B30 /* Pod.m in Sources */ = {isa = PBXBuildFile; fileRef = 75ED7CD9186856F000B82B30 /* Pod.m */; };
 		8FE2AE8B31F5430483E2EE67 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A3EDDB5BFDF4E5588523290 /* libPods.a */; };
@@ -147,14 +146,6 @@
 		74213BBA170D7BC000E7E6E6 /* PodDetailPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PodDetailPanel.xib; path = PodDetailPanel/PodDetailPanel.xib; sourceTree = "<group>"; };
 		743C4B0316C3F8D600F03545 /* Icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Icon.icns; sourceTree = "<group>"; };
 		743F7F2F16CCED2A0042CD63 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		745ABFBD1828E12100DB2BA1 /* PodLineDependencyParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PodLineDependencyParser.h; sourceTree = "<group>"; };
-		745ABFBE1828E12100DB2BA1 /* PodLineDependencyParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PodLineDependencyParser.m; sourceTree = "<group>"; };
-		745ABFC81828EC7E00DB2BA1 /* CPProject+Misc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CPProject+Misc.h"; sourceTree = "<group>"; };
-		745ABFC91828EC7E00DB2BA1 /* CPProject+Misc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CPProject+Misc.m"; sourceTree = "<group>"; };
-		745ABFE61828FDF100DB2BA1 /* CPDependency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPDependency.h; sourceTree = "<group>"; };
-		745ABFE71828FDF100DB2BA1 /* CPDependency.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPDependency.m; sourceTree = "<group>"; };
-		7497F8581862DEF700D37A16 /* CPDependency+Misc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CPDependency+Misc.h"; sourceTree = "<group>"; };
-		7497F8591862DEF700D37A16 /* CPDependency+Misc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CPDependency+Misc.m"; sourceTree = "<group>"; };
 		74BCF60716E736480054040D /* trash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trash.png; sourceTree = "<group>"; };
 		74DA445216DCBA9100F130EF /* libresolv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libresolv.dylib; path = usr/lib/libresolv.dylib; sourceTree = SDKROOT; };
 		74DA445516DDE76500F130EF /* action_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = action_arrow.png; sourceTree = "<group>"; };
@@ -180,6 +171,8 @@
 		7528C92D1714AA2700F12D66 /* UnitTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UnitTest.h; sourceTree = "<group>"; };
 		7528C92E1714AA2700F12D66 /* UnitTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnitTest.m; sourceTree = "<group>"; };
 		7528C9301714AA2700F12D66 /* UnitTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UnitTest-Prefix.pch"; sourceTree = "<group>"; };
+		752CECB2186BA2DB00B03531 /* NSManagedObjectModel+KCOrderedAccessorFix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObjectModel+KCOrderedAccessorFix.h"; sourceTree = "<group>"; };
+		752CECB3186BA2DB00B03531 /* NSManagedObjectModel+KCOrderedAccessorFix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObjectModel+KCOrderedAccessorFix.m"; sourceTree = "<group>"; };
 		7530C6C218072A720050C136 /* AppConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppConstants.h; sourceTree = "<group>"; };
 		7530C6C318072A720050C136 /* AppConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppConstants.m; sourceTree = "<group>"; };
 		7530C6C618072A720050C136 /* NSApp+Misc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSApp+Misc.h"; sourceTree = "<group>"; };
@@ -218,20 +211,28 @@
 		7567ED5F1809E245006B0F7C /* PodSpecParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PodSpecParser.m; sourceTree = "<group>"; };
 		7567ED601809E245006B0F7C /* PodSpecTaskOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PodSpecTaskOperation.h; sourceTree = "<group>"; };
 		7567ED611809E245006B0F7C /* PodSpecTaskOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PodSpecTaskOperation.m; sourceTree = "<group>"; };
+		75796D66186B9598008C31C7 /* CPDependency+Misc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CPDependency+Misc.h"; sourceTree = "<group>"; };
+		75796D67186B9598008C31C7 /* CPDependency+Misc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CPDependency+Misc.m"; sourceTree = "<group>"; };
+		75796D68186B9598008C31C7 /* CPDependency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPDependency.h; sourceTree = "<group>"; };
+		75796D69186B9598008C31C7 /* CPDependency.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPDependency.m; sourceTree = "<group>"; };
+		75796D6A186B9598008C31C7 /* CPProject+Misc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CPProject+Misc.h"; sourceTree = "<group>"; };
+		75796D6B186B9598008C31C7 /* CPProject+Misc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CPProject+Misc.m"; sourceTree = "<group>"; };
+		75796D6C186B9598008C31C7 /* CPProject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPProject.h; sourceTree = "<group>"; };
+		75796D6D186B9598008C31C7 /* CPProject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPProject.m; sourceTree = "<group>"; };
+		75796D70186B9598008C31C7 /* PodSpec+Misc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PodSpec+Misc.h"; sourceTree = "<group>"; };
+		75796D71186B9598008C31C7 /* PodSpec+Misc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PodSpec+Misc.m"; sourceTree = "<group>"; };
+		75796D72186B9598008C31C7 /* PodSpec+StdOutParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PodSpec+StdOutParser.h"; sourceTree = "<group>"; };
+		75796D73186B9598008C31C7 /* PodSpec+StdOutParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PodSpec+StdOutParser.m"; sourceTree = "<group>"; };
+		75796D74186B9598008C31C7 /* PodSpec+YAML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PodSpec+YAML.h"; sourceTree = "<group>"; };
+		75796D75186B9598008C31C7 /* PodSpec+YAML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PodSpec+YAML.m"; sourceTree = "<group>"; };
+		75796D76186B9598008C31C7 /* PodSpec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PodSpec.h; sourceTree = "<group>"; };
+		75796D77186B9598008C31C7 /* PodSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PodSpec.m; sourceTree = "<group>"; };
+		75796D8B186B975C008C31C7 /* PodLineDependencyParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PodLineDependencyParser.h; sourceTree = "<group>"; };
+		75796D8C186B975C008C31C7 /* PodLineDependencyParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PodLineDependencyParser.m; sourceTree = "<group>"; };
 		759D90A717E7A03300B93F36 /* CocoaPodsPlugin.xcplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CocoaPodsPlugin.xcplugin; sourceTree = BUILT_PRODUCTS_DIR; };
-		75A9F49D1809DFA000869AA5 /* PodSpec+Misc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PodSpec+Misc.h"; sourceTree = "<group>"; };
-		75A9F49E1809DFA000869AA5 /* PodSpec+Misc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PodSpec+Misc.m"; sourceTree = "<group>"; };
-		75A9F49F1809DFA000869AA5 /* PodSpec+StdOutParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PodSpec+StdOutParser.h"; sourceTree = "<group>"; };
-		75A9F4A01809DFA000869AA5 /* PodSpec+StdOutParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PodSpec+StdOutParser.m"; sourceTree = "<group>"; };
-		75A9F4A11809DFA000869AA5 /* PodSpec+YAML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PodSpec+YAML.h"; sourceTree = "<group>"; };
-		75A9F4A21809DFA000869AA5 /* PodSpec+YAML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PodSpec+YAML.m"; sourceTree = "<group>"; };
-		75A9F4A31809DFA000869AA5 /* PodSpec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PodSpec.h; sourceTree = "<group>"; };
-		75A9F4A41809DFA000869AA5 /* PodSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PodSpec.m; sourceTree = "<group>"; };
 		75BBB55718087EF00031B011 /* HyperlinkTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HyperlinkTextField.h; sourceTree = "<group>"; };
 		75BBB55818087EF00031B011 /* HyperlinkTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HyperlinkTextField.m; sourceTree = "<group>"; };
 		75BBB55C180896D40031B011 /* PluginIcon26.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = PluginIcon26.tiff; sourceTree = "<group>"; };
-		75ED7CD41868504C00B82B30 /* CPProject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPProject.h; sourceTree = "<group>"; };
-		75ED7CD51868504C00B82B30 /* CPProject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPProject.m; sourceTree = "<group>"; };
 		75ED7CD8186856F000B82B30 /* Pod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pod.h; sourceTree = "<group>"; };
 		75ED7CD9186856F000B82B30 /* Pod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pod.m; sourceTree = "<group>"; };
 		8F0ADA391BE84E54BA40C106 /* libPods-CocoaPodsPlugin.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CocoaPodsPlugin.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -384,23 +385,6 @@
 			path = Resources;
 			sourceTree = SOURCE_ROOT;
 		};
-		745ABFB81828E12100DB2BA1 /* CPProject */ = {
-			isa = PBXGroup;
-			children = (
-				75ED7CD41868504C00B82B30 /* CPProject.h */,
-				75ED7CD51868504C00B82B30 /* CPProject.m */,
-				745ABFE61828FDF100DB2BA1 /* CPDependency.h */,
-				745ABFE71828FDF100DB2BA1 /* CPDependency.m */,
-				745ABFC81828EC7E00DB2BA1 /* CPProject+Misc.h */,
-				745ABFC91828EC7E00DB2BA1 /* CPProject+Misc.m */,
-				745ABFBD1828E12100DB2BA1 /* PodLineDependencyParser.h */,
-				745ABFBE1828E12100DB2BA1 /* PodLineDependencyParser.m */,
-				7497F8581862DEF700D37A16 /* CPDependency+Misc.h */,
-				7497F8591862DEF700D37A16 /* CPDependency+Misc.m */,
-			);
-			path = CPProject;
-			sourceTree = "<group>";
-		};
 		74D0EE35170AFFE600F9442B /* PodDetailsPanel */ = {
 			isa = PBXGroup;
 			children = (
@@ -450,12 +434,22 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		752CECB1186BA2DB00B03531 /* KCOrderedAccessorFix */ = {
+			isa = PBXGroup;
+			children = (
+				752CECB2186BA2DB00B03531 /* NSManagedObjectModel+KCOrderedAccessorFix.h */,
+				752CECB3186BA2DB00B03531 /* NSManagedObjectModel+KCOrderedAccessorFix.m */,
+			);
+			name = KCOrderedAccessorFix;
+			path = ../KCOrderedAccessorFix;
+			sourceTree = "<group>";
+		};
 		7530C6C018072A720050C136 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				75796D8A186B975C008C31C7 /* PodFileParser */,
+				75796D65186B9598008C31C7 /* CoreData Entities */,
 				7567ED5B1809E245006B0F7C /* PodRepositoryManager */,
-				745ABFB81828E12100DB2BA1 /* CPProject */,
-				75A9F49C1809DFA000869AA5 /* CoreData+YAML */,
 				75BBB55618087EF00031B011 /* HyperlinkTextField */,
 				7530C73618073DCA0050C136 /* CocoaPodsApp */,
 				7530C70618073BF80050C136 /* NSBeginAlertSheet-using-Blocks */,
@@ -516,6 +510,7 @@
 		7530C6D118072A720050C136 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
+				752CECB1186BA2DB00B03531 /* KCOrderedAccessorFix */,
 				7530C6D218072A720050C136 /* NSManagedObject+CoreData.h */,
 				7530C6D318072A720050C136 /* NSManagedObject+CoreData.m */,
 				7530C6D418072A720050C136 /* NSManagedObjectContext+Custom.h */,
@@ -595,20 +590,36 @@
 			path = PodRepositoryManager;
 			sourceTree = "<group>";
 		};
-		75A9F49C1809DFA000869AA5 /* CoreData+YAML */ = {
+		75796D65186B9598008C31C7 /* CoreData Entities */ = {
 			isa = PBXGroup;
 			children = (
-				75A9F49D1809DFA000869AA5 /* PodSpec+Misc.h */,
-				75A9F49E1809DFA000869AA5 /* PodSpec+Misc.m */,
-				75A9F49F1809DFA000869AA5 /* PodSpec+StdOutParser.h */,
-				75A9F4A01809DFA000869AA5 /* PodSpec+StdOutParser.m */,
-				75A9F4A11809DFA000869AA5 /* PodSpec+YAML.h */,
-				75A9F4A21809DFA000869AA5 /* PodSpec+YAML.m */,
-				75A9F4A31809DFA000869AA5 /* PodSpec.h */,
-				75A9F4A41809DFA000869AA5 /* PodSpec.m */,
+				75796D76186B9598008C31C7 /* PodSpec.h */,
+				75796D77186B9598008C31C7 /* PodSpec.m */,
+				75796D6C186B9598008C31C7 /* CPProject.h */,
+				75796D6D186B9598008C31C7 /* CPProject.m */,
+				75796D68186B9598008C31C7 /* CPDependency.h */,
+				75796D69186B9598008C31C7 /* CPDependency.m */,
+				75796D66186B9598008C31C7 /* CPDependency+Misc.h */,
+				75796D67186B9598008C31C7 /* CPDependency+Misc.m */,
+				75796D6A186B9598008C31C7 /* CPProject+Misc.h */,
+				75796D6B186B9598008C31C7 /* CPProject+Misc.m */,
+				75796D70186B9598008C31C7 /* PodSpec+Misc.h */,
+				75796D71186B9598008C31C7 /* PodSpec+Misc.m */,
+				75796D72186B9598008C31C7 /* PodSpec+StdOutParser.h */,
+				75796D73186B9598008C31C7 /* PodSpec+StdOutParser.m */,
+				75796D74186B9598008C31C7 /* PodSpec+YAML.h */,
+				75796D75186B9598008C31C7 /* PodSpec+YAML.m */,
 			);
-			name = "CoreData+YAML";
-			path = CoreDataYAML;
+			path = "CoreData Entities";
+			sourceTree = "<group>";
+		};
+		75796D8A186B975C008C31C7 /* PodFileParser */ = {
+			isa = PBXGroup;
+			children = (
+				75796D8B186B975C008C31C7 /* PodLineDependencyParser.h */,
+				75796D8C186B975C008C31C7 /* PodLineDependencyParser.m */,
+			);
+			path = PodFileParser;
 			sourceTree = "<group>";
 		};
 		75BBB55618087EF00031B011 /* HyperlinkTextField */ = {
@@ -842,39 +853,40 @@
 				7567ED661809E245006B0F7C /* PodSpecTaskOperation.m in Sources */,
 				740FE06916C297400078A953 /* CocoaPodWindowController.m in Sources */,
 				7530C6F718072DCE0050C136 /* HoverTableRowView.m in Sources */,
-				75ED7CD61868504C00B82B30 /* CPProject.m in Sources */,
 				7530C6DB18072A720050C136 /* AppConstants.m in Sources */,
 				7530C6E118072A720050C136 /* CCPWorkspaceManager.m in Sources */,
-				7497F85A1862DEF700D37A16 /* CPDependency+Misc.m in Sources */,
 				756786CF180728550056C1AC /* Plugin.m in Sources */,
-				745ABFC51828E12100DB2BA1 /* PodLineDependencyParser.m in Sources */,
 				75ED7CDA186856F000B82B30 /* Pod.m in Sources */,
+				75796D7C186B9598008C31C7 /* CPProject+Misc.m in Sources */,
 				7530C6FE18072E200050C136 /* ProjectCell.m in Sources */,
 				7530C72118073BF90050C136 /* NSApplication+ESSApplicationCategory.m in Sources */,
 				7530C73918073DCA0050C136 /* CocoaPodsApp.m in Sources */,
 				7567ED641809E245006B0F7C /* PodSpecParser.m in Sources */,
 				7530C6E918072A720050C136 /* NSPersistentStoreCoordinator+Custom.m in Sources */,
-				75A9F4A91809DFA000869AA5 /* PodSpec+Misc.m in Sources */,
-				745ABFE81828FDF100DB2BA1 /* CPDependency.m in Sources */,
-				75A9F4AF1809DFA000869AA5 /* PodSpec.m in Sources */,
 				7530C6FB18072DE90050C136 /* NSCustomImageView.m in Sources */,
 				7530C6DF18072A720050C136 /* NSString+Misc.m in Sources */,
-				75A9F4AD1809DFA000869AA5 /* PodSpec+YAML.m in Sources */,
+				75796D82186B9598008C31C7 /* PodSpec+Misc.m in Sources */,
+				75796D88186B9598008C31C7 /* PodSpec.m in Sources */,
+				75796D86186B9598008C31C7 /* PodSpec+YAML.m in Sources */,
+				75796D7E186B9598008C31C7 /* CPProject.m in Sources */,
 				7530C6DD18072A720050C136 /* NSApp+Misc.m in Sources */,
 				7530C6E718072A720050C136 /* NSManagedObjectContext+Custom.m in Sources */,
 				74DA445E16DF57F800F130EF /* CocoaPodsTreeController.m in Sources */,
-				745ABFCA1828EC7E00DB2BA1 /* CPProject+Misc.m in Sources */,
 				74DA447016E0F36600F130EF /* CustomOutlineView.m in Sources */,
 				74213BB9170D7B8800E7E6E6 /* PodDetailPanel.m in Sources */,
 				75BBB55918087EF00031B011 /* HyperlinkTextField.m in Sources */,
 				7530C6F318072D130050C136 /* DataModel.xcdatamodeld in Sources */,
 				751F031218683F6400305394 /* NSFileManager+DirectoryLocations.m in Sources */,
 				7530C70118072F490050C136 /* ProjectTableView.m in Sources */,
+				75796D78186B9598008C31C7 /* CPDependency+Misc.m in Sources */,
+				752CECB4186BA2DB00B03531 /* NSManagedObjectModel+KCOrderedAccessorFix.m in Sources */,
 				7567ED621809E245006B0F7C /* PodRepositoryManager.m in Sources */,
 				7530C6E518072A720050C136 /* NSManagedObject+CoreData.m in Sources */,
-				75A9F4AB1809DFA000869AA5 /* PodSpec+StdOutParser.m in Sources */,
+				75796D8D186B975C008C31C7 /* PodLineDependencyParser.m in Sources */,
+				75796D84186B9598008C31C7 /* PodSpec+StdOutParser.m in Sources */,
 				7567ED681809E857006B0F7C /* main.m in Sources */,
 				75225FD91723FA4F00B3C077 /* HooksPanel.m in Sources */,
+				75796D7A186B9598008C31C7 /* CPDependency.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -883,9 +895,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7528C92F1714AA2700F12D66 /* UnitTest.m in Sources */,
-				745ABFCC1828EC7E00DB2BA1 /* CPProject+Misc.m in Sources */,
-				745ABFC71828E12100DB2BA1 /* PodLineDependencyParser.m in Sources */,
-				745ABFEA1828FDF100DB2BA1 /* CPDependency.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -893,24 +902,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75796D79186B9598008C31C7 /* CPDependency+Misc.m in Sources */,
 				7567ED631809E245006B0F7C /* PodRepositoryManager.m in Sources */,
-				75A9F4B01809DFA000869AA5 /* PodSpec.m in Sources */,
-				75A9F4AE1809DFA000869AA5 /* PodSpec+YAML.m in Sources */,
 				7530C6DC18072A720050C136 /* AppConstants.m in Sources */,
-				75ED7CD71868504C00B82B30 /* CPProject.m in Sources */,
 				7530C6EA18072A720050C136 /* NSPersistentStoreCoordinator+Custom.m in Sources */,
-				75A9F4AA1809DFA000869AA5 /* PodSpec+Misc.m in Sources */,
-				745ABFCB1828EC7E00DB2BA1 /* CPProject+Misc.m in Sources */,
-				75A9F4AC1809DFA000869AA5 /* PodSpec+StdOutParser.m in Sources */,
+				75796D7F186B9598008C31C7 /* CPProject.m in Sources */,
 				7574047A17E8E43C004CF3FD /* HooksPanel.m in Sources */,
 				7567ED671809E245006B0F7C /* PodSpecTaskOperation.m in Sources */,
+				75796D7D186B9598008C31C7 /* CPProject+Misc.m in Sources */,
 				751F031318683F6400305394 /* NSFileManager+DirectoryLocations.m in Sources */,
-				745ABFE91828FDF100DB2BA1 /* CPDependency.m in Sources */,
 				7574047C17E8E43C004CF3FD /* PodDetailPanel.m in Sources */,
+				75796D8E186B975C008C31C7 /* PodLineDependencyParser.m in Sources */,
+				75796D87186B9598008C31C7 /* PodSpec+YAML.m in Sources */,
+				75796D89186B9598008C31C7 /* PodSpec.m in Sources */,
 				756786D0180728550056C1AC /* Plugin.m in Sources */,
+				75796D85186B9598008C31C7 /* PodSpec+StdOutParser.m in Sources */,
 				7530C73A18073DCA0050C136 /* CocoaPodsApp.m in Sources */,
 				7574047E17E8E43C004CF3FD /* CocoaPodWindowController.m in Sources */,
+				75796D83186B9598008C31C7 /* PodSpec+Misc.m in Sources */,
+				75796D7B186B9598008C31C7 /* CPDependency.m in Sources */,
 				7567ED651809E245006B0F7C /* PodSpecParser.m in Sources */,
+				752CECB5186BA2DB00B03531 /* NSManagedObjectModel+KCOrderedAccessorFix.m in Sources */,
 				75ED7CDB186856F000B82B30 /* Pod.m in Sources */,
 				7530C6DE18072A720050C136 /* NSApp+Misc.m in Sources */,
 				75BBB55A18087EF00031B011 /* HyperlinkTextField.m in Sources */,
@@ -919,8 +931,6 @@
 				7530C6E618072A720050C136 /* NSManagedObject+CoreData.m in Sources */,
 				7530C6E018072A720050C136 /* NSString+Misc.m in Sources */,
 				7574048917E8E454004CF3FD /* CocoaPodsTreeController.m in Sources */,
-				7497F85B1862DEF700D37A16 /* CPDependency+Misc.m in Sources */,
-				745ABFC61828E12100DB2BA1 /* PodLineDependencyParser.m in Sources */,
 				7530C6E218072A720050C136 /* CCPWorkspaceManager.m in Sources */,
 				7574048A17E8E454004CF3FD /* CustomOutlineView.m in Sources */,
 				7530C6F418072D130050C136 /* DataModel.xcdatamodeld in Sources */,

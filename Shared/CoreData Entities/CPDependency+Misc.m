@@ -14,8 +14,8 @@
 
 +(CPDependency *) dependencyWithPod: (PodSpec *) pod
 {
-    CPDependency *d = [[CPDependency alloc] init];
-    d.pod = pod;
+    CPDependency *d = [CPDependency createEntityInContext: pod.managedObjectContext];
+    [d setPod: pod];
     return d;
 }
 

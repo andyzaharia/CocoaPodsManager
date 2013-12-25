@@ -106,7 +106,7 @@
                         if ([line isSameLeftSideWithCaseInsensitive: kPOD]) {
                             CPDependency *dependency = [PodLineDependencyParser dependencyFromString: line];
                             if (dependency) {
-                                [self addItemsObject: dependency];
+                                dependency.project = self;
                             } else {
                                 NSLog(@"Failed to parse line:\n%@", line);
                             }
@@ -274,14 +274,14 @@
 
 #pragma mark - Work around, most likely an Apple Bug
 
-- (void)addItemsObject:(CPDependency *)value {    
-    NSMutableOrderedSet *tmpOrderedSet = [NSMutableOrderedSet orderedSetWithOrderedSet:[self mutableOrderedSetValueForKey: @"items"]];
-    NSUInteger idx = [tmpOrderedSet count];
-    NSIndexSet* indexes = [NSIndexSet indexSetWithIndex:idx];
-    [self willChange:NSKeyValueChangeInsertion valuesAtIndexes:indexes forKey: @"items"];
-    [tmpOrderedSet addObject:value];
-    [self setPrimitiveValue:tmpOrderedSet forKey: @"items"];
-    [self didChange:NSKeyValueChangeInsertion valuesAtIndexes:indexes forKey: @"items"];
-}
+//- (void)addItemsObject:(CPDependency *)value {    
+//    NSMutableOrderedSet *tmpOrderedSet = [NSMutableOrderedSet orderedSetWithOrderedSet:[self mutableOrderedSetValueForKey: @"items"]];
+//    NSUInteger idx = [tmpOrderedSet count];
+//    NSIndexSet* indexes = [NSIndexSet indexSetWithIndex:idx];
+//    [self willChange:NSKeyValueChangeInsertion valuesAtIndexes:indexes forKey: @"items"];
+//    [tmpOrderedSet addObject:value];
+//    [self setPrimitiveValue:tmpOrderedSet forKey: @"items"];
+//    [self didChange:NSKeyValueChangeInsertion valuesAtIndexes:indexes forKey: @"items"];
+//}
 
 @end

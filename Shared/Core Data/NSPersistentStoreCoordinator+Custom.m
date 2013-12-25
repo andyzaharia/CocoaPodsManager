@@ -9,6 +9,7 @@
 #import "NSPersistentStoreCoordinator+Custom.h"
 #import "Plugin.h"
 #import "NSFileManager+DirectoryLocations.h"
+#import "NSManagedObjectModel+KCOrderedAccessorFix.h"
 
 @implementation NSPersistentStoreCoordinator (Custom)
 
@@ -21,16 +22,19 @@ static NSString *_dataModelName = nil;
 
 + (void) setDataModelName: (NSString *) name {
     _dataModelName = name;
+    
+    [NSManagedObjectContext contextForMainThread]; // Initialize main thread context
 }
 
 +(NSPersistentStoreCoordinator *) sharedPersisntentStoreCoordinator
 {
     NSAssert(_dataModelName, @"Core Data model name has not been set. Use [NSPersistentStoreCoordinator setDataModelName:].");
     
-    //TODO: Move the Store to aplication support
-    
     if (!_sharedPersistentStore) {
-        NSString *storePath = [[[NSFileManager defaultManager] applicationSupportDirectory] stringByAppendingPathComponent:@"CocoaPodsData.sqlite"];
+        NSString *executableName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleExecutable"];
+
+        NSString *storeFileName = [NSString stringWithFormat:@"%@.db", executableName];
+        NSString *storePath = [[[NSFileManager defaultManager] applicationSupportDirectory] stringByAppendingPathComponent: storeFileName];
         NSURL *storeUrl = [NSURL fileURLWithPath:storePath];
         
         NSBundle *bundle = [NSBundle bundleForClass:[Plugin class]];        
@@ -41,6 +45,7 @@ static NSString *_dataModelName = nil;
         NSURL *modelUrl = [NSURL fileURLWithPath: modelPath];
         
         NSManagedObjectModel *_managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL: modelUrl];
+        [_managedObjectModel kc_generateOrderedSetAccessors];
         
         NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
                                  [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,

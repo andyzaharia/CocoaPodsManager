@@ -34,6 +34,8 @@
                         onFailure: (OnFailure) onFailure;
 
 
+-(void) loadPodSpecRespository: (OnDone) onDone;
+
 // Will update the properties only for the Pods that have the flag fetchedDetails set to NO
 -(void) updateAllPodProperties: (OnDone) onDone;
 

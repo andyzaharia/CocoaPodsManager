@@ -20,8 +20,8 @@
         <attribute name="post_install" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="pre_install" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="projectFilePath" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="items" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="CPDependency" inverseName="project" inverseEntity="CPDependency" syncable="YES"/>
-        <relationship name="pods" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="PodSpec" inverseName="projects" inverseEntity="PodSpec" syncable="YES"/>
+        <relationship name="items" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="CPDependency" inverseName="project" inverseEntity="CPDependency" syncable="YES"/>
+        <relationship name="pods" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="PodSpec" inverseName="projects" inverseEntity="PodSpec" syncable="YES"/>
     </entity>
     <entity name="PodSpec" representedClassName="PodSpec" syncable="YES">
         <attribute name="childDescription" optional="YES" transient="YES" attributeType="String" syncable="YES"/>

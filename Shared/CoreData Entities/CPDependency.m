@@ -2,7 +2,7 @@
 //  CPDependency.m
 //  CocoaPodsManager
 //
-//  Created by Andy on 05.11.2013.
+//  Created by Andrei Zaharia on 12/25/13.
 //  Copyright (c) 2013 Andy. All rights reserved.
 //
 
@@ -13,13 +13,13 @@
 
 @implementation CPDependency
 
+@dynamic commit;
+@dynamic customPodSpec;
+@dynamic gitSource;
+@dynamic head;
+@dynamic local;
 @dynamic versionOperator;
 @dynamic versionStr;
-@dynamic gitSource;
-@dynamic local;
-@dynamic customPodSpec;
-@dynamic commit;
-@dynamic head;
 @dynamic pod;
 @dynamic project;
 

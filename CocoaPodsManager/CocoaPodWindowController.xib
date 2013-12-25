@@ -1271,7 +1271,7 @@
 												<int key="NSTCFlags">1</int>
 											</object>
 											<object class="NSTextViewSharedData" key="NSSharedData">
-												<int key="NSFlags">12263</int>
+												<int key="NSFlags">50474983</int>
 												<int key="NSTextCheckingTypes">0</int>
 												<nil key="NSMarkedAttributes"/>
 												<reference key="NSBackgroundColor" ref="729584588"/>
@@ -1593,40 +1593,6 @@
 					<string key="id">1408</string>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">podListIncludeCheckoxStateChange:</string>
-						<reference key="source" ref="1001"/>
-						<object class="NSButton" key="destination" id="404661464">
-							<reference key="NSNextResponder" ref="723565912"/>
-							<int key="NSvFlags">300</int>
-							<array class="NSMutableArray" key="NSSubviews"/>
-							<string key="NSFrame">{{4, -3}, {61, 18}}</string>
-							<reference key="NSSuperview" ref="723565912"/>
-							<string key="NSReuseIdentifierKey">_NS:9</string>
-							<int key="NSTag">3</int>
-							<bool key="NSEnabled">YES</bool>
-							<object class="NSButtonCell" key="NSCell" id="324934717">
-								<int key="NSCellFlags">67108864</int>
-								<int key="NSCellFlags2">268435456</int>
-								<string key="NSContents"/>
-								<reference key="NSSupport" ref="766748184"/>
-								<string key="NSCellIdentifier">_NS:9</string>
-								<reference key="NSControlView" ref="404661464"/>
-								<int key="NSButtonFlags">1211912448</int>
-								<int key="NSButtonFlags2">2</int>
-								<reference key="NSNormalImage" ref="961086848"/>
-								<reference key="NSAlternateImage" ref="6489098"/>
-								<string key="NSAlternateContents"/>
-								<string key="NSKeyEquivalent"/>
-								<int key="NSPeriodicDelay">200</int>
-								<int key="NSPeriodicInterval">25</int>
-							</object>
-							<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-						</object>
-					</object>
-					<string key="id">1406</string>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">projectPodsList</string>
 						<reference key="source" ref="1001"/>
@@ -1768,6 +1734,40 @@
 						</object>
 					</object>
 					<string key="id">1342</string>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">addPodDependencyWithCheckoxStateChange:</string>
+						<reference key="source" ref="1001"/>
+						<object class="NSButton" key="destination" id="404661464">
+							<reference key="NSNextResponder" ref="723565912"/>
+							<int key="NSvFlags">300</int>
+							<array class="NSMutableArray" key="NSSubviews"/>
+							<string key="NSFrame">{{4, -3}, {61, 18}}</string>
+							<reference key="NSSuperview" ref="723565912"/>
+							<string key="NSReuseIdentifierKey">_NS:9</string>
+							<int key="NSTag">3</int>
+							<bool key="NSEnabled">YES</bool>
+							<object class="NSButtonCell" key="NSCell" id="324934717">
+								<int key="NSCellFlags">67108864</int>
+								<int key="NSCellFlags2">268435456</int>
+								<string key="NSContents"/>
+								<reference key="NSSupport" ref="766748184"/>
+								<string key="NSCellIdentifier">_NS:9</string>
+								<reference key="NSControlView" ref="404661464"/>
+								<int key="NSButtonFlags">1211912448</int>
+								<int key="NSButtonFlags2">2</int>
+								<reference key="NSNormalImage" ref="961086848"/>
+								<reference key="NSAlternateImage" ref="6489098"/>
+								<string key="NSAlternateContents"/>
+								<string key="NSKeyEquivalent"/>
+								<int key="NSPeriodicDelay">200</int>
+								<int key="NSPeriodicInterval">25</int>
+							</object>
+							<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+						</object>
+					</object>
+					<string key="id">wGo-0J-PEI</string>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -3421,7 +3421,210 @@
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes"/>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<object class="IBPartialClassDescription">
+					<string key="className">CocoaPodWindowController</string>
+					<string key="superclassName">NSWindowController</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="closeLogPanel:">id</string>
+						<string key="columnVisibilityToggle:">NSMenuItem</string>
+						<string key="deletePodFromProject:">NSButton</string>
+						<string key="deploymentDidChange:">NSPopUpButton</string>
+						<string key="headValueChanged:">NSButton</string>
+						<string key="inhibitAllWarningsAction:">NSButton</string>
+						<string key="installAction:">id</string>
+						<string key="platformDidChange:">NSPopUpButton</string>
+						<string key="podListIncludeCheckoxStateChange:">NSButton</string>
+						<string key="podOpenHomePageAction:">id</string>
+						<string key="podVersionChanged:">NSPopUpButton</string>
+						<string key="refresh:">id</string>
+						<string key="saveAction:">id</string>
+						<string key="searchTermDidChange:">id</string>
+						<string key="showLogWindowWithString:">NSString</string>
+						<string key="updateAction:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="closeLogPanel:">
+							<string key="name">closeLogPanel:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="columnVisibilityToggle:">
+							<string key="name">columnVisibilityToggle:</string>
+							<string key="candidateClassName">NSMenuItem</string>
+						</object>
+						<object class="IBActionInfo" key="deletePodFromProject:">
+							<string key="name">deletePodFromProject:</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBActionInfo" key="deploymentDidChange:">
+							<string key="name">deploymentDidChange:</string>
+							<string key="candidateClassName">NSPopUpButton</string>
+						</object>
+						<object class="IBActionInfo" key="headValueChanged:">
+							<string key="name">headValueChanged:</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBActionInfo" key="inhibitAllWarningsAction:">
+							<string key="name">inhibitAllWarningsAction:</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBActionInfo" key="installAction:">
+							<string key="name">installAction:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="platformDidChange:">
+							<string key="name">platformDidChange:</string>
+							<string key="candidateClassName">NSPopUpButton</string>
+						</object>
+						<object class="IBActionInfo" key="podListIncludeCheckoxStateChange:">
+							<string key="name">podListIncludeCheckoxStateChange:</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBActionInfo" key="podOpenHomePageAction:">
+							<string key="name">podOpenHomePageAction:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="podVersionChanged:">
+							<string key="name">podVersionChanged:</string>
+							<string key="candidateClassName">NSPopUpButton</string>
+						</object>
+						<object class="IBActionInfo" key="refresh:">
+							<string key="name">refresh:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="saveAction:">
+							<string key="name">saveAction:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="searchTermDidChange:">
+							<string key="name">searchTermDidChange:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="showLogWindowWithString:">
+							<string key="name">showLogWindowWithString:</string>
+							<string key="candidateClassName">NSString</string>
+						</object>
+						<object class="IBActionInfo" key="updateAction:">
+							<string key="name">updateAction:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="btnInstall">NSButton</string>
+						<string key="btnSave">NSButton</string>
+						<string key="btnUpdate">NSButton</string>
+						<string key="chBxInhibitAllWarnings">NSButton</string>
+						<string key="cocoaPodsList">NSOutlineView</string>
+						<string key="contentSplitViewContainer">NSSplitView</string>
+						<string key="loadingIndicator">NSProgressIndicator</string>
+						<string key="logSheet">NSPanel</string>
+						<string key="pbDeployment">NSPopUpButton</string>
+						<string key="pbPlatform">NSPopUpButton</string>
+						<string key="projectPodsList">NSOutlineView</string>
+						<string key="searchField">NSSearchFieldCell</string>
+						<string key="tfAvailablePods">NSTextFieldCell</string>
+						<string key="toolbar">NSToolbar</string>
+						<string key="tvLog">NSTextView</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="btnInstall">
+							<string key="name">btnInstall</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="btnSave">
+							<string key="name">btnSave</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="btnUpdate">
+							<string key="name">btnUpdate</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="chBxInhibitAllWarnings">
+							<string key="name">chBxInhibitAllWarnings</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="cocoaPodsList">
+							<string key="name">cocoaPodsList</string>
+							<string key="candidateClassName">NSOutlineView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="contentSplitViewContainer">
+							<string key="name">contentSplitViewContainer</string>
+							<string key="candidateClassName">NSSplitView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="loadingIndicator">
+							<string key="name">loadingIndicator</string>
+							<string key="candidateClassName">NSProgressIndicator</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="logSheet">
+							<string key="name">logSheet</string>
+							<string key="candidateClassName">NSPanel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="pbDeployment">
+							<string key="name">pbDeployment</string>
+							<string key="candidateClassName">NSPopUpButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="pbPlatform">
+							<string key="name">pbPlatform</string>
+							<string key="candidateClassName">NSPopUpButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="projectPodsList">
+							<string key="name">projectPodsList</string>
+							<string key="candidateClassName">NSOutlineView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="searchField">
+							<string key="name">searchField</string>
+							<string key="candidateClassName">NSSearchFieldCell</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="tfAvailablePods">
+							<string key="name">tfAvailablePods</string>
+							<string key="candidateClassName">NSTextFieldCell</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="toolbar">
+							<string key="name">toolbar</string>
+							<string key="candidateClassName">NSToolbar</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="tvLog">
+							<string key="name">tvLog</string>
+							<string key="candidateClassName">NSTextView</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/CocoaPodWindowController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">CustomOutlineView</string>
+					<string key="superclassName">NSOutlineView</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/CustomOutlineView.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">NSTextView</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="orderFrontSharingServicePicker:">id</string>
+						<string key="toggleQuickLookPreviewPanel:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="orderFrontSharingServicePicker:">
+							<string key="name">orderFrontSharingServicePicker:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="toggleQuickLookPreviewPanel:">
+							<string key="name">toggleQuickLookPreviewPanel:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/NSTextView.h</string>
+					</object>
+				</object>
+			</array>
+		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaFramework</string>
 		<bool key="IBDocument.previouslyAttemptedUpgradeToXcode5">YES</bool>

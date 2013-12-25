@@ -132,21 +132,7 @@
         NSArray *_names = [_podNameListToFetchDetails copy];
         [_names enumerateObjectsUsingBlock:^(NSString *name, NSUInteger idx, BOOL *stop) {
             if([name length] > 0) {
-                NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name LIKE[c] %@", name];
-                NSSortDescriptor *sorter = [[NSSortDescriptor alloc] initWithKey:@"name" ascending: YES];
-                
-                NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"PodSpec"];
-                [request setPredicate: predicate];
-                [request setSortDescriptors:@[sorter]];
-                
-                PodSpec *pod = nil;
-                
-                NSArray *items = [backgroundContext executeFetchRequest: request error: nil];
-                
-                if ([items count]) {
-                    pod = [items lastObject];
-                }
-                
+                PodSpec *pod = [PodSpec findFirstByAttribute:@"name" withValue: name inContext: backgroundContext];
                 if (!pod) {
                     pod = [PodSpec createEntityInContext: backgroundContext];
                     pod.name = name;
@@ -225,7 +211,39 @@
         dispatch_async(dispatch_get_main_queue(), ^{
         });
     });
+}
+
+#pragma mark -
+
+-(void) loadPodSpecRespository: (OnDone) onDone
+{
+    __weak PodRepositoryManager *weakSelf = self;
     
+    NSManagedObjectContext *backgroundContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+    backgroundContext.parentContext = [NSManagedObjectContext contextForCurrentThread];
+    [backgroundContext performBlock:^{
+        __block NSMutableArray *podNameList = [weakSelf getPodNameListFromMasterDirectory].mutableCopy;
+        [podNameList enumerateObjectsUsingBlock:^(NSString *name, NSUInteger idx, BOOL *stop) {
+            if([name length] > 0) {
+                PodSpec *pod = [PodSpec findFirstByAttribute:@"name" withValue: name inContext: backgroundContext];
+                if (!pod) {
+                    pod = [PodSpec createEntityInContext: backgroundContext];
+                    pod.name = name;
+                    pod.fetchedDetails = @NO;
+                }
+            }
+        }];
+        
+        if ([backgroundContext hasChanges]) {
+            [backgroundContext save: nil];
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (onDone) {
+                onDone();
+            }
+        });
+    }];
 }
 
 @end

@@ -2,7 +2,7 @@
 //  CPProject.m
 //  CocoaPodsManager
 //
-//  Created by Andrei Zaharia on 12/23/13.
+//  Created by Andrei Zaharia on 12/25/13.
 //  Copyright (c) 2013 Andy. All rights reserved.
 //
 

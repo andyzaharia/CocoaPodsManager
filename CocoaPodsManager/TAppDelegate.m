@@ -53,13 +53,16 @@
     [self.recentlyUsedProjects setDoubleAction:@selector(tableViewDoubleClick:)];
     
     [self refreshRecentProjectsList];
-    
-    if ([PodSpec findAll].count == 0) {
-        [self updatePodList: nil];
-    }
     [self getCocoaPodVersion];
-        
-    [self updatePodsProperties];
+    
+    [self.lbStatus setStringValue:@"Indexing PodSpec files..."];
+    [self.loadingIndicator startAnimation: self];
+    PodRepositoryManager *manager = [PodRepositoryManager sharedPodSpecManager];
+    [manager loadPodSpecRespository:^{
+        [weakSelf.lbStatus setStringValue:@""];
+        [weakSelf.loadingIndicator stopAnimation: weakSelf];
+        [weakSelf updatePodsProperties];
+    }];
 }
 
 - (void)applicationWillFinishLaunching:(NSNotification *)aNotification
@@ -118,14 +121,8 @@
 {
     [self.lbStatus setStringValue:@""];
     
-    [self.loadingIndicator startAnimation: self];
-    
-    __weak TAppDelegate *weakSelf = self;
     PodRepositoryManager *manager = [PodRepositoryManager sharedPodSpecManager];
-    manager.delegate = self;
-    [manager updateAllPodProperties:^{
-        [weakSelf.loadingIndicator stopAnimation: weakSelf];
-    }];
+    [manager updateAllPodProperties: nil];
 }
 
 -(void) getCocoaPodVersion
@@ -198,7 +195,9 @@
 
 -(void) refreshRecentProjectsList
 {
-    NSMutableArray *items = [CPProject findAllSortedBy:@"date" ascending: NO].mutableCopy;
+    NSArray *items = [CPProject findAllSortedBy: @"date"
+                                      ascending: NO
+                                      inContext: [NSManagedObjectContext contextForMainThread]];
     // Lets check if all projects exists
     __block NSMutableArray *itemsToRemove = [NSMutableArray array];
     [items enumerateObjectsUsingBlock:^(CPProject *proj, NSUInteger idx, BOOL *stop) {
@@ -208,7 +207,6 @@
     }];
     if ([itemsToRemove count]) {
         // Cleanup the missing projects
-        [items removeObjectsInArray:itemsToRemove];
         NSManagedObjectContext *context = [NSManagedObjectContext contextForMainThread];
         [itemsToRemove enumerateObjectsUsingBlock:^(CPProject *proj, NSUInteger idx, BOOL *stop) {
             [context deleteObject: proj];
@@ -218,7 +216,9 @@
         }
     }
     
-    self.projects = items;
+    self.projects = [CPProject findAllSortedBy: @"date"
+                                     ascending: NO
+                                     inContext: [NSManagedObjectContext contextForMainThread]];
     [self.recentlyUsedProjects reloadData];
     
     [self.openRecentMenu.submenu removeAllItems];
@@ -258,7 +258,7 @@
 }
 
 - (IBAction)clearPodList:(id)sender {
-    [PodSpec deleteAllMatchingPredicate:[NSPredicate predicateWithFormat:@"name.length > 0"]];
+    [PodSpec deleteAllMatchingPredicate:[NSPredicate predicateWithValue: YES]];
     [self updatePodList: nil];
 }
 
