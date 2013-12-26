@@ -208,12 +208,12 @@ static NSArray *OSX_VERSIONS = nil;
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"projectFilePath LIKE[c] %@", projectPath];
     __block CPProject *prj = [CPProject findFirstWithPredicate: predicate];
     
-    [ctx performBlock:^{
+    [ctx performBlockAndWait:^{
         
         if (!prj) {
             
             NSArray *items = [CPProject findAllSortedBy:@"date" ascending: NO inContext: ctx];
-            // We might want to change ...
+            // We might want to change this...
             if ([items count] >= MAX_RECTENT_PROJECTS) {
                 NSInteger itemsToDeleteCount = ([items count] - MAX_RECTENT_PROJECTS);
                 NSArray *itemsToDelete = [items subarrayWithRange:NSMakeRange([items count] - itemsToDeleteCount, itemsToDeleteCount)];
@@ -224,31 +224,19 @@ static NSArray *OSX_VERSIONS = nil;
             }
             
             prj = [CPProject createEntityInContext: ctx];
+            [prj setPlatformString:@"iOS"]; // Default
             [prj setProjectPath: projectPath];
             [prj setName: [[projectPath lastPathComponent] stringByDeletingPathExtension]];
-        }
-        
-        BOOL podFileAlreadyExists = ([[NSFileManager defaultManager] fileExistsAtPath:[CPProject podFileWithProjectPath: projectPath]]);
-        if(podFileAlreadyExists && [prj.items count]) {
-            self.project = prj;
-            
-            [self updateUI];
-            [self.projectPodsList reloadData];
-            
+            prj.date = [NSDate date];
         } else {
-        
-            [ctx performBlock:^{
-                prj.date = [NSDate date];
-                
-                self.project = [CPProject createEntityInContext: ctx];
-                self.project.projectFilePath = projectPath;
-                
-                [self updateUI];
-                [self.projectPodsList reloadData];
-            }];
+            prj.date = [NSDate date];
+            [self.projectPodsList reloadData];
         }
     
+        self.project = prj;
         [ctx save: nil];
+        
+        [self updateUI];
     }];
 }
 
@@ -483,7 +471,7 @@ static NSArray *OSX_VERSIONS = nil;
 {
     [self.pbDeployment removeAllItems];
     
-    NSMutableArray *items = [NSMutableArray arrayWithArray: ([platform isEqualToString:@"ios"]) ? iOS_VERSIONS : OSX_VERSIONS];
+    NSMutableArray *items = [NSMutableArray arrayWithArray: ([platform isEqualToString:@"iOS"]) ? iOS_VERSIONS : OSX_VERSIONS];
     [items insertObject:@"-" atIndex: 0];
     
     for (NSString *item in items) {
@@ -792,6 +780,7 @@ static NSArray *OSX_VERSIONS = nil;
     [self.btnUpdate setEnabled: YES];
     
     self.chBxInhibitAllWarnings.state = [self.project.inhibit_all_warnings boolValue];
+
 }
 
 #pragma mark - Sheet delegates

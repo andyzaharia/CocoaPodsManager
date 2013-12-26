@@ -182,7 +182,7 @@
 -(void) writeProjectToPodFile
 {
     NSMutableString *podString = [NSMutableString string];
-    NSString *platformStr = [NSString stringWithFormat:@"platform :%@", self.platformString];
+    NSString *platformStr = [NSString stringWithFormat:@"platform :%@", [self.platformString lowercaseString]];
     if ([self.deploymentString length] > 0) {
         platformStr = [platformStr stringByAppendingFormat:@", '%@'", self.deploymentString];
     }
