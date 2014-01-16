@@ -207,7 +207,7 @@ static NSArray *OSX_VERSIONS = nil;
     NSString *projectPath = [CPProject projectPathWithRandomPath: filePath];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"projectFilePath LIKE[c] %@", projectPath];
     __block CPProject *prj = [CPProject findFirstWithPredicate: predicate];
-    
+        
     [ctx performBlockAndWait:^{
         
         if (!prj) {
@@ -224,17 +224,19 @@ static NSArray *OSX_VERSIONS = nil;
             }
             
             prj = [CPProject createEntityInContext: ctx];
-            [prj setPlatformString:@"iOS"]; // Default
+            [prj setPlatformString:@"iOS"]; ////TODO: Possible bug here
+            
             [prj setProjectPath: projectPath];
             [prj setName: [[projectPath lastPathComponent] stringByDeletingPathExtension]];
             prj.date = [NSDate date];
+            
         } else {
             prj.date = [NSDate date];
             [self.projectPodsList reloadData];
         }
     
         self.project = prj;
-        [ctx save: nil];
+        [ctx saveToPersistentStore];
         
         [self updateUI];
     }];
@@ -471,7 +473,8 @@ static NSArray *OSX_VERSIONS = nil;
 {
     [self.pbDeployment removeAllItems];
     
-    NSMutableArray *items = [NSMutableArray arrayWithArray: ([platform isEqualToString:@"iOS"]) ? iOS_VERSIONS : OSX_VERSIONS];
+    BOOL isiOSPlatform = [[platform lowercaseString] isEqualToString:@"ios"]; // Darn make this an enum type ...
+    NSMutableArray *items = [NSMutableArray arrayWithArray: (isiOSPlatform) ? iOS_VERSIONS : OSX_VERSIONS];
     [items insertObject:@"-" atIndex: 0];
     
     for (NSString *item in items) {
@@ -833,15 +836,6 @@ static NSArray *OSX_VERSIONS = nil;
             [cellView.textField setStringValue: ([pod.name length]) ? pod.name : @""];
             [cellView.textField setFont:[NSFont systemFontOfSize:13]];
             
-//          Check if the Pod has the description fetched
-            if (![pod.fetchedDetails boolValue]) {
-//          This will slow down the app a lot.
-//                [pod fetchPropertiesWithVersion: [pod lastVersion]
-//                                         onDone:^{
-//                                             //NSLog(@"Retrieved description.");
-//                                         }];
-            }
-            
             // Layout code.... oh... ugly code
             if ([pod.desc length]) {
                 NSTextField *descriptionTextField = [cellView viewWithTag: 2];
@@ -994,7 +988,7 @@ static NSArray *OSX_VERSIONS = nil;
         NSButton *button = [view viewWithTag: 1];
         
         if(dependency && button) {
-            button.state = dependency.head;
+            button.state = [dependency.head boolValue];
         }
     }
     else if ([[tableColumn identifier] isEqualToString:kCOLUMN_TARGET_ID]) {
@@ -1015,7 +1009,7 @@ static NSArray *OSX_VERSIONS = nil;
     
     if (self.cocoaPodsList == outlineView) {
         return item ? 4 : [self.pods count];
-    }else if (self.projectPodsList == outlineView) {
+    } else if (self.projectPodsList == outlineView) {
         if (!item) {
             return [self.project.items count];
         }
@@ -1169,6 +1163,33 @@ static NSArray *OSX_VERSIONS = nil;
     return ([item isKindOfClass:[CPDependency class]]) ? nil: (id <NSPasteboardWriting>)item;
 }
 
+- (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectItem:(id)item
+{
+    if (self.cocoaPodsList == outlineView) {
+        if ([item isKindOfClass:[PodSpec class]]) {
+            PodSpec *pod = (PodSpec *)item;
+            // Check if the Pod has the description fetched
+            if (![pod.fetchedDetails boolValue]) {
+                // This will slow down the app a lot.
+                
+                __weak CocoaPodWindowController *weakSelf = self;
+                NSInteger row = [weakSelf.cocoaPodsList rowForItem: item];
+                
+                OnDoneEx onDone = ^(NSDictionary *properties) {
+                    [pod applyProperties: properties];
+                    [weakSelf.cocoaPodsList reloadDataForRowIndexes: [NSIndexSet indexSetWithIndex:row]
+                                                      columnIndexes: [NSIndexSet indexSetWithIndex:0]];
+                };
+
+                [pod fetchPropertiesAsyncWithVersion:[pod lastVersion] onDone:onDone onFailure: nil];
+            }
+        }
+
+    }
+    
+    return YES;
+}
+
 #pragma mark - Expand And Load Data
 
 // Not using this for now...
@@ -1211,17 +1232,15 @@ static NSArray *OSX_VERSIONS = nil;
                 if ([versions count]) {
                     versions = [versions sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
                     NSString *lastVersion = [versions lastObject];
-                    [_podSpec fetchPropertiesInContext: context withVersion: lastVersion];
+                    [_podSpec fetchYamlPropertiesWithVersion: lastVersion];
                 }
             }
         }];
         
         if ([context hasChanges]) {
-            [context save: nil];
+            [context saveToPersistentStore];
         }
-    });
-    
-    
+    });    
 }
 
 #pragma mark -

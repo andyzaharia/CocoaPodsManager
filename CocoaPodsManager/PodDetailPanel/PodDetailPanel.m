@@ -105,7 +105,7 @@
         }
     }
     
-    NSMutableArray *yaml = [self.pod fetchPropertiesInContext:nil withVersion: [self.puVersion.itemTitles objectAtIndex: 0]];
+    NSMutableArray *yaml = [self.pod fetchYamlPropertiesWithVersion: [self.puVersion.itemTitles objectAtIndex: 0]];
     NSLog(@"YAML %@", yaml);
     
     // Set the attributed text for the Authors Label

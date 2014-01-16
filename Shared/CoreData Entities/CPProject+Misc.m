@@ -48,9 +48,22 @@
     [self willChangeValueForKey:@"projectFilePath"];
     [self setPrimitiveValue:projectFilePath forKey:@"projectFilePath"];
 
+    NSAlert* msgBox = [[NSAlert alloc] init];
+    [msgBox setMessageText: @"Did set project file"];
+    [msgBox addButtonWithTitle: @"OK"];
+    [msgBox runModal];
+    
     [self readPodFile];
     
     [self didChangeValueForKey:@"projectFilePath"];
+}
+
+#pragma mark - Validation
+
+-(BOOL) podFileExistsAtCurrentPath
+{
+    NSString *podFilePath = [self podFilePath];
+    return [[NSFileManager defaultManager] fileExistsAtPath:podFilePath isDirectory: nil];
 }
 
 #pragma mark - PodFile  Parser
@@ -85,8 +98,9 @@
 -(void) readPodFile
 {
     // Really this parser needs some better code
-    
     NSString *podFilePath = [self podFilePath];
+    
+
     if ([podFilePath length]) {
         NSURL *fileURL = [NSURL fileURLWithPath: podFilePath];
         NSString *fileContent = [NSString stringWithContentsOfURL:fileURL encoding:NSUTF8StringEncoding error: nil];
@@ -271,17 +285,5 @@
     fPath = [fPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.xcworkspace", self.name]];
     return fPath;
 }
-
-#pragma mark - Work around, most likely an Apple Bug
-
-//- (void)addItemsObject:(CPDependency *)value {    
-//    NSMutableOrderedSet *tmpOrderedSet = [NSMutableOrderedSet orderedSetWithOrderedSet:[self mutableOrderedSetValueForKey: @"items"]];
-//    NSUInteger idx = [tmpOrderedSet count];
-//    NSIndexSet* indexes = [NSIndexSet indexSetWithIndex:idx];
-//    [self willChange:NSKeyValueChangeInsertion valuesAtIndexes:indexes forKey: @"items"];
-//    [tmpOrderedSet addObject:value];
-//    [self setPrimitiveValue:tmpOrderedSet forKey: @"items"];
-//    [self didChange:NSKeyValueChangeInsertion valuesAtIndexes:indexes forKey: @"items"];
-//}
 
 @end

@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 typedef void (^OnDone)(void);
+typedef void (^OnDoneEx)(id data);
 typedef void (^OnFailure)(NSString *message);
 typedef void (^OnProgress)(CGFloat progress);
 typedef void (^OnSuccess) (NSString *);

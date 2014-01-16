@@ -116,7 +116,7 @@
 {
     NSString *lastVersion = [self lastVersion];
     if ([lastVersion length]) {
-        return [self fetchPropertiesInContext:self.managedObjectContext withVersion: lastVersion];
+        return [self fetchYamlPropertiesWithVersion: lastVersion];
     } else return nil;
 }
 

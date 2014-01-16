@@ -27,7 +27,7 @@ static Plugin *_sharedPluginInstance = nil;
 	static id sharedPlugin = nil;
 	static dispatch_once_t once;
 	dispatch_once(&once, ^{
-        [NSPersistentStoreCoordinator setDataModelName:@"DataModel"];
+        //[NSPersistentStoreCoordinator setDataModelName:@"DataModel" withStoreName:@"CocoaPodsManager.db"];
         
 		sharedPlugin = [[self alloc] init];
 	});
@@ -116,7 +116,7 @@ static Plugin *_sharedPluginInstance = nil;
 - (void) showMessageBox: (id) origin {
 
     NSString *workspaceDirectoryPath = [CCPWorkspaceManager currentWorkspaceDirectoryPath];
-    
+
     if ([workspaceDirectoryPath length]) {
         
         // Check if this PodFile project isnt already opened.

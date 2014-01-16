@@ -28,6 +28,9 @@ typedef void (^PodExecOnFailBlock) (NSError *);
 -(void) getOnlineVersionFromGithub: (OnSuccess) onSuccess
                            onError: (OnError) onError;
 
+-(void) installGem: (OnSuccess) onSuccess
+           onError: (OnError) onError;
+
 #pragma mark - Class Methods
 
 + (id)sharedCocoaPodsApp;

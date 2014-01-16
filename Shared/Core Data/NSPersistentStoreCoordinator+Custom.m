@@ -7,23 +7,20 @@
 //
 
 #import "NSPersistentStoreCoordinator+Custom.h"
-#import "Plugin.h"
-#import "NSFileManager+DirectoryLocations.h"
-#import "NSManagedObjectModel+KCOrderedAccessorFix.h"
 
 @implementation NSPersistentStoreCoordinator (Custom)
 
 static NSPersistentStoreCoordinator *_sharedPersistentStore = nil;
 static NSString *_dataModelName = nil;
+static NSString *_storeFileName = nil;
 
 + (NSString *)applicationDocumentsDirectory {
     return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
 }
 
-+ (void) setDataModelName: (NSString *) name {
++ (void) setDataModelName: (NSString *) name withStoreName: (NSString *) storeFileName {
     _dataModelName = name;
-    
-    [NSManagedObjectContext contextForMainThread]; // Initialize main thread context
+    _storeFileName = storeFileName;
 }
 
 +(NSPersistentStoreCoordinator *) sharedPersisntentStoreCoordinator
@@ -31,13 +28,10 @@ static NSString *_dataModelName = nil;
     NSAssert(_dataModelName, @"Core Data model name has not been set. Use [NSPersistentStoreCoordinator setDataModelName:].");
     
     if (!_sharedPersistentStore) {
-        NSString *executableName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleExecutable"];
-
-        NSString *storeFileName = [NSString stringWithFormat:@"%@.db", executableName];
-        NSString *storePath = [[[NSFileManager defaultManager] applicationSupportDirectory] stringByAppendingPathComponent: storeFileName];
+        NSString *storePath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent: _storeFileName];
         NSURL *storeUrl = [NSURL fileURLWithPath:storePath];
         
-        NSBundle *bundle = [NSBundle bundleForClass:[Plugin class]];        
+        NSBundle *bundle = [NSBundle mainBundle];
         NSString *resourcePath = [bundle resourcePath];
         NSString *modelFileName = [_dataModelName stringByAppendingPathExtension:@"momd"];
         NSString *modelPath = [resourcePath stringByAppendingPathComponent: modelFileName];
@@ -45,12 +39,10 @@ static NSString *_dataModelName = nil;
         NSURL *modelUrl = [NSURL fileURLWithPath: modelPath];
         
         NSManagedObjectModel *_managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL: modelUrl];
-        [_managedObjectModel kc_generateOrderedSetAccessors];
         
-        NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
-                                 [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
-                                 [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
-        
+        NSDictionary *options = @{NSMigratePersistentStoresAutomaticallyOption: @(YES),
+                                  NSInferMappingModelAutomaticallyOption : @(YES)};
+    
         NSError *error;
         _sharedPersistentStore = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel: _managedObjectModel];
         if (![_sharedPersistentStore addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeUrl options:options error:&error]) {
@@ -62,5 +54,9 @@ static NSString *_dataModelName = nil;
     return _sharedPersistentStore;
 }
 
++ (void) setNewPresistentStore: (NSPersistentStoreCoordinator *) store
+{
+    _sharedPersistentStore = store;
+}
 
 @end

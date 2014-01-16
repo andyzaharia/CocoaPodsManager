@@ -10,6 +10,7 @@
 #import "CPProject.h"
 #import "NSString+Misc.h"
 #import "AppConstants.h"
+#import "STPrivilegedTask.h"
 
 @interface CocoaPodsApp (){
     BOOL _isInstalled;
@@ -57,11 +58,15 @@
         currentVersion = [app cocoaPodVersion];
     }
     
+//    [[NSURLCache sharedURLCache] setMemoryCapacity:0];
+//    [[NSURLCache sharedURLCache] setDiskCapacity:0];
+    
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     NSURL *url = [NSURL URLWithString:@"https://raw.github.com/CocoaPods/Specs/master/CocoaPods-version.yml"];
-    [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL: url]
-                                       queue:queue
-                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+    NSURLRequest *request = [NSURLRequest requestWithURL: url];    
+    [NSURLConnection sendAsynchronousRequest: request
+                                       queue: queue
+                           completionHandler: ^(NSURLResponse *response, NSData *data, NSError *error) {
                                if (error) {
                                    dispatch_async(dispatch_get_main_queue(), ^{
                                        onError(error);
@@ -100,6 +105,81 @@
                                    });
                                }
                            }];
+}
+
+-(void) installGem: (OnSuccess) onSuccess
+           onError: (OnError) onError
+{
+    int status = 0;
+    
+    NSArray *args = @[@"sudo", @"gem", @"install", @"cocoapods"];
+    
+    @try {
+        NSPipe *pipe = [[NSPipe alloc] init];
+        STPrivilegedTask *task = [[STPrivilegedTask alloc] initWithLaunchPath: @"/usr/bin/env"
+                                                                    arguments: args];
+        [task setCurrentDirectoryPath: [[NSFileManager defaultManager] currentDirectoryPath]];
+        
+        [[NSNotificationCenter defaultCenter] addObserverForName:NSFileHandleDataAvailableNotification
+                                                          object:[pipe fileHandleForReading]
+                                                           queue:[NSOperationQueue mainQueue]
+                                                      usingBlock:^(NSNotification *note) {
+                                                          NSLog(@"Available data");
+                                                      }];
+        
+        NSFileHandle *outputHandle = [task outputFileHandle];
+        [outputHandle waitForDataInBackgroundAndNotify];
+        [task launch];
+        [task waitUntilExit];
+
+        NSData *data = [outputHandle availableData];
+        NSString *output = [[NSString alloc] initWithBytes: [data bytes]
+                                                    length: [data length]
+                                                  encoding: NSUTF8StringEncoding] ;
+        NSLog(@"Log: %@", output);
+        NSLog(@"Termination status %d", [task terminationStatus]);
+        NSLog(@"Task description: %@", [task description]);
+                                        
+//        NSTask *task = [[NSTask alloc] init];
+//        
+//        NSPipe *pipe = [[NSPipe alloc] init];
+//        NSFileHandle *handle;
+//        NSString *outputString;
+//        
+//        NSMutableDictionary *environment = [[[NSProcessInfo processInfo] environment] mutableCopy];
+//        environment[@"CP_STDOUT_SYNC"] = @"TRUE";
+//        environment[@"LC_ALL"] = @"UTF-8";
+//        
+//        [task setLaunchPath:@"/usr/bin/env"];
+//        [task setEnvironment: environment];
+//        [task setArguments:args];
+//        [task setStandardInput:[NSPipe pipe]];
+//        [task setStandardOutput:pipe];
+//        [task setStandardError:[NSPipe pipe]];
+//        [task setCurrentDirectoryPath: [[NSFileManager defaultManager] currentDirectoryPath]];
+//        
+//        handle = [pipe fileHandleForReading];
+//        [task setTerminationHandler:^(NSTask *task) {
+//            
+//        }];
+//        
+//        [task launch];
+//        [task waitUntilExit];
+//        
+//        outputString = [[NSString alloc] initWithData:[handle readDataToEndOfFile] encoding:NSASCIIStringEncoding];
+//        NSLog(@"LOG: %@", outputString);
+//        
+//        status = [task terminationStatus];
+//        
+//        NSLog(@"Status %d", [task terminationStatus]);
+    }
+    @catch (NSException *exception) {
+        status = -1;
+        //failBlock([NSError errorWithDomain:[exception debugDescription] code:status userInfo:nil]);
+    }
+    @finally {
+        
+    }
 }
 
 #pragma mark - Class Methods

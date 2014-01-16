@@ -112,6 +112,8 @@
 		758CB56E17E8EBEC00A30AF5 /* Xcode.png in Resources */ = {isa = PBXBuildFile; fileRef = E195CE7816CA538200B4E3B8 /* Xcode.png */; };
 		758CB56F17E8EBEC00A30AF5 /* Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 743C4B0316C3F8D600F03545 /* Icon.icns */; };
 		759D90A817E7A03300B93F36 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 740FE03016C294A60078A953 /* Cocoa.framework */; };
+		75B1C44C18771FD400F7AF59 /* STPrivilegedTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 75B1C44918771FD400F7AF59 /* STPrivilegedTask.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		75B1C44D18771FD400F7AF59 /* STPrivilegedTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 75B1C44918771FD400F7AF59 /* STPrivilegedTask.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		75BBB55918087EF00031B011 /* HyperlinkTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BBB55818087EF00031B011 /* HyperlinkTextField.m */; };
 		75BBB55A18087EF00031B011 /* HyperlinkTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BBB55818087EF00031B011 /* HyperlinkTextField.m */; };
 		75BBB55D180896D40031B011 /* PluginIcon26.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 75BBB55C180896D40031B011 /* PluginIcon26.tiff */; };
@@ -230,6 +232,8 @@
 		75796D8B186B975C008C31C7 /* PodLineDependencyParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PodLineDependencyParser.h; sourceTree = "<group>"; };
 		75796D8C186B975C008C31C7 /* PodLineDependencyParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PodLineDependencyParser.m; sourceTree = "<group>"; };
 		759D90A717E7A03300B93F36 /* CocoaPodsPlugin.xcplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CocoaPodsPlugin.xcplugin; sourceTree = BUILT_PRODUCTS_DIR; };
+		75B1C44818771FD400F7AF59 /* STPrivilegedTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPrivilegedTask.h; sourceTree = "<group>"; };
+		75B1C44918771FD400F7AF59 /* STPrivilegedTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPrivilegedTask.m; sourceTree = "<group>"; };
 		75BBB55718087EF00031B011 /* HyperlinkTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HyperlinkTextField.h; sourceTree = "<group>"; };
 		75BBB55818087EF00031B011 /* HyperlinkTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HyperlinkTextField.m; sourceTree = "<group>"; };
 		75BBB55C180896D40031B011 /* PluginIcon26.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = PluginIcon26.tiff; sourceTree = "<group>"; };
@@ -447,6 +451,7 @@
 		7530C6C018072A720050C136 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				75B1C44618771FD400F7AF59 /* STPrivilegedTask */,
 				75796D8A186B975C008C31C7 /* PodFileParser */,
 				75796D65186B9598008C31C7 /* CoreData Entities */,
 				7567ED5B1809E245006B0F7C /* PodRepositoryManager */,
@@ -620,6 +625,15 @@
 				75796D8C186B975C008C31C7 /* PodLineDependencyParser.m */,
 			);
 			path = PodFileParser;
+			sourceTree = "<group>";
+		};
+		75B1C44618771FD400F7AF59 /* STPrivilegedTask */ = {
+			isa = PBXGroup;
+			children = (
+				75B1C44818771FD400F7AF59 /* STPrivilegedTask.h */,
+				75B1C44918771FD400F7AF59 /* STPrivilegedTask.m */,
+			);
+			path = STPrivilegedTask;
 			sourceTree = "<group>";
 		};
 		75BBB55618087EF00031B011 /* HyperlinkTextField */ = {
@@ -869,6 +883,7 @@
 				75796D88186B9598008C31C7 /* PodSpec.m in Sources */,
 				75796D86186B9598008C31C7 /* PodSpec+YAML.m in Sources */,
 				75796D7E186B9598008C31C7 /* CPProject.m in Sources */,
+				75B1C44C18771FD400F7AF59 /* STPrivilegedTask.m in Sources */,
 				7530C6DD18072A720050C136 /* NSApp+Misc.m in Sources */,
 				7530C6E718072A720050C136 /* NSManagedObjectContext+Custom.m in Sources */,
 				74DA445E16DF57F800F130EF /* CocoaPodsTreeController.m in Sources */,
@@ -916,6 +931,7 @@
 				75796D87186B9598008C31C7 /* PodSpec+YAML.m in Sources */,
 				75796D89186B9598008C31C7 /* PodSpec.m in Sources */,
 				756786D0180728550056C1AC /* Plugin.m in Sources */,
+				75B1C44D18771FD400F7AF59 /* STPrivilegedTask.m in Sources */,
 				75796D85186B9598008C31C7 /* PodSpec+StdOutParser.m in Sources */,
 				7530C73A18073DCA0050C136 /* CocoaPodsApp.m in Sources */,
 				7574047E17E8E43C004CF3FD /* CocoaPodWindowController.m in Sources */,

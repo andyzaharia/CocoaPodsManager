@@ -19,6 +19,9 @@
 -(BOOL) setProjectPath: (NSString *) fPath;
 -(BOOL) isPodInstalledForProject;
 
+// Returns NO if the PodFile cant be located at the current Project Path location
+-(BOOL) podFileExistsAtCurrentPath;
+
 -(CPDependency *) dependencyForPod: (PodSpec *) pod;
 
 -(void) addPodsFromArray: (NSArray *) items;

@@ -50,7 +50,7 @@
             pod.name = podName;
             
             NSString *currentVersion = [[pod versionsArray] objectAtIndex: 0];
-            [pod fetchPropertiesInContext: [pod managedObjectContext] withVersion: currentVersion];
+            [pod fetchYamlPropertiesWithVersion: currentVersion];
         }
         CGFloat p = (CGFloat)([lines indexOfObject: name] + 1) / (CGFloat)[lines count];
         if (p - _progress > 0.005) {
@@ -85,8 +85,7 @@
             if ([versions count]) {
                 versions = [versions sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
                 NSString *lastVersion = [versions lastObject];
-                [pod fetchPropertiesInContext: [pod managedObjectContext]
-                                  withVersion: lastVersion];
+                [pod fetchYamlPropertiesWithVersion: lastVersion];
             }
         }
     }
@@ -106,7 +105,7 @@
             return;
         }
         
-        NSManagedObjectContext *context = [NSManagedObjectContext contextForCurrentThread];
+        NSManagedObjectContext *context = [NSManagedObjectContext contextForBackgroundThread];
         self.managedObjectContext = context;
         
         [context performBlockAndWait:^{
@@ -114,7 +113,7 @@
             [self fetchPodsProperties];
             
             if ([context hasChanges]) {
-                [context save: nil];
+                [context saveToPersistentStore];
             }
         }];
         
@@ -133,6 +132,8 @@
 
 +(void) fetchPodSpecWithName: (NSString *) podName onDone: (OnDone) onDone
 {
+    //NSLog(@"Fetched PodSpec with Name: %@", podName);
+    
     NSManagedObjectContext *context = [NSManagedObjectContext contextForCurrentThread];
     [context performBlockAndWait:^{
         
@@ -148,13 +149,12 @@
             if ([versions count]) {
                 versions = [versions sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
                 NSString *lastVersion = [versions lastObject];
-                [pod fetchPropertiesInContext: context
-                                  withVersion: lastVersion];
+                [pod fetchYamlPropertiesWithVersion: lastVersion];
             }
         }
         
         if ([context hasChanges]) {
-            [context save: nil];
+            [context saveToPersistentStore];
         }
         
         if (onDone) {

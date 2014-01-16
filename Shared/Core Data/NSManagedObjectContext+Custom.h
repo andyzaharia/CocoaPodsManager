@@ -14,6 +14,10 @@
 + (NSManagedObjectContext *) contextForCurrentThread;
 + (void) cleanContextsForCurrentThread;
 
++ (NSManagedObjectContext *) contextForBackgroundThread;
++ (NSManagedObjectContext *) masterWriterPrivateContext;
 
+// Simply calls save and save on the parent context, if there is one.
+-(void) saveToPersistentStore;
 
 @end

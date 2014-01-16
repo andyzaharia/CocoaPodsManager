@@ -21,14 +21,15 @@
     
 }
 
-@property (assign) IBOutlet       NSCustomImageView           *ivProject;
-@property (assign) IBOutlet       ProjectTableView            *recentlyUsedProjects;
+@property (assign) IBOutlet             NSCustomImageView           *ivProject;
+@property (assign) IBOutlet             ProjectTableView            *recentlyUsedProjects;
+@property (unsafe_unretained) IBOutlet  NSPanel                     *installCocoaPodsHelperWindow;
 
-@property (assign) IBOutlet       NSTextField                 *lbVersionText;
-@property (assign) IBOutlet       NSMenuItem                  *openRecentMenu;
+@property (assign) IBOutlet             NSTextField                 *lbVersionText;
+@property (assign) IBOutlet             NSMenuItem                  *openRecentMenu;
 
-@property (nonatomic, retain)   NSMutableArray              *viewControllers;
-@property (nonatomic, retain)   NSArray                     *projects; // Used for recents
+@property (nonatomic, retain)           NSMutableArray              *viewControllers;
+@property (nonatomic, retain)           NSArray                     *projects; // Used for recents
 
 @end
 
@@ -36,7 +37,7 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    [NSPersistentStoreCoordinator setDataModelName:@"DataModel"];
+    [NSPersistentStoreCoordinator setDataModelName:@"DataModel" withStoreName: @"CocoaPodsManager.db"];
     
     NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
     [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
@@ -67,11 +68,6 @@
 
 - (void)applicationWillFinishLaunching:(NSNotification *)aNotification
 {
-    [[NSNotificationCenter defaultCenter] addObserver: self
-                                             selector: @selector(backgroundContextDidSave:)
-                                                 name: NSManagedObjectContextDidSaveNotification
-                                               object: nil];
-    
     self.viewControllers = [NSMutableArray array];
 }
 
@@ -89,6 +85,8 @@
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification
 {
+    [[NSManagedObjectContext contextForMainThread] saveToPersistentStore];
+    
     [[PodRepositoryManager sharedPodSpecManager] cancelUpdate];
 }
 
@@ -125,6 +123,19 @@
     [manager updateAllPodProperties: nil];
 }
 
+-(void) askForInstallation
+{
+    NSAlert* msgBox = [NSAlert alertWithMessageText:@"CocoaPods cannot be found."
+                                      defaultButton:@"Yes"
+                                    alternateButton:@""
+                                        otherButton:@"No"
+                          informativeTextWithFormat: @"Do you want to install it ?"];
+    [msgBox beginSheetModalForWindow: self.window
+                       modalDelegate: self
+                      didEndSelector: @selector(installAlertDidEnd:returnCode:contextInfo:)
+                         contextInfo: nil];
+}
+
 -(void) getCocoaPodVersion
 {
     NSString *currentVersion = @"";
@@ -134,6 +145,9 @@
     CocoaPodsApp *app = [CocoaPodsApp sharedCocoaPodsApp];
     if ([app isInstalled]) {
         currentVersion = [app cocoaPodVersion];
+    } else {
+        // Promp for installation
+        [self askForInstallation];
     }
 
     __weak TAppDelegate *weakSelf = self;
@@ -173,7 +187,7 @@
                     [hyperlinkString endEditing];
 
                     [string appendAttributedString: hyperlinkString];
-                }else {
+                } else {
                     [string appendAttributedString:[[NSAttributedString alloc] initWithString: PODS_NOT_INSTALLED_LABEL]];
                 }
     
@@ -195,46 +209,42 @@
 
 -(void) refreshRecentProjectsList
 {
-    NSArray *items = [CPProject findAllSortedBy: @"date"
-                                      ascending: NO
-                                      inContext: [NSManagedObjectContext contextForMainThread]];
-    // Lets check if all projects exists
-    __block NSMutableArray *itemsToRemove = [NSMutableArray array];
-    [items enumerateObjectsUsingBlock:^(CPProject *proj, NSUInteger idx, BOOL *stop) {
-        if (![[NSFileManager defaultManager] fileExistsAtPath:proj.projectFilePath]) {
-            [itemsToRemove addObject: proj];
+    NSManagedObjectContext *context = [NSManagedObjectContext contextForMainThread];
+    [context performBlockAndWait:^{
+        NSArray *items = [CPProject findAllSortedBy: @"date"
+                                          ascending: NO
+                                          inContext: context];
+        // Lets check if all projects exists
+        __block NSMutableArray *itemsToRemove = [NSMutableArray array];
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        [items enumerateObjectsUsingBlock:^(CPProject *proj, NSUInteger idx, BOOL *stop) {
+            if ((![fileManager fileExistsAtPath:proj.projectFilePath]) || (![proj.name length])) {
+                [itemsToRemove addObject: proj];
+            }
+            
+        }];
+        
+        if ([itemsToRemove count]) {
+            // Cleanup the missing projects
+            [itemsToRemove enumerateObjectsUsingBlock:^(CPProject *proj, NSUInteger idx, BOOL *stop) {
+                [context deleteObject: proj];
+            }];
+            
+            if ([context hasChanges]) {
+                [context saveToPersistentStore];
+            }
         }
     }];
-    if ([itemsToRemove count]) {
-        // Cleanup the missing projects
-        NSManagedObjectContext *context = [NSManagedObjectContext contextForMainThread];
-        [itemsToRemove enumerateObjectsUsingBlock:^(CPProject *proj, NSUInteger idx, BOOL *stop) {
-            [context deleteObject: proj];
-        }];
-        if ([context hasChanges]) {
-            [context save: nil];
-        }
-    }
-    
-    self.projects = [CPProject findAllSortedBy: @"date"
-                                     ascending: NO
-                                     inContext: [NSManagedObjectContext contextForMainThread]];
+
+    self.projects = [CPProject findAllSortedBy: @"date" ascending: NO inContext: context];
     [self.recentlyUsedProjects reloadData];
     
     [self.openRecentMenu.submenu removeAllItems];
+    
     for (CPProject *proj in self.projects) {
-        // Cleanup if project name is nil
-        if (![proj.name length]) {
-            NSManagedObjectContext *context = [NSManagedObjectContext contextForMainThread];
-            [context performBlock:^{
-                [context deleteObject: proj];
-                [context save: nil];
-            }];
-        } else {
-            NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:proj.name action:@selector(openRecentItem:) keyEquivalent: @""];
-            item.tag = [self.projects indexOfObject: proj];
-            [self.openRecentMenu.submenu addItem: item];
-        }
+        NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:proj.name action:@selector(openRecentItem:) keyEquivalent: @""];
+        item.tag = [self.projects indexOfObject: proj];
+        [self.openRecentMenu.submenu addItem: item];
     }
 }
 
@@ -258,7 +268,13 @@
 }
 
 - (IBAction)clearPodList:(id)sender {
-    [PodSpec deleteAllMatchingPredicate:[NSPredicate predicateWithValue: YES]];
+    NSManagedObjectContext *context = [NSManagedObjectContext contextForMainThread];
+    [context performBlockAndWait:^{
+        [PodSpec deleteAllMatchingPredicate:[NSPredicate predicateWithValue: YES] inContext: context];
+        
+        [context saveToPersistentStore];
+    }];
+    
     [self updatePodList: nil];
 }
 
@@ -348,18 +364,25 @@
     return YES;
 }
 
-#pragma mark -
+#pragma mark - Installation Window Panel
 
-- (void)backgroundContextDidSave:(NSNotification *)notification {
-    // Make sure we're on the main thread when updating the main context
-//    if (![NSThread isMainThread]) {
-//        [self performSelectorOnMainThread:@selector(backgroundContextDidSave:)
-//                               withObject:notification
-//                            waitUntilDone:YES];
-//        return;
+// Test code... 
+
+- (void) installAlertDidEnd:(NSAlert *) alert returnCode:(int) returnCode contextInfo:(int *) contextInfo
+{
+    if(returnCode == NSAlertDefaultReturn){
+        [[CocoaPodsApp sharedCocoaPodsApp] installGem:^(NSString *message) {
+            
+        } onError:^(NSError *error) {
+            
+        }];
+    }
+//
+//    self.canClose = YES;
+//    
+//    if (returnCode != NSAlertAlternateReturn) {
+//        [self close];
 //    }
-//    // merge in the changes to the main context on the main thread
-//    [[NSManagedObjectContext defaultContext] mergeChangesFromContextDidSaveNotification:notification];
 }
 
 @end

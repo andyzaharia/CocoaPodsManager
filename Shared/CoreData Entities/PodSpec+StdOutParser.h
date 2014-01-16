@@ -10,13 +10,15 @@
 
 @interface PodSpec (StdOutParser)
 
--(NSMutableArray *) fetchPropertiesInContext: (NSManagedObjectContext *) context withVersion: (NSString *) version;
+-(void) applyProperties: (NSDictionary *) properties;
 
+-(NSMutableArray *) fetchYamlPropertiesWithVersion: (NSString *) version;
 
 -(void) fetchPropertiesInContext: (NSManagedObjectContext *) context;
 
 // Launched from main thread only
--(void) fetchPropertiesWithVersion: (NSString *) version
-                            onDone: (OnDone) onDone;
+-(void) fetchPropertiesAsyncWithVersion: (NSString *) version
+                                 onDone: (OnDoneEx) onDone
+                              onFailure: (OnError) onFailure;
 
 @end

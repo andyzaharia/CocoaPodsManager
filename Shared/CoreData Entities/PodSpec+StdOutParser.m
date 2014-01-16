@@ -18,6 +18,21 @@
 
 @implementation PodSpec (StdOutParser)
 
+-(void) applyProperties: (NSDictionary *) properties
+{
+    if (properties) {
+        NSString *desc = [properties valueForKey:@"description"];
+        if (![desc length]) {
+            desc = [properties valueForKey:@"summary"]; // Fall back to summary.
+        }
+        self.desc = [desc stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        
+        
+    }
+}
+
+#pragma mark -
+
 -(NSString *) podNameFromLine: (NSString *) line{
     
     NSRange podStartRange = NSMakeRange(0, 2);
@@ -39,7 +54,7 @@
 }
 
 
--(NSMutableArray *) fetchPropertiesInContext: (NSManagedObjectContext *) context withVersion: (NSString *) version{
+-(NSMutableArray *) fetchYamlPropertiesWithVersion: (NSString *) version {
     TODO("Must be improved.")
     
     NSString *podSpecFilePath = [NSHomeDirectory() stringByAppendingPathComponent: [PODS_MASTER_FOLDER stringByAppendingPathComponent: self.name]];
@@ -56,11 +71,7 @@
                                          error: &error];
         
         NSDictionary *properties = [yaml lastObject];
-        if (properties) {
-            NSString *desc = [properties valueForKey:@"description"];
-            desc = [desc stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceAndNewlineCharacterSet]];
-            self.desc = desc;
-        }
+        [self applyProperties: properties];
         
     } failBlock:^(NSError *error) {
         TODO("hanlde error");
@@ -70,8 +81,9 @@
 }
 
 // Launched from main thread only
--(void) fetchPropertiesWithVersion: (NSString *) version
-                            onDone: (OnDone) onDone
+-(void) fetchPropertiesAsyncWithVersion: (NSString *) version
+                                 onDone: (OnDoneEx) onDone
+                              onFailure: (OnError) onFailure
 {
     __weak PodSpec *weakSelf = self;
     
@@ -94,6 +106,10 @@
             NSString *descriptionString = nil;
             if (properties) {
                 NSString *desc = [properties valueForKey:@"description"];
+                if (![desc length]) {
+                    desc = [properties valueForKey:@"summary"]; // Fall back to summary.
+                }
+                
                 desc = [desc stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceAndNewlineCharacterSet]];
                 descriptionString = desc;
             }
@@ -102,12 +118,14 @@
                 weakSelf.desc = descriptionString;
                 
                 if (onDone) {
-                    onDone();
+                    onDone(properties);
                 }
             });
             
         } failBlock:^(NSError *error) {
-            
+            if (onFailure) {
+                onFailure(error);
+            }
         }];
     });
 }

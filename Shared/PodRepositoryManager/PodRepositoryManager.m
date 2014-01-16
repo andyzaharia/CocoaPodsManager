@@ -125,8 +125,7 @@
 {
     __weak PodRepositoryManager *weakSelf = self;
     
-    NSManagedObjectContext *backgroundContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-    backgroundContext.parentContext = [NSManagedObjectContext contextForCurrentThread];
+    NSManagedObjectContext *backgroundContext = [NSManagedObjectContext contextForBackgroundThread];
     [backgroundContext performBlock:^{
         __block NSMutableArray *_podNameListToFetchDetails = [weakSelf getPodNameListFromMasterDirectory].mutableCopy;
         NSArray *_names = [_podNameListToFetchDetails copy];
@@ -146,7 +145,7 @@
         }];
         
         if ([backgroundContext hasChanges]) {
-            [backgroundContext save: nil];
+            [backgroundContext saveToPersistentStore];
         }
 
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -219,8 +218,7 @@
 {
     __weak PodRepositoryManager *weakSelf = self;
     
-    NSManagedObjectContext *backgroundContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-    backgroundContext.parentContext = [NSManagedObjectContext contextForCurrentThread];
+    NSManagedObjectContext *backgroundContext = [NSManagedObjectContext contextForBackgroundThread];
     [backgroundContext performBlock:^{
         __block NSMutableArray *podNameList = [weakSelf getPodNameListFromMasterDirectory].mutableCopy;
         [podNameList enumerateObjectsUsingBlock:^(NSString *name, NSUInteger idx, BOOL *stop) {
