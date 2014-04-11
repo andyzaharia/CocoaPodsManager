@@ -181,14 +181,7 @@ static NSArray *OSX_VERSIONS = nil;
 }
 
 - (void)windowWillClose:(NSNotification *)notification {
-//    [NSApp endSheet: self.window];
-//    [self.window orderOut: self];
-//    
-//    //[NSApp stopModal];
-//    
-//    if ([NSApplication isRunningFromPlugin]) {
-//        
-//    }
+    [self.window setFrameAutosaveName:[self.window representedFilename]];
 }
 
 -(void) dealloc{
