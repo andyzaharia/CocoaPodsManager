@@ -61,11 +61,10 @@ static Plugin *_sharedPluginInstance = nil;
 - (void) applicationDidFinishLaunching: (NSNotification*) notification {
     
     @try {
+        __weak Plugin *weakSelf = self;
         PodRepositoryManager *manager = [PodRepositoryManager sharedPodSpecManager];
         [manager loadPodSpecRepository:^{
-//            [weakSelf.lbStatus setStringValue:@""];
-//            [weakSelf.loadingIndicator stopAnimation: weakSelf];
-//            [weakSelf updatePodsProperties];
+            //[weakSelf updatePodsProperties];
         }];
     }
     @catch (NSException *exception) {
@@ -172,6 +171,13 @@ static Plugin *_sharedPluginInstance = nil;
     return [[NSImage alloc] initWithContentsOfFile: imagePath];
 }
 
-#pragma mark -
+#pragma mark - Pod Management
+
+-(void) updatePodsProperties
+{
+    // This does not work correctly right now.
+    PodRepositoryManager *manager = [PodRepositoryManager sharedPodSpecManager];
+    [manager updateAllPodProperties: nil];
+}
 
 @end

@@ -66,13 +66,16 @@
     [CocoaPodsApp executeWithArguments:@[@"ipc", @"spec", podSpecFilePath] responseBlock:^(NSString *stdOut) {
         
         NSError *error = nil;
-        yaml = [YAMLSerialization YAMLWithData: [stdOut dataUsingEncoding:NSUTF8StringEncoding]
-                                       options: kYAMLReadOptionStringScalars
-                                         error: &error];
         
-        NSDictionary *properties = [yaml lastObject];
-        [self applyProperties: properties];
-        
+        yaml = [YAMLSerialization objectsWithYAMLString: stdOut
+                                                options: kYAMLReadOptionStringScalars
+                                                  error: &error];
+        if (!error) {
+            NSDictionary *properties = [yaml lastObject];
+            [self applyProperties: properties];
+        } else {
+            // Fail silently.
+        }
     } failBlock:^(NSError *error) {
         TODO("hanlde error");
     }];

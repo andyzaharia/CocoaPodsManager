@@ -1,6 +1,6 @@
 PODS:
   - LibYAML (0.1.4)
-  - YAML-Framework (0.0.1):
+  - YAML-Framework (0.0.2):
     - LibYAML (~> 0.1.4)
   - ZKTextField (0.0.1)
 
@@ -9,8 +9,8 @@ DEPENDENCIES:
   - ZKTextField
 
 SPEC CHECKSUMS:
-  LibYAML: bf5d90eb17ab8006db821c000d68c1debf2a6ba8
-  YAML-Framework: 4ada9225119ffb13a206f251fe4434e660bca16d
-  ZKTextField: c48a5472579cdfe64bcca71d1a8c6558f59f7149
+  LibYAML: 66876e9cf33f78ed8985bee1234753a1f675976a
+  YAML-Framework: 8ac087fa5dad49246f5e7c0894759dacb3644dfe
+  ZKTextField: 12f797128e8fbe0d768b3307b65fea9d3571978a
 
-COCOAPODS: 0.28.0
+COCOAPODS: 0.31.1
