@@ -165,8 +165,8 @@
                                                                                 <action selector="deletePodFromProject:" target="-2" id="1342"/>
                                                                             </connections>
                                                                         </button>
-                                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="788">
-                                                                            <rect key="frame" x="38" y="12" width="103" height="17"/>
+                                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="788">
+                                                                            <rect key="frame" x="38" y="12" width="99" height="17"/>
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="789">
                                                                                 <font key="font" metaFont="system"/>
@@ -278,7 +278,7 @@
                                                                 </customView>
                                                             </prototypeCellViews>
                                                         </tableColumn>
-                                                        <tableColumn identifier="PodGitSource" width="120" minWidth="80" maxWidth="1000" id="928">
+                                                        <tableColumn identifier="PodGitSource" width="120" minWidth="80" maxWidth="300" id="928">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Git Source">
                                                                 <font key="font" metaFont="smallSystem"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -293,7 +293,7 @@
                                                                     <rect key="frame" x="378" y="1" width="120" height="25"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                                     <subviews>
-                                                                        <textField verticalHuggingPriority="750" fixedFrame="YES" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="936">
+                                                                        <textField verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="936">
                                                                             <rect key="frame" x="0.0" y="1" width="120" height="22"/>
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="937">
@@ -306,10 +306,15 @@
                                                                             </connections>
                                                                         </textField>
                                                                     </subviews>
+                                                                    <constraints>
+                                                                        <constraint firstItem="936" firstAttribute="leading" secondItem="930" secondAttribute="leading" id="2Wx-8x-7Y4"/>
+                                                                        <constraint firstItem="936" firstAttribute="centerY" secondItem="930" secondAttribute="centerY" id="4sz-DT-GZF"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="936" secondAttribute="trailing" id="jMI-uo-Umz"/>
+                                                                    </constraints>
                                                                 </customView>
                                                             </prototypeCellViews>
                                                         </tableColumn>
-                                                        <tableColumn identifier="PodLocalSource" width="120" minWidth="80" maxWidth="1000" id="938">
+                                                        <tableColumn identifier="PodLocalSource" width="120" minWidth="80" maxWidth="300" id="938">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Local Source">
                                                                 <font key="font" metaFont="smallSystem"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -324,7 +329,7 @@
                                                                     <rect key="frame" x="499" y="1" width="120" height="25"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
-                                                                        <textField verticalHuggingPriority="750" fixedFrame="YES" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="941">
+                                                                        <textField verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="941">
                                                                             <rect key="frame" x="0.0" y="1" width="120" height="22"/>
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="942">
@@ -334,10 +339,15 @@
                                                                             </textFieldCell>
                                                                         </textField>
                                                                     </subviews>
+                                                                    <constraints>
+                                                                        <constraint firstItem="941" firstAttribute="leading" secondItem="939" secondAttribute="leading" id="4GO-6s-6Ns"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="941" secondAttribute="trailing" id="9lC-Ud-CmL"/>
+                                                                        <constraint firstItem="941" firstAttribute="centerY" secondItem="939" secondAttribute="centerY" id="C4Y-gq-642"/>
+                                                                    </constraints>
                                                                 </customView>
                                                             </prototypeCellViews>
                                                         </tableColumn>
-                                                        <tableColumn identifier="PodCommit" width="120" minWidth="80" maxWidth="1000" id="943">
+                                                        <tableColumn identifier="PodCommit" width="120" minWidth="80" maxWidth="300" id="943">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Commit">
                                                                 <font key="font" metaFont="smallSystem"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -365,7 +375,7 @@
                                                                 </customView>
                                                             </prototypeCellViews>
                                                         </tableColumn>
-                                                        <tableColumn identifier="PodCustomPodSpec" width="80" minWidth="80" maxWidth="1000" id="948">
+                                                        <tableColumn identifier="PodCustomPodSpec" width="80" minWidth="80" maxWidth="300" id="948">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Custom PodSpec">
                                                                 <font key="font" metaFont="smallSystem"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -393,7 +403,7 @@
                                                                 </customView>
                                                             </prototypeCellViews>
                                                         </tableColumn>
-                                                        <tableColumn identifier="PodTarget" width="140" minWidth="16" maxWidth="1000" id="1385">
+                                                        <tableColumn identifier="PodTarget" width="140" minWidth="16" maxWidth="300" id="1385">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="CustomTarget">
                                                                 <font key="font" metaFont="smallSystem"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
