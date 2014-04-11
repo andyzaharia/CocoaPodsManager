@@ -2,8 +2,8 @@
 //  CPProject.h
 //  CocoaPodsManager
 //
-//  Created by Andrei Zaharia on 12/25/13.
-//  Copyright (c) 2013 Andy. All rights reserved.
+//  Created by Andrei Zaharia on 1/17/14.
+//  Copyright (c) 2014 Andy. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -21,8 +21,10 @@
 @property (nonatomic, retain) NSString * post_install;
 @property (nonatomic, retain) NSString * pre_install;
 @property (nonatomic, retain) NSString * projectFilePath;
+@property (nonatomic, retain) NSString * xcodeproj;
 @property (nonatomic, retain) NSOrderedSet *items;
 @property (nonatomic, retain) NSOrderedSet *pods;
+@property (nonatomic, retain) NSSet *targets;
 @end
 
 @interface CPProject (CoreDataGeneratedAccessors)
@@ -47,4 +49,9 @@
 - (void)removePodsObject:(PodSpec *)value;
 - (void)addPods:(NSOrderedSet *)values;
 - (void)removePods:(NSOrderedSet *)values;
+- (void)addTargetsObject:(NSManagedObject *)value;
+- (void)removeTargetsObject:(NSManagedObject *)value;
+- (void)addTargets:(NSSet *)values;
+- (void)removeTargets:(NSSet *)values;
+
 @end

@@ -2,8 +2,8 @@
 //  CPDependency.m
 //  CocoaPodsManager
 //
-//  Created by Andrei Zaharia on 12/25/13.
-//  Copyright (c) 2013 Andy. All rights reserved.
+//  Created by Andrei Zaharia on 1/17/14.
+//  Copyright (c) 2014 Andy. All rights reserved.
 //
 
 #import "CPDependency.h"
@@ -22,5 +22,6 @@
 @dynamic versionStr;
 @dynamic pod;
 @dynamic project;
+@dynamic target;
 
 @end
