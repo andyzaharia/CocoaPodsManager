@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment version="1080" defaultVersion="1080" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4514"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="CocoaPodWindowController">
@@ -25,7 +25,7 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application"/>
-        <window identifier="CocoaPodWindowController" title="Project Name" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" showsToolbarButton="NO" wantsToBeColor="NO" animationBehavior="default" id="1">
+        <window identifier="CocoaPodWindowController" title="Project Name" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" showsToolbarButton="NO" animationBehavior="default" id="1">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <rect key="contentRect" x="196" y="240" width="734" height="639"/>
             <rect key="screenRect" x="0.0" y="0.0" width="2048" height="1130"/>
@@ -93,21 +93,18 @@
                                         <constraints>
                                             <constraint firstAttribute="width" constant="55" id="GNN-JA-I1g"/>
                                         </constraints>
-                                        <popUpButtonCell key="cell" type="push" title="7.0" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" selectedItem="Yda-eI-U4M" id="516">
+                                        <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="516">
                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="menu"/>
                                             <menu key="menu" title="OtherViews" id="517">
                                                 <items>
-                                                    <menuItem title="-" id="759"/>
-                                                    <menuItem title="4.0" id="518"/>
-                                                    <menuItem title="4.1" id="1307"/>
-                                                    <menuItem title="4.2" id="1308"/>
-                                                    <menuItem title="4.3" id="1309"/>
+                                                    <menuItem title="-" keyEquivalent="z" id="759"/>
                                                     <menuItem title="5.0" id="520"/>
                                                     <menuItem title="5.1" id="1310"/>
                                                     <menuItem title="6.0" id="519"/>
                                                     <menuItem title="6.1" id="1312"/>
                                                     <menuItem title="7.0" state="on" id="Yda-eI-U4M"/>
+                                                    <menuItem title="7.1" state="on" id="hfB-U0-GVM"/>
                                                 </items>
                                             </menu>
                                         </popUpButtonCell>
@@ -521,7 +518,7 @@
                                             <action selector="inhibitAllWarningsAction:" target="-2" id="1372"/>
                                         </connections>
                                     </button>
-                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1bI-Vo-JZR">
+                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1bI-Vo-JZR">
                                         <rect key="frame" x="79" y="68" width="254" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="zY3-1U-w6d">
@@ -530,9 +527,12 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CTs-qs-Ujz">
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CTs-qs-Ujz">
                                         <rect key="frame" x="334" y="62" width="82" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="70" id="LMh-ID-yqH"/>
+                                        </constraints>
                                         <buttonCell key="cell" type="push" title="Browse" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="cPh-SQ-jQa">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -552,9 +552,11 @@
                                     <constraint firstAttribute="trailing" secondItem="511" secondAttribute="trailing" constant="108" id="HDo-zI-jcQ"/>
                                     <constraint firstItem="1370" firstAttribute="centerX" secondItem="474" secondAttribute="centerX" id="MJz-Jw-7Xt"/>
                                     <constraint firstItem="511" firstAttribute="top" secondItem="474" secondAttribute="top" id="MoD-ig-sF6"/>
+                                    <constraint firstItem="1370" firstAttribute="top" secondItem="6Cz-bg-EME" secondAttribute="bottom" constant="8" id="PfN-p7-6HM"/>
                                     <constraint firstItem="818" firstAttribute="top" secondItem="1370" secondAttribute="bottom" constant="8" id="T3d-hj-abx"/>
                                     <constraint firstItem="708" firstAttribute="top" secondItem="487" secondAttribute="bottom" id="Uqu-u6-d16"/>
                                     <constraint firstItem="726" firstAttribute="leading" secondItem="708" secondAttribute="leading" id="bB8-EY-jdK"/>
+                                    <constraint firstItem="CTs-qs-Ujz" firstAttribute="trailing" secondItem="621" secondAttribute="trailing" id="bbI-U7-EIA"/>
                                     <constraint firstItem="6Cz-bg-EME" firstAttribute="leading" secondItem="1370" secondAttribute="leading" id="drA-zt-IkS"/>
                                     <constraint firstItem="726" firstAttribute="leading" secondItem="1370" secondAttribute="leading" id="eIP-E6-jz6"/>
                                     <constraint firstItem="1396" firstAttribute="leading" secondItem="89" secondAttribute="leading" constant="11" id="eKm-PM-XNB"/>
@@ -565,14 +567,18 @@
                                     <constraint firstItem="474" firstAttribute="leading" secondItem="89" secondAttribute="leading" constant="69" id="gQc-EZ-yxG"/>
                                     <constraint firstItem="487" firstAttribute="top" secondItem="89" secondAttribute="top" constant="10" id="h2x-ML-ZNs"/>
                                     <constraint firstItem="1396" firstAttribute="top" secondItem="1370" secondAttribute="bottom" constant="8" id="hK7-KV-32f"/>
+                                    <constraint firstItem="1370" firstAttribute="top" secondItem="1bI-Vo-JZR" secondAttribute="bottom" constant="12" id="hbg-5f-kKW"/>
                                     <constraint firstItem="818" firstAttribute="leading" secondItem="1396" secondAttribute="trailing" constant="50" id="hp5-vF-cZM"/>
+                                    <constraint firstItem="CTs-qs-Ujz" firstAttribute="leading" secondItem="1bI-Vo-JZR" secondAttribute="trailing" constant="7" id="iEE-Rr-mah"/>
                                     <constraint firstItem="621" firstAttribute="baseline" secondItem="653" secondAttribute="baseline" id="kqq-zL-cEd"/>
                                     <constraint firstAttribute="trailing" secondItem="726" secondAttribute="trailing" constant="6" id="krV-PG-SHP"/>
                                     <constraint firstItem="487" firstAttribute="leading" secondItem="708" secondAttribute="leading" id="ksX-lu-R0h"/>
                                     <constraint firstAttribute="bottom" secondItem="1396" secondAttribute="bottom" constant="12" id="mHJ-ah-9YW"/>
+                                    <constraint firstItem="1bI-Vo-JZR" firstAttribute="leading" secondItem="6Cz-bg-EME" secondAttribute="trailing" constant="2" id="ns0-lN-ZQC"/>
                                     <constraint firstItem="511" firstAttribute="leading" secondItem="512" secondAttribute="trailing" constant="8" symbolic="YES" id="pag-40-65S"/>
                                     <constraint firstItem="512" firstAttribute="centerX" secondItem="89" secondAttribute="centerX" id="tCa-1p-8rJ"/>
                                     <constraint firstAttribute="bottom" secondItem="818" secondAttribute="bottom" constant="13" id="ybf-6d-y8B"/>
+                                    <constraint firstItem="621" firstAttribute="top" secondItem="CTs-qs-Ujz" secondAttribute="bottom" constant="35" id="yfb-1E-7rx"/>
                                     <constraint firstItem="653" firstAttribute="leading" secondItem="818" secondAttribute="trailing" constant="12" symbolic="YES" id="z0c-6q-B8i"/>
                                 </constraints>
                             </customView>
@@ -595,7 +601,7 @@
                                                     <tableViewGridLines key="gridStyleMask" dashed="YES"/>
                                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                     <tableColumns>
-                                                        <tableColumn identifier="PodName" width="250" minWidth="250" maxWidth="1000" id="874">
+                                                        <tableColumn identifier="PodInfoTableCellView" width="250" minWidth="250" maxWidth="1000" id="874">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Name">
                                                                 <font key="font" metaFont="smallSystem"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -607,46 +613,6 @@
                                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                             </textFieldCell>
                                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
-                                                            <prototypeCellViews>
-                                                                <tableCellView id="890">
-                                                                    <rect key="frame" x="1" y="1" width="250" height="55"/>
-                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                                    <subviews>
-                                                                        <button fixedFrame="YES" tag="3" translatesAutoresizingMaskIntoConstraints="NO" id="1402">
-                                                                            <rect key="frame" x="4" y="-3" width="61" height="18"/>
-                                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                                                            <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="left" inset="2" id="1403">
-                                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                                                <font key="font" metaFont="system"/>
-                                                                            </buttonCell>
-                                                                            <connections>
-                                                                                <action selector="addPodDependencyWithCheckoxStateChange:" target="-2" id="wGo-0J-PEI"/>
-                                                                            </connections>
-                                                                        </button>
-                                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="891">
-                                                                            <rect key="frame" x="27" y="-680" width="6" height="17"/>
-                                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Sample Pod Name" id="892">
-                                                                                <font key="font" metaFont="system"/>
-                                                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                                            </textFieldCell>
-                                                                        </textField>
-                                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" tag="2" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1404" userLabel="Static Text - Sample pod description">
-                                                                            <rect key="frame" x="27" y="-565" width="60" height="34"/>
-                                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                                                            <textFieldCell key="cell" truncatesLastVisibleLine="YES" sendsActionOnEndEditing="YES" title="Sample pod description" id="1405">
-                                                                                <font key="font" size="10" name="LucidaGrande"/>
-                                                                                <color key="textColor" red="0.58823531870000001" green="0.58823531870000001" blue="0.58823531870000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                                            </textFieldCell>
-                                                                        </textField>
-                                                                    </subviews>
-                                                                    <connections>
-                                                                        <outlet property="textField" destination="891" id="893"/>
-                                                                    </connections>
-                                                                </tableCellView>
-                                                            </prototypeCellViews>
                                                         </tableColumn>
                                                         <tableColumn identifier="PodAction" width="40" minWidth="40" maxWidth="40" id="876">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">

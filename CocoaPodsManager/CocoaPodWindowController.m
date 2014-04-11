@@ -15,6 +15,8 @@
 #import "PodDetailPanel.h"
 #import "NSApp+Misc.h"
 
+#import "PodInfoTableCellView.h"
+
 #include <Security/Authorization.h>
 #include <Security/AuthorizationTags.h>
 #import <QuartzCore/QuartzCore.h>
@@ -104,7 +106,7 @@ static NSArray *OSX_VERSIONS = nil;
     if (self) {
         // Initialization code here.
         if(!iOS_VERSIONS) {
-            iOS_VERSIONS = @[@"4.0",@"4.1",@"4.2",@"4.3",@"5.0",@"5.1",@"6.0",@"6.1", @"7.0", @"7.1"];
+            iOS_VERSIONS = @[@"5.0",@"5.1",@"6.0",@"6.1", @"7.0", @"7.1"];
         }
         
         if(!OSX_VERSIONS) {
@@ -145,6 +147,13 @@ static NSArray *OSX_VERSIONS = nil;
     [self.projectPodsList setTarget: self];
     [self.projectPodsList setDoubleAction:@selector(doubleClickInTableView:)];
     [self.cocoaPodsList setDoubleAction:@selector(doubleClickInCocoaPodsList:)];
+    
+    // Register Nibs
+    NSBundle *thisBundle = [NSBundle bundleForClass:[self class]];
+    NSNib *podInfoCellNib = [[NSNib alloc] initWithNibNamed:@"PodInfoTableCellView" bundle: thisBundle];
+    [self.cocoaPodsList registerNib:podInfoCellNib forIdentifier:@"PodInfoTableCellView"];
+    
+
     
     // Default Column visiblity settings
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -845,68 +854,18 @@ static NSArray *OSX_VERSIONS = nil;
 
 // Configures the view for the available pods
 -(NSView *) viewForCocoaPodsListTableView: (NSView *) view forTableColumn:(NSTableColumn *)tableColumn item:(id)item{
-  // You lazy ass, learn Autolayout, if it actually works :]
-    
+
     if ([view isKindOfClass:[NSTableCellView class]]) {
-        NSTableCellView *cellView = (NSTableCellView *)view;
+        PodInfoTableCellView *cellView = (PodInfoTableCellView *)view;
         if ([item isKindOfClass:[PodSpec class]]) {
             PodSpec *pod = (PodSpec *)item;
-            [cellView.textField setStringValue: ([pod.name length]) ? pod.name : @""];
-            [cellView.textField setFont:[NSFont systemFontOfSize:13]];
             
-            // Layout code.... oh... ugly code
-            if ([pod.desc length]) {
-                NSTextField *descriptionTextField = [cellView viewWithTag: 2];
-                if (descriptionTextField) {
-                    if ([pod.desc length]) {
-                        [descriptionTextField setStringValue: pod.desc];
-                    } else {
-                        [descriptionTextField setStringValue: @""];
-                    }
-                }
-                
-                [descriptionTextField setHidden: NO];
-                
-                NSTextField *nameTextField = [cellView viewWithTag: 1];
-                [nameTextField sizeToFit];
-                [nameTextField setFrame: NSMakeRect(nameTextField.frame.origin.x,
-                                                    view.frame.size.height - nameTextField.frame.size.height - 3.0,
-                                                    nameTextField.frame.size.width,
-                                                    nameTextField.frame.size.height)];
-                
-                [descriptionTextField sizeToFit];
-                
-                CGFloat descriptionHeight = view.frame.size.height - (nameTextField.frame.size.height + 6.0);
-                NSRect descriptionRect = NSMakeRect(nameTextField.frame.origin.x,
-                                                    view.frame.size.height - (nameTextField.frame.size.height + nameTextField.frame.origin.y) - 3.0,
-                                                    view.frame.size.width - descriptionTextField.frame.origin.x,
-                                                    descriptionHeight);
-                
-                [descriptionTextField setFrame: descriptionRect];
-                
-            } else {
-                NSTextField *nameTextField = [cellView viewWithTag: 1];
-                [nameTextField sizeToFit];
-                [nameTextField setFrame: NSMakeRect(nameTextField.frame.origin.x,
-                                                    view.frame.size.height * 0.5 - nameTextField.frame.size.height * 0.5,
-                                                    nameTextField.frame.size.width,
-                                                    nameTextField.frame.size.height)];
-                
-                NSTextField *descriptionTextField = [cellView viewWithTag: 2];
-                [descriptionTextField setHidden: YES];
+            if ([cellView isKindOfClass:[PodInfoTableCellView class]]) {
+                [cellView displayPodSpec: pod isInstalled: [self.project containsPod: pod]];
             }
             
-            NSButton *_installedInProjectCheckBox = [cellView viewWithTag: 3];
-            if (_installedInProjectCheckBox) {
-                [_installedInProjectCheckBox setState: [self.project containsPod: pod]];
-            }
-            
-            // XCode 5 IB workaround.
-            NSView *btnView = [cellView viewWithTag: 3];
-            [btnView setFrame: NSMakeRect(4.0,
-                                          cellView.bounds.size.height * 0.5 - btnView.frame.size.height * 0.5,
-                                          btnView.frame.size.width,
-                                          btnView.frame.size.height)];
+            [cellView.btnInstalled setTarget: self];
+            [cellView.btnInstalled setAction: @selector(addPodDependencyWithCheckoxStateChange:)];
             
         }else{
             if([item isKindOfClass:[NSString class]]){

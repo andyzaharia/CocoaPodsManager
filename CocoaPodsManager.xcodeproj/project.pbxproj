@@ -118,6 +118,10 @@
 		75BBB55918087EF00031B011 /* HyperlinkTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BBB55818087EF00031B011 /* HyperlinkTextField.m */; };
 		75BBB55A18087EF00031B011 /* HyperlinkTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BBB55818087EF00031B011 /* HyperlinkTextField.m */; };
 		75BBB55D180896D40031B011 /* PluginIcon26.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 75BBB55C180896D40031B011 /* PluginIcon26.tiff */; };
+		75DD6DE718F85FD5005920FF /* PodInfoTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DD6DE618F85FD5005920FF /* PodInfoTableCellView.m */; };
+		75DD6DE818F85FD5005920FF /* PodInfoTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DD6DE618F85FD5005920FF /* PodInfoTableCellView.m */; };
+		75DD6DEA18F86479005920FF /* PodInfoTableCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75DD6DE918F86479005920FF /* PodInfoTableCellView.xib */; };
+		75DD6DEB18F86479005920FF /* PodInfoTableCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75DD6DE918F86479005920FF /* PodInfoTableCellView.xib */; };
 		75ED7CDA186856F000B82B30 /* Pod.m in Sources */ = {isa = PBXBuildFile; fileRef = 75ED7CD9186856F000B82B30 /* Pod.m */; };
 		75ED7CDB186856F000B82B30 /* Pod.m in Sources */ = {isa = PBXBuildFile; fileRef = 75ED7CD9186856F000B82B30 /* Pod.m */; };
 		8FE2AE8B31F5430483E2EE67 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A3EDDB5BFDF4E5588523290 /* libPods.a */; };
@@ -240,6 +244,9 @@
 		75BBB55718087EF00031B011 /* HyperlinkTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HyperlinkTextField.h; sourceTree = "<group>"; };
 		75BBB55818087EF00031B011 /* HyperlinkTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HyperlinkTextField.m; sourceTree = "<group>"; };
 		75BBB55C180896D40031B011 /* PluginIcon26.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = PluginIcon26.tiff; sourceTree = "<group>"; };
+		75DD6DE518F85FD5005920FF /* PodInfoTableCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PodInfoTableCellView.h; sourceTree = "<group>"; };
+		75DD6DE618F85FD5005920FF /* PodInfoTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PodInfoTableCellView.m; sourceTree = "<group>"; };
+		75DD6DE918F86479005920FF /* PodInfoTableCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PodInfoTableCellView.xib; sourceTree = "<group>"; };
 		75ED7CD8186856F000B82B30 /* Pod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pod.h; sourceTree = "<group>"; };
 		75ED7CD9186856F000B82B30 /* Pod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pod.m; sourceTree = "<group>"; };
 		8F0ADA391BE84E54BA40C106 /* libPods-CocoaPodsPlugin.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CocoaPodsPlugin.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -349,6 +356,9 @@
 				740FE06716C297400078A953 /* CocoaPodWindowController.h */,
 				740FE06816C297400078A953 /* CocoaPodWindowController.m */,
 				740FE07516C3986E0078A953 /* CocoaPodWindowController.xib */,
+				75DD6DE518F85FD5005920FF /* PodInfoTableCellView.h */,
+				75DD6DE618F85FD5005920FF /* PodInfoTableCellView.m */,
+				75DD6DE918F86479005920FF /* PodInfoTableCellView.xib */,
 				7530C6ED18072B260050C136 /* MainWindow */,
 				E1E3381C16C93CD000FCD1F6 /* Helpers */,
 				75225FD61723FA1D00B3C077 /* HooksPanel */,
@@ -754,6 +764,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75DD6DEA18F86479005920FF /* PodInfoTableCellView.xib in Resources */,
 				740FE03B16C294A60078A953 /* InfoPlist.strings in Resources */,
 				740FE07616C3986E0078A953 /* CocoaPodWindowController.xib in Resources */,
 				743C4B0416C3F8D600F03545 /* Icon.icns in Resources */,
@@ -793,6 +804,7 @@
 				758CB56717E8EBEC00A30AF5 /* install.png in Resources */,
 				758CB56817E8EBEC00A30AF5 /* update.png in Resources */,
 				758CB56917E8EBEC00A30AF5 /* play.png in Resources */,
+				75DD6DEB18F86479005920FF /* PodInfoTableCellView.xib in Resources */,
 				758CB56A17E8EBEC00A30AF5 /* trash.png in Resources */,
 				758CB56B17E8EBEC00A30AF5 /* action_arrow.png in Resources */,
 				758CB56C17E8EBEC00A30AF5 /* xcode_proj.png in Resources */,
@@ -871,6 +883,7 @@
 			files = (
 				740FE04416C294A60078A953 /* TAppDelegate.m in Sources */,
 				7567ED661809E245006B0F7C /* PodSpecTaskOperation.m in Sources */,
+				75DD6DE718F85FD5005920FF /* PodInfoTableCellView.m in Sources */,
 				740FE06916C297400078A953 /* CocoaPodWindowController.m in Sources */,
 				759B30CD1889DC480039EFA5 /* PodSpec.m in Sources */,
 				759B30D11889DC480039EFA5 /* CPProject.m in Sources */,
@@ -929,6 +942,7 @@
 				7530C6DC18072A720050C136 /* AppConstants.m in Sources */,
 				7530C6EA18072A720050C136 /* NSPersistentStoreCoordinator+Custom.m in Sources */,
 				7574047A17E8E43C004CF3FD /* HooksPanel.m in Sources */,
+				75DD6DE818F85FD5005920FF /* PodInfoTableCellView.m in Sources */,
 				7567ED671809E245006B0F7C /* PodSpecTaskOperation.m in Sources */,
 				75796D7D186B9598008C31C7 /* CPProject+Misc.m in Sources */,
 				759B30DA1889DC480039EFA5 /* CPTarget.m in Sources */,
