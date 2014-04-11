@@ -10,4 +10,9 @@
 
 @interface CPProject (PodFileParser)
 
+-(BOOL) readPlatformFromLine: (NSString *) platformStr;
+-(void) readPodFile;
+
+-(void) writeProjectToPodFile;
+
 @end

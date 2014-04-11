@@ -69,8 +69,6 @@
 		756786D0180728550056C1AC /* Plugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 756786C6180728550056C1AC /* Plugin.m */; };
 		7567ED621809E245006B0F7C /* PodRepositoryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7567ED5D1809E245006B0F7C /* PodRepositoryManager.m */; };
 		7567ED631809E245006B0F7C /* PodRepositoryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7567ED5D1809E245006B0F7C /* PodRepositoryManager.m */; };
-		7567ED641809E245006B0F7C /* PodSpecParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7567ED5F1809E245006B0F7C /* PodSpecParser.m */; };
-		7567ED651809E245006B0F7C /* PodSpecParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7567ED5F1809E245006B0F7C /* PodSpecParser.m */; };
 		7567ED661809E245006B0F7C /* PodSpecTaskOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7567ED611809E245006B0F7C /* PodSpecTaskOperation.m */; };
 		7567ED671809E245006B0F7C /* PodSpecTaskOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7567ED611809E245006B0F7C /* PodSpecTaskOperation.m */; };
 		7567ED681809E857006B0F7C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 740FE03C16C294A60078A953 /* main.m */; };
@@ -85,20 +83,14 @@
 		7574048A17E8E454004CF3FD /* CustomOutlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74DA446F16E0F36600F130EF /* CustomOutlineView.m */; };
 		75796D78186B9598008C31C7 /* CPDependency+Misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 75796D67186B9598008C31C7 /* CPDependency+Misc.m */; };
 		75796D79186B9598008C31C7 /* CPDependency+Misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 75796D67186B9598008C31C7 /* CPDependency+Misc.m */; };
-		75796D7A186B9598008C31C7 /* CPDependency.m in Sources */ = {isa = PBXBuildFile; fileRef = 75796D69186B9598008C31C7 /* CPDependency.m */; };
-		75796D7B186B9598008C31C7 /* CPDependency.m in Sources */ = {isa = PBXBuildFile; fileRef = 75796D69186B9598008C31C7 /* CPDependency.m */; };
 		75796D7C186B9598008C31C7 /* CPProject+Misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 75796D6B186B9598008C31C7 /* CPProject+Misc.m */; };
 		75796D7D186B9598008C31C7 /* CPProject+Misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 75796D6B186B9598008C31C7 /* CPProject+Misc.m */; };
-		75796D7E186B9598008C31C7 /* CPProject.m in Sources */ = {isa = PBXBuildFile; fileRef = 75796D6D186B9598008C31C7 /* CPProject.m */; };
-		75796D7F186B9598008C31C7 /* CPProject.m in Sources */ = {isa = PBXBuildFile; fileRef = 75796D6D186B9598008C31C7 /* CPProject.m */; };
 		75796D82186B9598008C31C7 /* PodSpec+Misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 75796D71186B9598008C31C7 /* PodSpec+Misc.m */; };
 		75796D83186B9598008C31C7 /* PodSpec+Misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 75796D71186B9598008C31C7 /* PodSpec+Misc.m */; };
 		75796D84186B9598008C31C7 /* PodSpec+StdOutParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 75796D73186B9598008C31C7 /* PodSpec+StdOutParser.m */; };
 		75796D85186B9598008C31C7 /* PodSpec+StdOutParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 75796D73186B9598008C31C7 /* PodSpec+StdOutParser.m */; };
 		75796D86186B9598008C31C7 /* PodSpec+YAML.m in Sources */ = {isa = PBXBuildFile; fileRef = 75796D75186B9598008C31C7 /* PodSpec+YAML.m */; };
 		75796D87186B9598008C31C7 /* PodSpec+YAML.m in Sources */ = {isa = PBXBuildFile; fileRef = 75796D75186B9598008C31C7 /* PodSpec+YAML.m */; };
-		75796D88186B9598008C31C7 /* PodSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 75796D77186B9598008C31C7 /* PodSpec.m */; };
-		75796D89186B9598008C31C7 /* PodSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 75796D77186B9598008C31C7 /* PodSpec.m */; };
 		75796D8D186B975C008C31C7 /* PodLineDependencyParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 75796D8C186B975C008C31C7 /* PodLineDependencyParser.m */; };
 		75796D8E186B975C008C31C7 /* PodLineDependencyParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 75796D8C186B975C008C31C7 /* PodLineDependencyParser.m */; };
 		758CB56617E8EBEC00A30AF5 /* save_as.png in Resources */ = {isa = PBXBuildFile; fileRef = 7510D00A170F3E540032E742 /* save_as.png */; };
@@ -111,6 +103,15 @@
 		758CB56D17E8EBEC00A30AF5 /* xcode_proj_small.png in Resources */ = {isa = PBXBuildFile; fileRef = E195CE8216CA6AB600B4E3B8 /* xcode_proj_small.png */; };
 		758CB56E17E8EBEC00A30AF5 /* Xcode.png in Resources */ = {isa = PBXBuildFile; fileRef = E195CE7816CA538200B4E3B8 /* Xcode.png */; };
 		758CB56F17E8EBEC00A30AF5 /* Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 743C4B0316C3F8D600F03545 /* Icon.icns */; };
+		759B30CA1889CEF80039EFA5 /* CPProject+PodFileParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 759B30C91889CEF80039EFA5 /* CPProject+PodFileParser.m */; };
+		759B30CD1889DC480039EFA5 /* PodSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 759B30CC1889DC480039EFA5 /* PodSpec.m */; };
+		759B30CE1889DC480039EFA5 /* PodSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 759B30CC1889DC480039EFA5 /* PodSpec.m */; };
+		759B30D11889DC480039EFA5 /* CPProject.m in Sources */ = {isa = PBXBuildFile; fileRef = 759B30D01889DC480039EFA5 /* CPProject.m */; };
+		759B30D21889DC480039EFA5 /* CPProject.m in Sources */ = {isa = PBXBuildFile; fileRef = 759B30D01889DC480039EFA5 /* CPProject.m */; };
+		759B30D51889DC480039EFA5 /* CPDependency.m in Sources */ = {isa = PBXBuildFile; fileRef = 759B30D41889DC480039EFA5 /* CPDependency.m */; };
+		759B30D61889DC480039EFA5 /* CPDependency.m in Sources */ = {isa = PBXBuildFile; fileRef = 759B30D41889DC480039EFA5 /* CPDependency.m */; };
+		759B30D91889DC480039EFA5 /* CPTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 759B30D81889DC480039EFA5 /* CPTarget.m */; };
+		759B30DA1889DC480039EFA5 /* CPTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 759B30D81889DC480039EFA5 /* CPTarget.m */; };
 		759D90A817E7A03300B93F36 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 740FE03016C294A60078A953 /* Cocoa.framework */; };
 		75B1C44C18771FD400F7AF59 /* STPrivilegedTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 75B1C44918771FD400F7AF59 /* STPrivilegedTask.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		75B1C44D18771FD400F7AF59 /* STPrivilegedTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 75B1C44918771FD400F7AF59 /* STPrivilegedTask.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -209,28 +210,30 @@
 		756786C6180728550056C1AC /* Plugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Plugin.m; sourceTree = "<group>"; };
 		7567ED5C1809E245006B0F7C /* PodRepositoryManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PodRepositoryManager.h; sourceTree = "<group>"; };
 		7567ED5D1809E245006B0F7C /* PodRepositoryManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PodRepositoryManager.m; sourceTree = "<group>"; };
-		7567ED5E1809E245006B0F7C /* PodSpecParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PodSpecParser.h; sourceTree = "<group>"; };
-		7567ED5F1809E245006B0F7C /* PodSpecParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PodSpecParser.m; sourceTree = "<group>"; };
 		7567ED601809E245006B0F7C /* PodSpecTaskOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PodSpecTaskOperation.h; sourceTree = "<group>"; };
 		7567ED611809E245006B0F7C /* PodSpecTaskOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PodSpecTaskOperation.m; sourceTree = "<group>"; };
 		75796D66186B9598008C31C7 /* CPDependency+Misc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CPDependency+Misc.h"; sourceTree = "<group>"; };
 		75796D67186B9598008C31C7 /* CPDependency+Misc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CPDependency+Misc.m"; sourceTree = "<group>"; };
-		75796D68186B9598008C31C7 /* CPDependency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPDependency.h; sourceTree = "<group>"; };
-		75796D69186B9598008C31C7 /* CPDependency.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPDependency.m; sourceTree = "<group>"; };
 		75796D6A186B9598008C31C7 /* CPProject+Misc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CPProject+Misc.h"; sourceTree = "<group>"; };
 		75796D6B186B9598008C31C7 /* CPProject+Misc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CPProject+Misc.m"; sourceTree = "<group>"; };
-		75796D6C186B9598008C31C7 /* CPProject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPProject.h; sourceTree = "<group>"; };
-		75796D6D186B9598008C31C7 /* CPProject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPProject.m; sourceTree = "<group>"; };
 		75796D70186B9598008C31C7 /* PodSpec+Misc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PodSpec+Misc.h"; sourceTree = "<group>"; };
 		75796D71186B9598008C31C7 /* PodSpec+Misc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PodSpec+Misc.m"; sourceTree = "<group>"; };
 		75796D72186B9598008C31C7 /* PodSpec+StdOutParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PodSpec+StdOutParser.h"; sourceTree = "<group>"; };
 		75796D73186B9598008C31C7 /* PodSpec+StdOutParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PodSpec+StdOutParser.m"; sourceTree = "<group>"; };
 		75796D74186B9598008C31C7 /* PodSpec+YAML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PodSpec+YAML.h"; sourceTree = "<group>"; };
 		75796D75186B9598008C31C7 /* PodSpec+YAML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PodSpec+YAML.m"; sourceTree = "<group>"; };
-		75796D76186B9598008C31C7 /* PodSpec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PodSpec.h; sourceTree = "<group>"; };
-		75796D77186B9598008C31C7 /* PodSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PodSpec.m; sourceTree = "<group>"; };
 		75796D8B186B975C008C31C7 /* PodLineDependencyParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PodLineDependencyParser.h; sourceTree = "<group>"; };
 		75796D8C186B975C008C31C7 /* PodLineDependencyParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PodLineDependencyParser.m; sourceTree = "<group>"; };
+		759B30C81889CEF80039EFA5 /* CPProject+PodFileParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CPProject+PodFileParser.h"; sourceTree = "<group>"; };
+		759B30C91889CEF80039EFA5 /* CPProject+PodFileParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CPProject+PodFileParser.m"; sourceTree = "<group>"; };
+		759B30CB1889DC480039EFA5 /* PodSpec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PodSpec.h; sourceTree = "<group>"; };
+		759B30CC1889DC480039EFA5 /* PodSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PodSpec.m; sourceTree = "<group>"; };
+		759B30CF1889DC480039EFA5 /* CPProject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPProject.h; sourceTree = "<group>"; };
+		759B30D01889DC480039EFA5 /* CPProject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPProject.m; sourceTree = "<group>"; };
+		759B30D31889DC480039EFA5 /* CPDependency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPDependency.h; sourceTree = "<group>"; };
+		759B30D41889DC480039EFA5 /* CPDependency.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPDependency.m; sourceTree = "<group>"; };
+		759B30D71889DC480039EFA5 /* CPTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTarget.h; sourceTree = "<group>"; };
+		759B30D81889DC480039EFA5 /* CPTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTarget.m; sourceTree = "<group>"; };
 		759D90A717E7A03300B93F36 /* CocoaPodsPlugin.xcplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CocoaPodsPlugin.xcplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		75B1C44818771FD400F7AF59 /* STPrivilegedTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPrivilegedTask.h; sourceTree = "<group>"; };
 		75B1C44918771FD400F7AF59 /* STPrivilegedTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPrivilegedTask.m; sourceTree = "<group>"; };
@@ -453,7 +456,6 @@
 			children = (
 				75B1C44618771FD400F7AF59 /* STPrivilegedTask */,
 				75796D8A186B975C008C31C7 /* PodFileParser */,
-				75796D65186B9598008C31C7 /* CoreData Entities */,
 				7567ED5B1809E245006B0F7C /* PodRepositoryManager */,
 				75BBB55618087EF00031B011 /* HyperlinkTextField */,
 				7530C73618073DCA0050C136 /* CocoaPodsApp */,
@@ -515,6 +517,7 @@
 		7530C6D118072A720050C136 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
+				75796D65186B9598008C31C7 /* Entities */,
 				752CECB1186BA2DB00B03531 /* KCOrderedAccessorFix */,
 				7530C6D218072A720050C136 /* NSManagedObject+CoreData.h */,
 				7530C6D318072A720050C136 /* NSManagedObject+CoreData.m */,
@@ -585,8 +588,6 @@
 			children = (
 				7567ED5C1809E245006B0F7C /* PodRepositoryManager.h */,
 				7567ED5D1809E245006B0F7C /* PodRepositoryManager.m */,
-				7567ED5E1809E245006B0F7C /* PodSpecParser.h */,
-				7567ED5F1809E245006B0F7C /* PodSpecParser.m */,
 				7567ED601809E245006B0F7C /* PodSpecTaskOperation.h */,
 				7567ED611809E245006B0F7C /* PodSpecTaskOperation.m */,
 				75ED7CD8186856F000B82B30 /* Pod.h */,
@@ -595,15 +596,17 @@
 			path = PodRepositoryManager;
 			sourceTree = "<group>";
 		};
-		75796D65186B9598008C31C7 /* CoreData Entities */ = {
+		75796D65186B9598008C31C7 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				75796D76186B9598008C31C7 /* PodSpec.h */,
-				75796D77186B9598008C31C7 /* PodSpec.m */,
-				75796D6C186B9598008C31C7 /* CPProject.h */,
-				75796D6D186B9598008C31C7 /* CPProject.m */,
-				75796D68186B9598008C31C7 /* CPDependency.h */,
-				75796D69186B9598008C31C7 /* CPDependency.m */,
+				759B30D71889DC480039EFA5 /* CPTarget.h */,
+				759B30D81889DC480039EFA5 /* CPTarget.m */,
+				759B30D31889DC480039EFA5 /* CPDependency.h */,
+				759B30D41889DC480039EFA5 /* CPDependency.m */,
+				759B30CF1889DC480039EFA5 /* CPProject.h */,
+				759B30D01889DC480039EFA5 /* CPProject.m */,
+				759B30CB1889DC480039EFA5 /* PodSpec.h */,
+				759B30CC1889DC480039EFA5 /* PodSpec.m */,
 				75796D66186B9598008C31C7 /* CPDependency+Misc.h */,
 				75796D67186B9598008C31C7 /* CPDependency+Misc.m */,
 				75796D6A186B9598008C31C7 /* CPProject+Misc.h */,
@@ -614,8 +617,11 @@
 				75796D73186B9598008C31C7 /* PodSpec+StdOutParser.m */,
 				75796D74186B9598008C31C7 /* PodSpec+YAML.h */,
 				75796D75186B9598008C31C7 /* PodSpec+YAML.m */,
+				759B30C81889CEF80039EFA5 /* CPProject+PodFileParser.h */,
+				759B30C91889CEF80039EFA5 /* CPProject+PodFileParser.m */,
 			);
-			path = "CoreData Entities";
+			name = Entities;
+			path = "../CoreData Entities";
 			sourceTree = "<group>";
 		};
 		75796D8A186B975C008C31C7 /* PodFileParser */ = {
@@ -866,23 +872,25 @@
 				740FE04416C294A60078A953 /* TAppDelegate.m in Sources */,
 				7567ED661809E245006B0F7C /* PodSpecTaskOperation.m in Sources */,
 				740FE06916C297400078A953 /* CocoaPodWindowController.m in Sources */,
+				759B30CD1889DC480039EFA5 /* PodSpec.m in Sources */,
+				759B30D11889DC480039EFA5 /* CPProject.m in Sources */,
 				7530C6F718072DCE0050C136 /* HoverTableRowView.m in Sources */,
 				7530C6DB18072A720050C136 /* AppConstants.m in Sources */,
+				759B30D91889DC480039EFA5 /* CPTarget.m in Sources */,
 				7530C6E118072A720050C136 /* CCPWorkspaceManager.m in Sources */,
 				756786CF180728550056C1AC /* Plugin.m in Sources */,
 				75ED7CDA186856F000B82B30 /* Pod.m in Sources */,
 				75796D7C186B9598008C31C7 /* CPProject+Misc.m in Sources */,
+				759B30D51889DC480039EFA5 /* CPDependency.m in Sources */,
 				7530C6FE18072E200050C136 /* ProjectCell.m in Sources */,
 				7530C72118073BF90050C136 /* NSApplication+ESSApplicationCategory.m in Sources */,
 				7530C73918073DCA0050C136 /* CocoaPodsApp.m in Sources */,
-				7567ED641809E245006B0F7C /* PodSpecParser.m in Sources */,
 				7530C6E918072A720050C136 /* NSPersistentStoreCoordinator+Custom.m in Sources */,
 				7530C6FB18072DE90050C136 /* NSCustomImageView.m in Sources */,
+				759B30CA1889CEF80039EFA5 /* CPProject+PodFileParser.m in Sources */,
 				7530C6DF18072A720050C136 /* NSString+Misc.m in Sources */,
 				75796D82186B9598008C31C7 /* PodSpec+Misc.m in Sources */,
-				75796D88186B9598008C31C7 /* PodSpec.m in Sources */,
 				75796D86186B9598008C31C7 /* PodSpec+YAML.m in Sources */,
-				75796D7E186B9598008C31C7 /* CPProject.m in Sources */,
 				75B1C44C18771FD400F7AF59 /* STPrivilegedTask.m in Sources */,
 				7530C6DD18072A720050C136 /* NSApp+Misc.m in Sources */,
 				7530C6E718072A720050C136 /* NSManagedObjectContext+Custom.m in Sources */,
@@ -901,7 +909,6 @@
 				75796D84186B9598008C31C7 /* PodSpec+StdOutParser.m in Sources */,
 				7567ED681809E857006B0F7C /* main.m in Sources */,
 				75225FD91723FA4F00B3C077 /* HooksPanel.m in Sources */,
-				75796D7A186B9598008C31C7 /* CPDependency.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -921,23 +928,22 @@
 				7567ED631809E245006B0F7C /* PodRepositoryManager.m in Sources */,
 				7530C6DC18072A720050C136 /* AppConstants.m in Sources */,
 				7530C6EA18072A720050C136 /* NSPersistentStoreCoordinator+Custom.m in Sources */,
-				75796D7F186B9598008C31C7 /* CPProject.m in Sources */,
 				7574047A17E8E43C004CF3FD /* HooksPanel.m in Sources */,
 				7567ED671809E245006B0F7C /* PodSpecTaskOperation.m in Sources */,
 				75796D7D186B9598008C31C7 /* CPProject+Misc.m in Sources */,
+				759B30DA1889DC480039EFA5 /* CPTarget.m in Sources */,
 				751F031318683F6400305394 /* NSFileManager+DirectoryLocations.m in Sources */,
 				7574047C17E8E43C004CF3FD /* PodDetailPanel.m in Sources */,
 				75796D8E186B975C008C31C7 /* PodLineDependencyParser.m in Sources */,
 				75796D87186B9598008C31C7 /* PodSpec+YAML.m in Sources */,
-				75796D89186B9598008C31C7 /* PodSpec.m in Sources */,
 				756786D0180728550056C1AC /* Plugin.m in Sources */,
 				75B1C44D18771FD400F7AF59 /* STPrivilegedTask.m in Sources */,
 				75796D85186B9598008C31C7 /* PodSpec+StdOutParser.m in Sources */,
 				7530C73A18073DCA0050C136 /* CocoaPodsApp.m in Sources */,
 				7574047E17E8E43C004CF3FD /* CocoaPodWindowController.m in Sources */,
+				759B30D21889DC480039EFA5 /* CPProject.m in Sources */,
 				75796D83186B9598008C31C7 /* PodSpec+Misc.m in Sources */,
-				75796D7B186B9598008C31C7 /* CPDependency.m in Sources */,
-				7567ED651809E245006B0F7C /* PodSpecParser.m in Sources */,
+				759B30CE1889DC480039EFA5 /* PodSpec.m in Sources */,
 				752CECB5186BA2DB00B03531 /* NSManagedObjectModel+KCOrderedAccessorFix.m in Sources */,
 				75ED7CDB186856F000B82B30 /* Pod.m in Sources */,
 				7530C6DE18072A720050C136 /* NSApp+Misc.m in Sources */,
@@ -946,6 +952,7 @@
 				7530C6E818072A720050C136 /* NSManagedObjectContext+Custom.m in Sources */,
 				7530C6E618072A720050C136 /* NSManagedObject+CoreData.m in Sources */,
 				7530C6E018072A720050C136 /* NSString+Misc.m in Sources */,
+				759B30D61889DC480039EFA5 /* CPDependency.m in Sources */,
 				7574048917E8E454004CF3FD /* CocoaPodsTreeController.m in Sources */,
 				7530C6E218072A720050C136 /* CCPWorkspaceManager.m in Sources */,
 				7574048A17E8E454004CF3FD /* CustomOutlineView.m in Sources */,

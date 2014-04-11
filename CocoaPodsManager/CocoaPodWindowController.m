@@ -7,7 +7,7 @@
 //
 
 #import "CocoaPodWindowController.h"
-#import "CPProject.h"
+#import "CPProject+PodFileParser.h"
 #import "CocoaPodsTreeController.h"
 #import "PodSpec+StdOutParser.h"
 #import "NSApplication+ESSApplicationCategory.h"
@@ -65,6 +65,7 @@ static NSArray *OSX_VERSIONS = nil;
 @property (assign) IBOutlet             NSProgressIndicator       *loadingIndicator;
 @property (assign) IBOutlet             NSPanel                   *logSheet;
 @property (assign) IBOutlet             NSButton                  *chBxInhibitAllWarnings;
+@property (weak) IBOutlet               NSTextField               *tfXCodeProj;
 @property (assign) IBOutlet             NSToolbar                 *toolbar;
 @property (unsafe_unretained) IBOutlet  NSTextView                *tvLog;
 
@@ -103,7 +104,7 @@ static NSArray *OSX_VERSIONS = nil;
     if (self) {
         // Initialization code here.
         if(!iOS_VERSIONS) {
-            iOS_VERSIONS = @[@"4.0",@"4.1",@"4.2",@"4.3",@"5.0",@"5.1",@"6.0",@"6.1",@"7.0"];
+            iOS_VERSIONS = @[@"4.0",@"4.1",@"4.2",@"4.3",@"5.0",@"5.1",@"6.0",@"6.1", @"7.0", @"7.1"];
         }
         
         if(!OSX_VERSIONS) {
@@ -167,12 +168,6 @@ static NSArray *OSX_VERSIONS = nil;
     }];
     
     [self updateViewMenu];
-    
-    // Dummy solution to change the bg of an NSView
-    CALayer *viewLayer = [CALayer layer];
-    [viewLayer setBackgroundColor:CGColorCreateGenericRGB(1.0, 1.0, 1.0, 0.7)]; //RGB plus Alpha Channel
-    [self.contentSplitViewContainer setWantsLayer:YES]; // view's backing store is using a Core Animation Layer
-    [self.contentSplitViewContainer setLayer:viewLayer];
 }
 
 - (void)windowWillClose:(NSNotification *)notification {
@@ -579,6 +574,29 @@ static NSArray *OSX_VERSIONS = nil;
     }
     
     self.wasEdited = YES;
+}
+
+- (IBAction)pickXcodeProject:(id)sender {
+    
+    NSOpenPanel *panel = [NSOpenPanel openPanel];
+    [panel setCanChooseFiles:YES];
+    [panel setCanChooseDirectories:NO];
+    [panel setAllowsMultipleSelection:NO];
+    [panel setPrompt:@"Choose"];
+    [panel setTitle:@"Choose Project"];
+    
+    NSString *defaultDirectoryPath = [self.project.projectFilePath stringByDeletingLastPathComponent];
+    [panel setDirectoryURL:[NSURL URLWithString: defaultDirectoryPath]];
+    
+    NSInteger clicked = [panel runModal];
+    
+    if (clicked == NSFileHandlingPanelOKButton) {
+        for (NSURL *url in [panel URLs]) {
+            // do something with the url here.
+            NSString *path = [url path]; NSLog(@"Path: %@", path);
+            [self.tfXCodeProj setStringValue: path];
+        }
+    }
 }
 
 #pragma mark Custom Methods

@@ -16,8 +16,6 @@
 {
     NSOperationQueue    *_operationQueue;
     NSInteger           _workingOperations;
-    
-    BOOL _isWorking;
 }
 
 @end
@@ -34,7 +32,6 @@
     }
     return self;
 }
-
 
 + (id)sharedPodSpecManager {
     
@@ -161,11 +158,8 @@
 
 -(void) updateAllPodProperties: (OnDone) onDone {
     
-    if (_isWorking) {
-        [_operationQueue cancelAllOperations];
-    }
+    [_operationQueue cancelAllOperations];
     
-    _isWorking = YES;
     [self fetchAndGeneratePodEntities:^{
         if (onDone) {
             onDone();

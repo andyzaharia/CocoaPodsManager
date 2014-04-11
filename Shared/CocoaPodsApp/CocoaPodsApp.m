@@ -7,7 +7,7 @@
 //
 
 #import "CocoaPodsApp.h"
-#import "CPProject.h"
+#import "CPProject+PodFileParser.h"
 #import "NSString+Misc.h"
 #import "AppConstants.h"
 #import "STPrivilegedTask.h"

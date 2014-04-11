@@ -10,6 +10,7 @@
         <attribute name="versionStr" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="pod" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PodSpec" inverseName="dependencies" inverseEntity="PodSpec" syncable="YES"/>
         <relationship name="project" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CPProject" inverseName="items" inverseEntity="CPProject" syncable="YES"/>
+        <relationship name="target" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CPTarget" inverseName="dependencies" inverseEntity="CPTarget" syncable="YES"/>
     </entity>
     <entity name="CPProject" representedClassName="CPProject" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
@@ -20,8 +21,19 @@
         <attribute name="post_install" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="pre_install" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="projectFilePath" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="xcodeproj" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="items" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="CPDependency" inverseName="project" inverseEntity="CPDependency" syncable="YES"/>
         <relationship name="pods" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="PodSpec" inverseName="projects" inverseEntity="PodSpec" syncable="YES"/>
+        <relationship name="targets" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CPTarget" inverseName="project" inverseEntity="CPTarget" syncable="YES"/>
+    </entity>
+    <entity name="CPTarget" representedClassName="CPTarget" syncable="YES">
+        <attribute name="deploymentString" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="inhibit_all_warnings" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="platformString" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="xcodeproj" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="dependencies" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="CPDependency" inverseName="target" inverseEntity="CPDependency" syncable="YES"/>
+        <relationship name="project" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CPProject" inverseName="targets" inverseEntity="CPProject" syncable="YES"/>
     </entity>
     <entity name="PodSpec" representedClassName="PodSpec" syncable="YES">
         <attribute name="childDescription" optional="YES" transient="YES" attributeType="String" syncable="YES"/>
@@ -42,5 +54,6 @@
         <element name="CPDependency" positionX="0" positionY="0" width="0" height="0"/>
         <element name="CPProject" positionX="0" positionY="0" width="0" height="0"/>
         <element name="PodSpec" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="CPTarget" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

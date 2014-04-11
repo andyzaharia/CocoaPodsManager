@@ -26,10 +26,6 @@
 
 -(void) addPodsFromArray: (NSArray *) items;
 
-//-(id) initWithXCodeProject:(XCodeProject *) proj;
-
--(void) writeProjectToPodFile;
-
 -(NSString *) podFilePath;
 -(NSString *) workSpaceFilePath;
 

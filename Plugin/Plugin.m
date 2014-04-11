@@ -27,14 +27,14 @@ static Plugin *_sharedPluginInstance = nil;
 	static id sharedPlugin = nil;
 	static dispatch_once_t once;
 	dispatch_once(&once, ^{
-        //[NSPersistentStoreCoordinator setDataModelName:@"DataModel" withStoreName:@"CocoaPodsManager.db"];
-        
 		sharedPlugin = [[self alloc] init];
 	});
 }
 
 - (id)init {
 	if (self = [super init]) {
+        [NSPersistentStoreCoordinator setDataModelName:@"DataModel" withStoreName: @"CocoaPodsManager.db" andBundleClass:[self class]];
+        [NSManagedObjectContext contextForMainThread];
         
         _windows = [NSMutableArray array];
         
@@ -58,9 +58,15 @@ static Plugin *_sharedPluginInstance = nil;
 
 - (void) applicationDidFinishLaunching: (NSNotification*) notification {
     
-    [[PodRepositoryManager sharedPodSpecManager] updateAllPodProperties:^{
+    @try {
+        [[PodRepositoryManager sharedPodSpecManager] updateAllPodProperties: nil];
+    }
+    @catch (NSException *exception) {
         
-    }];
+    }
+    @finally {
+        
+    }
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(selectionDidChange:)
@@ -82,7 +88,7 @@ static Plugin *_sharedPluginInstance = nil;
         NSImage *image = [[NSImage alloc] initWithContentsOfFile: imagePath];
         
         NSMenuItem* newMenuItem = [[NSMenuItem alloc] initWithTitle:@"CocoaPods Manager"
-                                                             action:@selector(showMessageBox:)
+                                                             action:@selector(showCocoaPodsManagerWindow:)
                                                       keyEquivalent:@"p"];
         
         [newMenuItem setTarget:self];
@@ -113,7 +119,7 @@ static Plugin *_sharedPluginInstance = nil;
     self.windows = nil;
 }
 
-- (void) showMessageBox: (id) origin {
+- (void) showCocoaPodsManagerWindow: (id) origin {
 
     NSString *workspaceDirectoryPath = [CCPWorkspaceManager currentWorkspaceDirectoryPath];
 

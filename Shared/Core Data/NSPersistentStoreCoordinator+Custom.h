@@ -11,6 +11,8 @@
 @interface NSPersistentStoreCoordinator (Custom)
 
 + (void) setDataModelName: (NSString *) name withStoreName: (NSString *) storeFileName;
++ (void) setDataModelName: (NSString *) name withStoreName: (NSString *) storeFileName andBundleClass: (Class) bundleClass;
+
 + (NSPersistentStoreCoordinator *) sharedPersisntentStoreCoordinator;
 + (void) setNewPresistentStore: (NSPersistentStoreCoordinator *) store;
 
