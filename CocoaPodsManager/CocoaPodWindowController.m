@@ -67,6 +67,7 @@ static NSArray *OSX_VERSIONS = nil;
 @property (assign) IBOutlet             NSProgressIndicator       *loadingIndicator;
 @property (assign) IBOutlet             NSPanel                   *logSheet;
 @property (assign) IBOutlet             NSButton                  *chBxInhibitAllWarnings;
+@property (weak) IBOutlet NSButton *btnCloseSheetPanel;
 @property (weak) IBOutlet               NSTextField               *tfXCodeProj;
 @property (assign) IBOutlet             NSToolbar                 *toolbar;
 @property (unsafe_unretained) IBOutlet  NSTextView                *tvLog;
@@ -153,7 +154,7 @@ static NSArray *OSX_VERSIONS = nil;
     NSNib *podInfoCellNib = [[NSNib alloc] initWithNibNamed:@"PodInfoTableCellView" bundle: thisBundle];
     [self.cocoaPodsList registerNib:podInfoCellNib forIdentifier:@"PodInfoTableCellView"];
     
-
+    [self.btnCloseSheetPanel setHidden: ![NSApplication isRunningFromPlugin]];
     
     // Default Column visiblity settings
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -606,6 +607,11 @@ static NSArray *OSX_VERSIONS = nil;
             [self.tfXCodeProj setStringValue: path];
         }
     }
+}
+
+- (IBAction)closeSheetPanel:(id)sender {
+    [NSApp endSheet: self.window returnCode: 0];
+    [self.window orderOut: self];
 }
 
 #pragma mark Custom Methods

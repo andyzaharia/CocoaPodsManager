@@ -19,6 +19,8 @@ static Plugin *_sharedPluginInstance = nil;
 
 @interface Plugin ()
 
+@property (nonatomic, strong) CocoaPodWindowController *windowController;
+
 @end
 
 @implementation Plugin
@@ -59,7 +61,7 @@ static Plugin *_sharedPluginInstance = nil;
 - (void) applicationDidFinishLaunching: (NSNotification*) notification {
     
     @try {
-        [[PodRepositoryManager sharedPodSpecManager] updateAllPodProperties: nil];
+        //[[PodRepositoryManager sharedPodSpecManager] updateAllPodProperties: nil];
     }
     @catch (NSException *exception) {
         
@@ -137,22 +139,15 @@ static Plugin *_sharedPluginInstance = nil;
             }
         }];
 
-        if (existingWindowController) {
-            
-            if (![existingWindowController.window isVisible]) {
-                [existingWindowController showWindow: [NSApp mainWindow]];
-            }
-            
-            [existingWindowController.window makeKeyAndOrderFront:self];
-        } else {
-            
-            CocoaPodWindowController *windowController = [[CocoaPodWindowController alloc] initWithWindowNibName:@"CocoaPodWindowController"];
-            [windowController openFile: workspaceDirectoryPath];
-            [windowController showWindow: [NSApp mainWindow]];
-            [windowController.window makeKeyAndOrderFront:self];
-            
-            [self.windows addObject: windowController];
-        }
+        
+        self.windowController = [[CocoaPodWindowController alloc] initWithWindowNibName:@"CocoaPodWindowController"];
+        [self.windowController openFile: workspaceDirectoryPath];
+
+        [NSApp beginSheet: [self.windowController window]
+           modalForWindow: [NSApp keyWindow]
+            modalDelegate: nil
+           didEndSelector: nil
+              contextInfo: NULL];
 
     } else {
         NSAlert* msgBox = [[NSAlert alloc] init];

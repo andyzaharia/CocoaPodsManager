@@ -115,6 +115,7 @@
 		759D90A817E7A03300B93F36 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 740FE03016C294A60078A953 /* Cocoa.framework */; };
 		75B1C44C18771FD400F7AF59 /* STPrivilegedTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 75B1C44918771FD400F7AF59 /* STPrivilegedTask.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		75B1C44D18771FD400F7AF59 /* STPrivilegedTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 75B1C44918771FD400F7AF59 /* STPrivilegedTask.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		75B33B6A18F8737000E485FD /* CPProject+PodFileParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 759B30C91889CEF80039EFA5 /* CPProject+PodFileParser.m */; };
 		75BBB55918087EF00031B011 /* HyperlinkTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BBB55818087EF00031B011 /* HyperlinkTextField.m */; };
 		75BBB55A18087EF00031B011 /* HyperlinkTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BBB55818087EF00031B011 /* HyperlinkTextField.m */; };
 		75BBB55D180896D40031B011 /* PluginIcon26.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 75BBB55C180896D40031B011 /* PluginIcon26.tiff */; };
@@ -737,6 +738,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = T;
+				LastTestingUpgradeCheck = 0510;
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = Andy;
 			};
@@ -960,6 +962,7 @@
 				759B30CE1889DC480039EFA5 /* PodSpec.m in Sources */,
 				752CECB5186BA2DB00B03531 /* NSManagedObjectModel+KCOrderedAccessorFix.m in Sources */,
 				75ED7CDB186856F000B82B30 /* Pod.m in Sources */,
+				75B33B6A18F8737000E485FD /* CPProject+PodFileParser.m in Sources */,
 				7530C6DE18072A720050C136 /* NSApp+Misc.m in Sources */,
 				75BBB55A18087EF00031B011 /* HyperlinkTextField.m in Sources */,
 				7530C72218073BF90050C136 /* NSApplication+ESSApplicationCategory.m in Sources */,
