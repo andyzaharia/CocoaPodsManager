@@ -208,7 +208,7 @@
 
 #pragma mark -
 
--(void) loadPodSpecRespository: (OnDone) onDone
+-(void) loadPodSpecRepository: (OnDone) onDone
 {
     __weak PodRepositoryManager *weakSelf = self;
     

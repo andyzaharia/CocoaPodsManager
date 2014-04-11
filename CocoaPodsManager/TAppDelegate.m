@@ -59,7 +59,7 @@
     [self.lbStatus setStringValue:@"Indexing PodSpec files..."];
     [self.loadingIndicator startAnimation: self];
     PodRepositoryManager *manager = [PodRepositoryManager sharedPodSpecManager];
-    [manager loadPodSpecRespository:^{
+    [manager loadPodSpecRepository:^{
         [weakSelf.lbStatus setStringValue:@""];
         [weakSelf.loadingIndicator stopAnimation: weakSelf];
         [weakSelf updatePodsProperties];

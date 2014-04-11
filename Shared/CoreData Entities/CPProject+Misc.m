@@ -43,10 +43,10 @@
     [self willChangeValueForKey:@"projectFilePath"];
     [self setPrimitiveValue:projectFilePath forKey:@"projectFilePath"];
 
-    NSAlert* msgBox = [[NSAlert alloc] init];
-    [msgBox setMessageText: @"Did set project file"];
-    [msgBox addButtonWithTitle: @"OK"];
-    [msgBox runModal];
+//    NSAlert* msgBox = [[NSAlert alloc] init];
+//    [msgBox setMessageText: @"Did set project file"];
+//    [msgBox addButtonWithTitle: @"OK"];
+//    [msgBox runModal];
     
     [self readPodFile];
     

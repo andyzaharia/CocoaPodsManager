@@ -61,7 +61,12 @@ static Plugin *_sharedPluginInstance = nil;
 - (void) applicationDidFinishLaunching: (NSNotification*) notification {
     
     @try {
-        //[[PodRepositoryManager sharedPodSpecManager] updateAllPodProperties: nil];
+        PodRepositoryManager *manager = [PodRepositoryManager sharedPodSpecManager];
+        [manager loadPodSpecRepository:^{
+//            [weakSelf.lbStatus setStringValue:@""];
+//            [weakSelf.loadingIndicator stopAnimation: weakSelf];
+//            [weakSelf updatePodsProperties];
+        }];
     }
     @catch (NSException *exception) {
         
