@@ -18,6 +18,7 @@ enum CocoaPodsAppError {
 @class CPProject;
 
 typedef void (^PodExecOnSucceedBlock) (NSString *);
+typedef void (^PodExecOnProgressBlock) (NSString *);
 typedef void (^PodExecOnFailBlock) (NSError *);
 
 @interface CocoaPodsApp : NSObject
@@ -38,7 +39,8 @@ typedef void (^PodExecOnFailBlock) (NSError *);
 +(int) executeWithArguments: (NSArray *) items
        withCurrentDirectory: (NSString *) currentDirectory
               responseBlock: (PodExecOnSucceedBlock) responseBlock
-             andOnFailBlock:(PodExecOnFailBlock) failBlock;
+              progressBlock: (PodExecOnProgressBlock) progressBlock
+             andOnFailBlock: (PodExecOnFailBlock) failBlock;
 
 // Execute with arguments in the current folder
 +(int) executeWithArguments: (NSArray *) items
@@ -57,6 +59,7 @@ typedef void (^PodExecOnFailBlock) (NSError *);
 
 +(void) installCocoaPodsInProject: (CPProject *) project
                         onSuccess: (PodExecOnSucceedBlock) onSuccess
+                       onProgress: (PodExecOnProgressBlock) onProgress
                       withOnError: (PodExecOnFailBlock) errorBlock;
 
 @end

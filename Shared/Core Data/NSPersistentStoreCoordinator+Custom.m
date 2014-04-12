@@ -33,13 +33,12 @@ static Class _bundleClass = NULL;
 }
 
 +(NSPersistentStoreCoordinator *) sharedPersisntentStoreCoordinator
-{
-    TODO("Fix database file location.");
-    
+{    
     NSAssert(_dataModelName, @"Core Data model name has not been set. Use [NSPersistentStoreCoordinator setDataModelName:withStoreName:].");
     
     if (!_sharedPersistentStore) {
-        NSString *storePath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent: _storeFileName];
+        NSString *storePath = [NSSearchPathForDirectoriesInDomains(NSApplicationDirectory, NSUserDomainMask, YES) lastObject];
+        storePath =  [storePath stringByAppendingPathComponent: _storeFileName];
         NSURL *storeUrl = [NSURL fileURLWithPath:storePath];
         
         NSBundle *bundle = (_bundleClass != NULL) ? [NSBundle bundleForClass: _bundleClass] : [NSBundle mainBundle];

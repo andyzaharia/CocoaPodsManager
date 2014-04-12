@@ -195,6 +195,7 @@
 +(int) executeWithArguments: (NSArray *) items
        withCurrentDirectory: (NSString *) currentDirectory
               responseBlock: (PodExecOnSucceedBlock) responseBlock
+              progressBlock: (PodExecOnProgressBlock) progressBlock
              andOnFailBlock: (PodExecOnFailBlock) failBlock{
     
     int status = 0;
@@ -228,6 +229,12 @@
         handle = [pipe fileHandleForReading];
         [task setTerminationHandler:^(NSTask *task) {
             
+            
+        }];
+        
+        [handle setReadabilityHandler:^(NSFileHandle *_handle) {
+            NSString *stringData = [[NSString alloc] initWithData:[_handle readDataToEndOfFile] encoding:NSASCIIStringEncoding];
+            progressBlock(stringData);
         }];
         
         [task launch];
@@ -253,6 +260,9 @@
     return [CocoaPodsApp executeWithArguments: items
                          withCurrentDirectory: [[NSFileManager defaultManager] currentDirectoryPath]
                                 responseBlock: responseBlock
+                                progressBlock:^(NSString *progressString) {
+                                    
+                                }
                                andOnFailBlock: failBlock];
 }
 
@@ -261,6 +271,9 @@
     return [CocoaPodsApp executeWithArguments: items
                          withCurrentDirectory: [[NSFileManager defaultManager] currentDirectoryPath]
                                 responseBlock:responseBlock
+                                progressBlock:^(NSString *progressString) {
+                                    
+                                }
                                andOnFailBlock: NULL];
 }
 
@@ -299,6 +312,9 @@
                                           responseBlock:^(NSString *outputMessage) {
                                               respOutput = outputMessage;
                                           }
+                                          progressBlock:^(NSString *progressString) {
+                                              
+                                          }
                                          andOnFailBlock:^(NSError *error) {
                                             
                                          }];
@@ -318,6 +334,7 @@
 
 +(void) installCocoaPodsInProject: (CPProject *) project
                         onSuccess: (PodExecOnSucceedBlock) onSuccess
+                       onProgress: (PodExecOnProgressBlock) onProgress
                       withOnError: (PodExecOnFailBlock) errorBlock{
     
     if (![[CocoaPodsApp sharedCocoaPodsApp] isInstalled]) {
@@ -337,6 +354,11 @@
                       withCurrentDirectory:[project.projectFilePath stringByDeletingLastPathComponent]
                              responseBlock:^(NSString *outputMessage) {
                                  respOutput = [outputMessage trimWhiteSpaceAndNewline];
+                             }
+                             progressBlock:^(NSString *progressString) {                                 
+                                 dispatch_async(dispatch_get_main_queue(), ^{
+                                     onProgress(progressString);
+                                 });
                              }
                             andOnFailBlock:^(NSError *error) {
                                 

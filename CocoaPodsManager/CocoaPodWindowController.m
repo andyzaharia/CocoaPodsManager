@@ -14,7 +14,6 @@
 #import "NSString+Misc.h"
 #import "PodDetailPanel.h"
 #import "NSApp+Misc.h"
-
 #import "PodInfoTableCellView.h"
 
 #include <Security/Authorization.h>
@@ -67,7 +66,7 @@ static NSArray *OSX_VERSIONS = nil;
 @property (assign) IBOutlet             NSProgressIndicator       *loadingIndicator;
 @property (assign) IBOutlet             NSPanel                   *logSheet;
 @property (assign) IBOutlet             NSButton                  *chBxInhibitAllWarnings;
-@property (weak) IBOutlet NSButton *btnCloseSheetPanel;
+@property (weak) IBOutlet               NSButton                  *btnCloseSheetPanel;
 @property (weak) IBOutlet               NSTextField               *tfXCodeProj;
 @property (assign) IBOutlet             NSToolbar                 *toolbar;
 @property (unsafe_unretained) IBOutlet  NSTextView                *tvLog;
@@ -82,10 +81,9 @@ static NSArray *OSX_VERSIONS = nil;
 
 // Test Code
 
-@property (assign) IBOutlet     NSButtonCell                        *testBtn;
+@property (assign) IBOutlet         NSButtonCell                        *testBtn;
 
-@property (weak) IBOutlet       NSSplitView                         *splitView;
-
+@property (weak) IBOutlet           NSSplitView                         *splitView;
 
 @end
 
@@ -269,6 +267,7 @@ static NSArray *OSX_VERSIONS = nil;
 
 - (IBAction)updateAction:(id)sender {
     
+    [self.loadingIndicator setHidden: NO];
     [self.loadingIndicator startAnimation: self];
     
     isWorking = YES;
@@ -283,6 +282,7 @@ static NSArray *OSX_VERSIONS = nil;
         isWorking = NO;
         
         [weakSelf.loadingIndicator stopAnimation: self];
+        [weakSelf.loadingIndicator setHidden: YES];
         [weakSelf.toolbar validateVisibleItems];
          weakSelf.wasEdited = NO;
         
@@ -303,7 +303,8 @@ static NSArray *OSX_VERSIONS = nil;
     }onError:^(NSError *error) {
         
         isWorking = NO;
-        [weakSelf.loadingIndicator stopAnimation: self];        
+        [weakSelf.loadingIndicator stopAnimation: self];
+        [weakSelf.loadingIndicator setHidden: YES];
         [weakSelf.toolbar validateVisibleItems];
         
         ESSBeginAlertSheet(
@@ -346,15 +347,17 @@ static NSArray *OSX_VERSIONS = nil;
     
     self.wasEdited = NO;
     
+    [self.loadingIndicator setHidden: NO];
     [self.loadingIndicator startAnimation: self];
     isWorking = YES;
     
     __weak CocoaPodWindowController *weakSelf = self;
     
-    [CocoaPodsApp installCocoaPodsInProject:self.project onSuccess:^(NSString *error) {
+    PodExecOnSucceedBlock onSuccess = ^(NSString *error) {
         
         isWorking = NO;
         [weakSelf.loadingIndicator stopAnimation: weakSelf];
+        [weakSelf.loadingIndicator setHidden: YES];
         [weakSelf.toolbar validateVisibleItems];
         weakSelf.wasEdited = NO;
         
@@ -372,11 +375,18 @@ static NSArray *OSX_VERSIONS = nil;
                           doneMessage,
                           NULL
                           );
-        
-    } withOnError:^(NSError *error) {
+    };
+    
+    PodExecOnProgressBlock onProgress = ^(NSString *outputString) {        
+        NSLog(@"Progress: %@", outputString);
+
+    };
+    
+    PodExecOnFailBlock onError = ^(NSError *error) {
         
         isWorking = NO;
         [weakSelf.loadingIndicator stopAnimation: self];
+        [weakSelf.loadingIndicator setHidden: YES];
         [weakSelf.toolbar validateVisibleItems];
         
         ESSBeginAlertSheet(
@@ -393,8 +403,13 @@ static NSArray *OSX_VERSIONS = nil;
                            },
                            NULL,
                            @" ");
-    }];
+    };
     
+    
+    [CocoaPodsApp installCocoaPodsInProject: self.project
+                                  onSuccess: onSuccess
+                                 onProgress: onProgress
+                                withOnError: onError];
 }
 
 
