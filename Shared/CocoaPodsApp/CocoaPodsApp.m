@@ -232,10 +232,13 @@
             
         }];
         
-        [handle setReadabilityHandler:^(NSFileHandle *_handle) {
-            NSString *stringData = [[NSString alloc] initWithData:[_handle readDataToEndOfFile] encoding:NSASCIIStringEncoding];
-            progressBlock(stringData);
-        }];
+        if (progressBlock) {
+            [handle setReadabilityHandler:^(NSFileHandle *_handle) {
+                NSString *stringData = [[NSString alloc] initWithData:[_handle readDataToEndOfFile] encoding:NSASCIIStringEncoding];
+                progressBlock(stringData);
+            }];
+        }
+
         
         [task launch];
         [task waitUntilExit];
@@ -260,9 +263,7 @@
     return [CocoaPodsApp executeWithArguments: items
                          withCurrentDirectory: [[NSFileManager defaultManager] currentDirectoryPath]
                                 responseBlock: responseBlock
-                                progressBlock:^(NSString *progressString) {
-                                    
-                                }
+                                progressBlock: nil
                                andOnFailBlock: failBlock];
 }
 

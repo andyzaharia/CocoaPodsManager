@@ -78,6 +78,8 @@
         }
     } failBlock:^(NSError *error) {
         TODO("hanlde error");
+        
+        NSLog(@"Error: %@", [error localizedDescription]);
     }];
     
     return yaml;
@@ -101,9 +103,9 @@
         [CocoaPodsApp executeWithArguments:@[@"ipc", @"spec", podSpecFilePath] responseBlock:^(NSString *stdOut) {
             
             NSError *error = nil;
-            yaml = [YAMLSerialization YAMLWithData: [stdOut dataUsingEncoding:NSUTF8StringEncoding]
-                                           options: kYAMLReadOptionStringScalars
-                                             error: &error];
+            yaml = [YAMLSerialization objectsWithYAMLString: stdOut
+                                                    options: kYAMLReadOptionStringScalars
+                                                      error: &error];
             
             NSDictionary *properties = [yaml lastObject];
             NSString *descriptionString = nil;
