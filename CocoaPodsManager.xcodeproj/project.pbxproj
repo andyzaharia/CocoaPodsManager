@@ -116,12 +116,6 @@
 		75B1C44C18771FD400F7AF59 /* STPrivilegedTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 75B1C44918771FD400F7AF59 /* STPrivilegedTask.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		75B1C44D18771FD400F7AF59 /* STPrivilegedTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 75B1C44918771FD400F7AF59 /* STPrivilegedTask.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		75B33B6A18F8737000E485FD /* CPProject+PodFileParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 759B30C91889CEF80039EFA5 /* CPProject+PodFileParser.m */; };
-		75B898B418F88C9E006BD67F /* JMModalOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 75B898AA18F88C9E006BD67F /* JMModalOverlay.m */; };
-		75B898B518F88C9E006BD67F /* JMModalOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75B898AC18F88C9E006BD67F /* JMModalOverlayView.m */; };
-		75B898B618F88C9E006BD67F /* JMOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75B898AE18F88C9E006BD67F /* JMOverlayView.m */; };
-		75B898BA18F88CB1006BD67F /* JMModalOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 75B898AA18F88C9E006BD67F /* JMModalOverlay.m */; };
-		75B898BB18F88CB1006BD67F /* JMModalOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75B898AC18F88C9E006BD67F /* JMModalOverlayView.m */; };
-		75B898BC18F88CB1006BD67F /* JMOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75B898AE18F88C9E006BD67F /* JMOverlayView.m */; };
 		75BBB55918087EF00031B011 /* HyperlinkTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BBB55818087EF00031B011 /* HyperlinkTextField.m */; };
 		75BBB55A18087EF00031B011 /* HyperlinkTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BBB55818087EF00031B011 /* HyperlinkTextField.m */; };
 		75BBB55D180896D40031B011 /* PluginIcon26.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 75BBB55C180896D40031B011 /* PluginIcon26.tiff */; };
@@ -248,12 +242,6 @@
 		759D90A717E7A03300B93F36 /* CocoaPodsPlugin.xcplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CocoaPodsPlugin.xcplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		75B1C44818771FD400F7AF59 /* STPrivilegedTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPrivilegedTask.h; sourceTree = "<group>"; };
 		75B1C44918771FD400F7AF59 /* STPrivilegedTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPrivilegedTask.m; sourceTree = "<group>"; };
-		75B898A918F88C9E006BD67F /* JMModalOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMModalOverlay.h; sourceTree = "<group>"; };
-		75B898AA18F88C9E006BD67F /* JMModalOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMModalOverlay.m; sourceTree = "<group>"; };
-		75B898AB18F88C9E006BD67F /* JMModalOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMModalOverlayView.h; sourceTree = "<group>"; };
-		75B898AC18F88C9E006BD67F /* JMModalOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMModalOverlayView.m; sourceTree = "<group>"; };
-		75B898AD18F88C9E006BD67F /* JMOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMOverlayView.h; sourceTree = "<group>"; };
-		75B898AE18F88C9E006BD67F /* JMOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMOverlayView.m; sourceTree = "<group>"; };
 		75BBB55718087EF00031B011 /* HyperlinkTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HyperlinkTextField.h; sourceTree = "<group>"; };
 		75BBB55818087EF00031B011 /* HyperlinkTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HyperlinkTextField.m; sourceTree = "<group>"; };
 		75BBB55C180896D40031B011 /* PluginIcon26.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = PluginIcon26.tiff; sourceTree = "<group>"; };
@@ -312,7 +300,6 @@
 		740FE02416C294A60078A953 = {
 			isa = PBXGroup;
 			children = (
-				75B898A118F88C9E006BD67F /* Vendor */,
 				7530C6F018072D120050C136 /* DataModel */,
 				7530C6C018072A720050C136 /* Shared */,
 				740FE03616C294A60078A953 /* CocoaPodsManager - App */,
@@ -666,35 +653,6 @@
 			path = STPrivilegedTask;
 			sourceTree = "<group>";
 		};
-		75B898A118F88C9E006BD67F /* Vendor */ = {
-			isa = PBXGroup;
-			children = (
-				75B898A218F88C9E006BD67F /* JMModalOverlay */,
-			);
-			path = Vendor;
-			sourceTree = "<group>";
-		};
-		75B898A218F88C9E006BD67F /* JMModalOverlay */ = {
-			isa = PBXGroup;
-			children = (
-				75B898A418F88C9E006BD67F /* JMModalOverlay */,
-			);
-			path = JMModalOverlay;
-			sourceTree = "<group>";
-		};
-		75B898A418F88C9E006BD67F /* JMModalOverlay */ = {
-			isa = PBXGroup;
-			children = (
-				75B898A918F88C9E006BD67F /* JMModalOverlay.h */,
-				75B898AA18F88C9E006BD67F /* JMModalOverlay.m */,
-				75B898AB18F88C9E006BD67F /* JMModalOverlayView.h */,
-				75B898AC18F88C9E006BD67F /* JMModalOverlayView.m */,
-				75B898AD18F88C9E006BD67F /* JMOverlayView.h */,
-				75B898AE18F88C9E006BD67F /* JMOverlayView.m */,
-			);
-			path = JMModalOverlay;
-			sourceTree = "<group>";
-		};
 		75BBB55618087EF00031B011 /* HyperlinkTextField */ = {
 			isa = PBXGroup;
 			children = (
@@ -926,16 +884,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				740FE04416C294A60078A953 /* TAppDelegate.m in Sources */,
-				75B898B418F88C9E006BD67F /* JMModalOverlay.m in Sources */,
 				7567ED661809E245006B0F7C /* PodSpecTaskOperation.m in Sources */,
-				75B898B518F88C9E006BD67F /* JMModalOverlayView.m in Sources */,
 				75DD6DE718F85FD5005920FF /* PodInfoTableCellView.m in Sources */,
 				740FE06916C297400078A953 /* CocoaPodWindowController.m in Sources */,
 				759B30CD1889DC480039EFA5 /* PodSpec.m in Sources */,
 				759B30D11889DC480039EFA5 /* CPProject.m in Sources */,
 				7530C6F718072DCE0050C136 /* HoverTableRowView.m in Sources */,
 				7530C6DB18072A720050C136 /* AppConstants.m in Sources */,
-				75B898B618F88C9E006BD67F /* JMOverlayView.m in Sources */,
 				759B30D91889DC480039EFA5 /* CPTarget.m in Sources */,
 				7530C6E118072A720050C136 /* CCPWorkspaceManager.m in Sources */,
 				756786CF180728550056C1AC /* Plugin.m in Sources */,
@@ -997,11 +952,8 @@
 				7574047C17E8E43C004CF3FD /* PodDetailPanel.m in Sources */,
 				75796D8E186B975C008C31C7 /* PodLineDependencyParser.m in Sources */,
 				75796D87186B9598008C31C7 /* PodSpec+YAML.m in Sources */,
-				75B898BA18F88CB1006BD67F /* JMModalOverlay.m in Sources */,
-				75B898BC18F88CB1006BD67F /* JMOverlayView.m in Sources */,
 				756786D0180728550056C1AC /* Plugin.m in Sources */,
 				75B1C44D18771FD400F7AF59 /* STPrivilegedTask.m in Sources */,
-				75B898BB18F88CB1006BD67F /* JMModalOverlayView.m in Sources */,
 				75796D85186B9598008C31C7 /* PodSpec+StdOutParser.m in Sources */,
 				7530C73A18073DCA0050C136 /* CocoaPodsApp.m in Sources */,
 				7574047E17E8E43C004CF3FD /* CocoaPodWindowController.m in Sources */,
