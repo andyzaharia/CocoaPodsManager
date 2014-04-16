@@ -17,6 +17,8 @@
 
 + (id)sharedPlugin;
 
-+(NSImage *) imageWithName: (NSString *) imageName;
++ (NSImage *) imageWithName: (NSString *) imageName;
+
+-(void) clearWindow;
 
 @end

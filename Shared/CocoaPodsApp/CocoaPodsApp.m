@@ -234,7 +234,7 @@
         
         if (progressBlock) {
             [handle setReadabilityHandler:^(NSFileHandle *_handle) {
-                NSString *stringData = [[NSString alloc] initWithData:[_handle readDataToEndOfFile] encoding:NSASCIIStringEncoding];
+                NSString *stringData = [[NSString alloc] initWithData:[_handle availableData] encoding:NSASCIIStringEncoding];
                 progressBlock(stringData);
             }];
         }
@@ -271,16 +271,15 @@
     
     return [CocoaPodsApp executeWithArguments: items
                          withCurrentDirectory: [[NSFileManager defaultManager] currentDirectoryPath]
-                                responseBlock:responseBlock
-                                progressBlock:^(NSString *progressString) {
-                                    
-                                }
+                                responseBlock: responseBlock
+                                progressBlock: nil
                                andOnFailBlock: NULL];
 }
 
 
 +(void) updateProject: (CPProject *) project
           withOptions: (NSArray *) options
+        progressBlock: (PodExecOnProgressBlock) onProgress
             onSuccess: (PodExecOnSucceedBlock) onSuccess
               onError: (PodExecOnFailBlock) errorBlock{
     
@@ -314,7 +313,11 @@
                                               respOutput = outputMessage;
                                           }
                                           progressBlock:^(NSString *progressString) {
-                                              
+                                              if (onProgress) {
+                                                  dispatch_async(dispatch_get_main_queue(), ^{
+                                                      onProgress(progressString);
+                                                  });
+                                              }
                                           }
                                          andOnFailBlock:^(NSError *error) {
                                             
@@ -366,7 +369,7 @@
                             }];
         
         // If anyone has a better Idea, I'm listening :-)
-        // TODO: Do more research, as this is a stupid method
+        // TODO: Do more research
         
         NSString *errorConst = @"[!]";
         NSString *installConfirmationString = @"From now on use";

@@ -7,6 +7,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="CocoaPodWindowController">
             <connections>
+                <outlet property="btnCloseLogWindow" destination="1286" id="c5b-It-Ng2"/>
                 <outlet property="btnCloseSheetPanel" destination="1396" id="JQd-io-JgL"/>
                 <outlet property="btnInstall" destination="653" id="755"/>
                 <outlet property="btnSave" destination="818" id="828"/>
@@ -14,11 +15,11 @@
                 <outlet property="chBxInhibitAllWarnings" destination="1370" id="1373"/>
                 <outlet property="cocoaPodsList" destination="870" id="898"/>
                 <outlet property="contentSplitViewContainer" destination="88" id="1364"/>
-                <outlet property="loadingIndicator" destination="ME6-OQ-Wwo" id="g6H-1g-eiZ"/>
                 <outlet property="logSheet" destination="1284" id="1289"/>
                 <outlet property="modalOverlay" destination="RQM-Y8-AOX" id="nW4-hT-wBY"/>
                 <outlet property="pbDeployment" destination="511" id="758"/>
                 <outlet property="pbPlatform" destination="474" id="757"/>
+                <outlet property="piLoading" destination="iOd-7E-a1b" id="3U0-vS-yZA"/>
                 <outlet property="projectPodsList" destination="727" id="741"/>
                 <outlet property="searchField" destination="7" id="52"/>
                 <outlet property="tfXCodeProj" destination="1bI-Vo-JZR" id="wEc-NC-xoY"/>
@@ -31,7 +32,7 @@
         <window identifier="CocoaPodWindowController" title="Project Name" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="CocoaPodWindowController" animationBehavior="default" id="1">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <rect key="contentRect" x="196" y="240" width="837" height="631"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2048" height="1130"/>
             <view key="contentView" wantsLayer="YES" canDrawConcurrently="YES" id="2">
                 <rect key="frame" x="0.0" y="0.0" width="837" height="631"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -557,10 +558,6 @@
                                             <action selector="pickXcodeProject:" target="-2" id="OJz-bp-sSP"/>
                                         </connections>
                                     </button>
-                                    <progressIndicator hidden="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="ME6-OQ-Wwo">
-                                        <rect key="frame" x="287" y="15" width="16" height="16"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    </progressIndicator>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="621" firstAttribute="leading" secondItem="653" secondAttribute="trailing" constant="12" symbolic="YES" id="4I5-5d-0EX"/>
@@ -763,14 +760,17 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" utility="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="112" width="537" height="240"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2048" height="1130"/>
             <view key="contentView" id="1285">
                 <rect key="frame" x="0.0" y="0.0" width="537" height="240"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1286">
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1286">
                         <rect key="frame" x="444" y="-2" width="94" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="82" id="Aao-qV-67c"/>
+                        </constraints>
                         <buttonCell key="cell" type="push" title="OK" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="1287">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -782,21 +782,21 @@ DQ
                             </connections>
                         </buttonCell>
                     </button>
-                    <scrollView fixedFrame="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1290">
-                        <rect key="frame" x="4" y="30" width="528" height="207"/>
+                    <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1290">
+                        <rect key="frame" x="4" y="30" width="528" height="206"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <clipView key="contentView" ambiguous="YES" misplaced="YES" id="TKZ-Nj-0qf">
-                            <rect key="frame" x="1" y="1" width="526" height="205"/>
+                        <clipView key="contentView" id="TKZ-Nj-0qf">
+                            <rect key="frame" x="1" y="1" width="526" height="204"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <textView ambiguous="YES" importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" smartInsertDelete="YES" id="1291">
-                                    <rect key="frame" x="0.0" y="0.0" width="526" height="205"/>
+                                <textView editable="NO" importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" smartInsertDelete="YES" id="1291">
+                                    <rect key="frame" x="0.0" y="0.0" width="526" height="204"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <size key="minSize" width="526" height="205"/>
+                                    <size key="minSize" width="526" height="204"/>
                                     <size key="maxSize" width="528" height="10000000"/>
                                     <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                    <size key="minSize" width="526" height="205"/>
+                                    <size key="minSize" width="526" height="204"/>
                                     <size key="maxSize" width="528" height="10000000"/>
                                 </textView>
                             </subviews>
@@ -807,11 +807,25 @@ DQ
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="1293">
-                            <rect key="frame" x="1" y="1" width="15" height="0.0"/>
+                            <rect key="frame" x="511" y="1" width="16" height="204"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
+                    <progressIndicator horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="iOd-7E-a1b">
+                        <rect key="frame" x="4" y="7" width="16" height="16"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    </progressIndicator>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="1290" firstAttribute="leading" secondItem="1285" secondAttribute="leading" constant="4" id="CBW-Mv-n2R"/>
+                    <constraint firstItem="iOd-7E-a1b" firstAttribute="leading" secondItem="1290" secondAttribute="leading" id="FQz-GT-Gcb"/>
+                    <constraint firstItem="1290" firstAttribute="top" secondItem="1285" secondAttribute="top" constant="4" id="FrU-R0-sZ6"/>
+                    <constraint firstAttribute="trailing" secondItem="1290" secondAttribute="trailing" constant="5" id="HxX-y4-t0c"/>
+                    <constraint firstItem="1286" firstAttribute="trailing" secondItem="1290" secondAttribute="trailing" id="XA7-Wb-vDB"/>
+                    <constraint firstAttribute="bottom" secondItem="1286" secondAttribute="bottom" constant="5" id="fAC-40-6x1"/>
+                    <constraint firstItem="1286" firstAttribute="centerY" secondItem="iOd-7E-a1b" secondAttribute="centerY" id="s7x-BS-BOb"/>
+                    <constraint firstItem="1286" firstAttribute="top" secondItem="1290" secondAttribute="bottom" constant="4" id="t9t-Ef-LeU"/>
+                </constraints>
             </view>
         </window>
         <customObject id="RQM-Y8-AOX" customClass="JMModalOverlay">

@@ -63,7 +63,8 @@ static NSArray *OSX_VERSIONS = nil;
 @property (assign) IBOutlet             NSTextFieldCell           *tfAvailablePods;
 @property (assign) IBOutlet             NSPopUpButton             *pbPlatform;
 @property (assign) IBOutlet             NSPopUpButton             *pbDeployment;
-@property (assign) IBOutlet             NSProgressIndicator       *loadingIndicator;
+@property (weak) IBOutlet               NSProgressIndicator       *piLoading;
+@property (weak) IBOutlet NSButton *btnCloseLogWindow;
 @property (assign) IBOutlet             NSPanel                   *logSheet;
 @property (assign) IBOutlet             NSButton                  *chBxInhibitAllWarnings;
 @property (weak) IBOutlet               NSButton                  *btnCloseSheetPanel;
@@ -267,63 +268,76 @@ static NSArray *OSX_VERSIONS = nil;
 
 - (IBAction)updateAction:(id)sender {
     
-    [self.loadingIndicator setHidden: NO];
-    [self.loadingIndicator startAnimation: self];
+    [self.piLoading setHidden: NO];
+    [self.piLoading startAnimation: self];
     
     isWorking = YES;
     
     [self.toolbar validateVisibleItems];
-    
+    [self showLogWindowWithString: @""];
     [self.project writeProjectToPodFile];
-    
+    [self.btnCloseLogWindow setEnabled: NO];
     __weak CocoaPodWindowController *weakSelf = self;
-    [CocoaPodsApp updateProject:self.project withOptions:@[] onSuccess:^(NSString *response) {
-        
+    
+    PodExecOnProgressBlock onProgress = ^(NSString *outputString) {
+        NSString *currentLogStr = [weakSelf.tvLog string];
+        currentLogStr = [currentLogStr stringByAppendingString: outputString];
+        [weakSelf.tvLog setString: currentLogStr];
+    };
+    
+    PodExecOnSucceedBlock onSuccess = ^(NSString *response) {
         isWorking = NO;
         
-        [weakSelf.loadingIndicator stopAnimation: self];
-        [weakSelf.loadingIndicator setHidden: YES];
+        [weakSelf.piLoading stopAnimation: weakSelf];
+        [weakSelf.piLoading setHidden: YES];
         [weakSelf.toolbar validateVisibleItems];
-         weakSelf.wasEdited = NO;
+        [weakSelf.btnCloseLogWindow setEnabled: YES];
+        weakSelf.wasEdited = NO;
         
         ESSBeginAlertSheet(@"Done !",
                            @"OK",
                            @"View Logs",
                            NULL,
-                           self.window,
+                           weakSelf.window,
                            NULL,
                            ^(void *contextInf, NSInteger returnCode) {
                                if(returnCode == NSAlertAlternateReturn) {
-                                   [self showLogWindowWithString: response];
+                                   [weakSelf showLogWindowWithString: response];
                                }
                            },
                            NULL,
                            @" ");
-        
-    }onError:^(NSError *error) {
+    };
+    
+    PodExecOnFailBlock onError = ^(NSError *error) {
         
         isWorking = NO;
-        [weakSelf.loadingIndicator stopAnimation: self];
-        [weakSelf.loadingIndicator setHidden: YES];
+        [weakSelf.piLoading stopAnimation: weakSelf];
+        [weakSelf.piLoading setHidden: YES];
         [weakSelf.toolbar validateVisibleItems];
-        
+        [weakSelf.btnCloseLogWindow setEnabled: YES];
         ESSBeginAlertSheet(
                            @"Failed !",
                            @"OK",
                            @"View Logs",
                            NULL,
-                           self.window,
+                           weakSelf.window,
                            NULL,
                            ^(void *contextInf, NSInteger returnCode) {
                                if(returnCode == NSAlertAlternateReturn) {
                                    NSString *info  = error.userInfo[NSLocalizedDescriptionKey];
-                                   [self showLogWindowWithString: info];
+                                   [weakSelf showLogWindowWithString: info];
                                }
                            },
                            NULL,
                            @" ");
-        
-    }];
+    };
+    
+    [CocoaPodsApp updateProject: self.project
+                    withOptions: @[]
+                  progressBlock: onProgress
+                      onSuccess: onSuccess
+                        onError: onError];
 }
 
 
@@ -345,23 +359,33 @@ static NSArray *OSX_VERSIONS = nil;
         return;
     }
     
+    
+    
     self.wasEdited = NO;
     
-    [self.loadingIndicator setHidden: NO];
-    [self.loadingIndicator startAnimation: self];
+    [self.piLoading setHidden: NO];
+    [self.piLoading startAnimation: self];
+    [self showLogWindowWithString: @""];
+    [self.btnCloseLogWindow setEnabled: NO];
     isWorking = YES;
     
     __weak CocoaPodWindowController *weakSelf = self;
     
     PodExecOnSucceedBlock onSuccess = ^(NSString *error) {
+        if (!weakSelf) {
+            return;
+        }
         
         isWorking = NO;
-        [weakSelf.loadingIndicator stopAnimation: weakSelf];
-        [weakSelf.loadingIndicator setHidden: YES];
+        [weakSelf.piLoading stopAnimation: weakSelf];
+        [weakSelf.piLoading setHidden: YES];
         [weakSelf.toolbar validateVisibleItems];
+        [weakSelf.btnCloseLogWindow setEnabled: YES];
         weakSelf.wasEdited = NO;
         
-        NSString *doneMessage = [NSString stringWithFormat:@"From now on use '%@.xcworkspace'", weakSelf.project.name];
+        
+        //NSString *doneMessage = [NSString stringWithFormat:@"From now on use '%@.xcworkspace'", weakSelf.project.name];
+        
         NSBeginAlertSheet(
                           @"Done !",
                           @"OK",
@@ -372,33 +396,43 @@ static NSArray *OSX_VERSIONS = nil;
                           NULL,
                           @selector(installDoneModalDidDismissed:returnCode:contextInfo:),
                           NULL,
-                          doneMessage,
+                          @" ",
                           NULL
                           );
     };
     
-    PodExecOnProgressBlock onProgress = ^(NSString *outputString) {        
-        NSLog(@"Progress: %@", outputString);
-
+    PodExecOnProgressBlock onProgress = ^(NSString *outputString) {
+        if (!weakSelf) {
+            return;
+        }
+        
+        NSString *currentLogStr = [weakSelf.tvLog string];
+        currentLogStr = [currentLogStr stringByAppendingString: outputString];
+        [weakSelf.tvLog setString: currentLogStr];
     };
     
     PodExecOnFailBlock onError = ^(NSError *error) {
         
+        if (!weakSelf) {
+            return;
+        }
+        
         isWorking = NO;
-        [weakSelf.loadingIndicator stopAnimation: self];
-        [weakSelf.loadingIndicator setHidden: YES];
+        [weakSelf.piLoading stopAnimation: weakSelf];
+        [weakSelf.piLoading setHidden: YES];
         [weakSelf.toolbar validateVisibleItems];
+        [weakSelf.btnCloseLogWindow setEnabled: YES];
         
         ESSBeginAlertSheet(
                            @"Failed !",
                            @"OK",
                            @"View Logs",
                            NULL,
-                           self.window,
+                           weakSelf.window,
                            NULL,
                            ^(void *contextInf, NSInteger returnCode) {
                                if(returnCode == NSAlertAlternateReturn) {
-                                   [self showLogWindowWithString: [error domain]];
+                                   [weakSelf showLogWindowWithString: [error domain]];
                                }
                            },
                            NULL,
@@ -616,6 +650,9 @@ static NSArray *OSX_VERSIONS = nil;
 - (IBAction)closeSheetPanel:(id)sender {
     [NSApp endSheet: self.window returnCode: 0];
     [self.window orderOut: self];
+    [self close];
+    
+    [[Plugin sharedPlugin] clearWindow];
 }
 
 #pragma mark Custom Methods
@@ -1360,7 +1397,6 @@ static NSArray *OSX_VERSIONS = nil;
 }
 
 - (IBAction)closeLogPanel:(id)sender {
-    
     [NSApp endSheet:self.logSheet];
     [self.logSheet orderOut:sender];
 }
@@ -1402,16 +1438,6 @@ static NSArray *OSX_VERSIONS = nil;
         [toolbarItem setAction: @selector(saveAction:)];
     }else if ([itemIdent isEqualToString: ActivityToolbarItemIdentifier]) {
         
-        NSProgressIndicator *indicator = [[NSProgressIndicator alloc] initWithFrame: NSMakeRect(0, 0, 16, 16)];
-        [indicator setStyle: NSProgressIndicatorSpinningStyle];
-        [indicator setDisplayedWhenStopped: NO];
-        [indicator setCanDrawConcurrently: YES];
-        
-        self.loadingIndicator = indicator;
-        
-        [toolbarItem setLabel: @""];
-        [toolbarItem setPaletteLabel: @""];
-        [toolbarItem setView: indicator];
     }
     
     return toolbarItem;

@@ -61,7 +61,7 @@ static Plugin *_sharedPluginInstance = nil;
 - (void) applicationDidFinishLaunching: (NSNotification*) notification {
     
     @try {
-        __weak Plugin *weakSelf = self;
+        //__weak Plugin *weakSelf = self;
         PodRepositoryManager *manager = [PodRepositoryManager sharedPodSpecManager];
         [manager loadPodSpecRepository:^{
             //[weakSelf updatePodsProperties];
@@ -143,7 +143,6 @@ static Plugin *_sharedPluginInstance = nil;
             }
         }];
 
-        
         self.windowController = [[CocoaPodWindowController alloc] initWithWindowNibName:@"CocoaPodWindowController"];
         [self.windowController openFile: workspaceDirectoryPath];
 
@@ -159,6 +158,11 @@ static Plugin *_sharedPluginInstance = nil;
         [msgBox addButtonWithTitle: @"OK"];
         [msgBox runModal];
     }
+}
+
+-(void) clearWindow
+{
+    self.windowController = nil;
 }
 
 #pragma mark - Images Helpers

@@ -54,6 +54,7 @@ typedef void (^PodExecOnFailBlock) (NSError *);
 
 +(void) updateProject: (CPProject *) project
           withOptions: (NSArray *) options
+        progressBlock: (PodExecOnProgressBlock) onProgress
             onSuccess: (PodExecOnSucceedBlock) onSuccess
               onError: (PodExecOnFailBlock) errorBlock;
 
