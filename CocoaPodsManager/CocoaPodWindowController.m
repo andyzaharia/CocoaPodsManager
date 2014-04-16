@@ -546,25 +546,21 @@ static NSArray *OSX_VERSIONS = nil;
     [defaults synchronize];
 }
 
-- (IBAction)podOpenHomePageAction:(id)sender {
+- (IBAction)openHomePageAction:(id)sender {
+    
+    NSWorkspace *workspace = [NSWorkspace sharedWorkspace];
     
     NSInteger row = [self.cocoaPodsList rowForView:sender];
     PodSpec *pod = self.pods[row];
     if ([pod.homePage length]) {
-        [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString: pod.homePage]];
+        [workspace openURL:[NSURL URLWithString: pod.homePage]];
     } else {
-    
-        TODO("Clean this mess.")
-        
-        NSArray *yamlContent = [pod lastVersionYAML];
-        NSDictionary *yamlDictionary = [yamlContent lastObject];
-        if (yamlDictionary) {
-            NSString *homePage = [yamlDictionary objectForKey:@"homepage"];
-            [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString: homePage]];
-        } else {
-            // YAML not retrieved, maybe throw an error ?
-             TODO("Show a ... home page not provided alert/dialog.")
-        }
+        [pod fetchPropertiesAsyncWithVersion: [pod lastVersion]
+                                      onDone:^(NSDictionary *properties) {
+                                          NSString *homePage = [properties objectForKey:@"homepage"];
+                                          NSLog(@"Home page: %@", homePage);
+                                          [workspace openURL:[NSURL URLWithString: homePage]];
+                                      } onFailure: nil];
     }
 }
 
