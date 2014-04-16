@@ -3,7 +3,7 @@ CocoaPodsManager
 
 A simple tool for managing your project pods. 
 
-This app was created because we just wanted a simple, 
+This plugin/app was created because we just wanted a simple, 
 clean GUI(not that the non gui version isnt good :D, ) app to quickly be able to edit and manage your pods.
 
 The current version is really in an early stage development and it doesnt support all the cocoapods features. 
@@ -17,7 +17,7 @@ The Code is by far not the cleanest one, and a lot of optimizations are required
 
 If you dont want to mess with the code you can just get the latest compiled version from here:
 
-![Pods Window](https://dl.dropboxusercontent.com/u/9337037/CocoaPodsManager/Screenshot%202013-12-23%2018.04.15.png "")
+![Pods Window](http://andyzaharia.com/CocoaPodsManager/CocoaPodsPluginScr1.png "")
 ![XCode Plugin](https://dl.dropboxusercontent.com/u/9337037/CocoaPodsManager/Screenshot%202013-12-23%2017.58.18.png "")
 ![Standalone app](https://dl.dropboxusercontent.com/u/9337037/CocoaPodsManager/Screenshot%202013-12-23%2018.05.53.png "")
 
